@@ -14,11 +14,12 @@ namespace WindowsFormsApplication1
         {
 
 
-            string datasource = "172.16.0.12";
-            string database = "ERPSOFT";
-            string username = "ERPUSER";
-            string password = "12345";
-            return DBSQLServerUtils.GetDBConnection(datasource, database, username, password);
+            //string datasource = "172.16.0.12";
+            //string database = "ERPSOFT";
+            //string username = "ERPUSER";
+            //string password = "12345";
+            //return DBSQLServerUtils.GetDBConnection(datasource, database, username, password);
+            return new SqlConnection("Data Source=ADMIN;Initial Catalog=ERPSOFT;Integrated Security=True");
         }
         public static SqlConnection GetERPDBConnection()
         {
