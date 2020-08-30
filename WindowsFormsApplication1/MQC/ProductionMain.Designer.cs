@@ -48,12 +48,13 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.layoutMain, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 31);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 25);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.974359F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.02564F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1055, 674);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(791, 548);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // tableLayoutPanel2
@@ -62,19 +63,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 165F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.lb_Clock, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.cb_Department, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1049, 54);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(787, 45);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -88,9 +90,10 @@
             this.label1.ForeColor = System.Drawing.Color.Khaki;
             this.label1.Image = global::WindowsFormsApplication1.Properties.Resources.home2_icon;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(2, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 54);
+            this.label1.Size = new System.Drawing.Size(161, 45);
             this.label1.TabIndex = 0;
             this.label1.Text = "Departments";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -105,9 +108,10 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkKhaki;
             this.label2.Image = global::WindowsFormsApplication1.Properties.Resources.Clock_icon;
-            this.label2.Location = new System.Drawing.Point(666, 0);
+            this.label2.Location = new System.Drawing.Point(499, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 54);
+            this.label2.Size = new System.Drawing.Size(64, 45);
             this.label2.TabIndex = 2;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -120,9 +124,10 @@
             this.lb_Clock.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lb_Clock.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Clock.ForeColor = System.Drawing.Color.Khaki;
-            this.lb_Clock.Location = new System.Drawing.Point(756, 0);
+            this.lb_Clock.Location = new System.Drawing.Point(567, 0);
+            this.lb_Clock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Clock.Name = "lb_Clock";
-            this.lb_Clock.Size = new System.Drawing.Size(290, 54);
+            this.lb_Clock.Size = new System.Drawing.Size(218, 45);
             this.lb_Clock.TabIndex = 3;
             this.lb_Clock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -136,9 +141,10 @@
             this.cb_Department.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_Department.ForeColor = System.Drawing.Color.Khaki;
             this.cb_Department.FormattingEnabled = true;
-            this.cb_Department.Location = new System.Drawing.Point(223, 3);
+            this.cb_Department.Location = new System.Drawing.Point(167, 2);
+            this.cb_Department.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_Department.Name = "cb_Department";
-            this.cb_Department.Size = new System.Drawing.Size(437, 33);
+            this.cb_Department.Size = new System.Drawing.Size(328, 28);
             this.cb_Department.TabIndex = 1;
             // 
             // layoutMain
@@ -150,21 +156,23 @@
             this.layoutMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.layoutMain.ColumnCount = 1;
             this.layoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutMain.Location = new System.Drawing.Point(3, 63);
+            this.layoutMain.Location = new System.Drawing.Point(2, 51);
+            this.layoutMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.layoutMain.Name = "layoutMain";
             this.layoutMain.RowCount = 1;
             this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutMain.Size = new System.Drawing.Size(1049, 608);
+            this.layoutMain.Size = new System.Drawing.Size(787, 495);
             this.layoutMain.TabIndex = 1;
             // 
             // ProductionMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 709);
+            this.ClientSize = new System.Drawing.Size(799, 576);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ProductionMain";
-            this.Padding = new System.Windows.Forms.Padding(18, 60, 18, 19);
+            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 15);
             this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Blue;
             this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;
