@@ -58,22 +58,22 @@ namespace WindowsFormsApplication1.WMS.View
             Database.GetListWarehouse getlistWarehouse = new Database.GetListWarehouse();
             switch ((sender as TabControl).SelectedIndex)
             {   
+                //case 0:
+
+                //    getlistWarehouse = new Database.GetListWarehouse();
+                //    ListWarehouse = new List<Database.WarehouseItems>();
+                //    ListWarehouse = getlistWarehouse.GetWarehouseItems();
+                //    var listwarehouse2 = ListWarehouse.Select(d => d.MC001_Wh).Distinct().ToList();
+                //    cb_warehousePQC.DataSource = listwarehouse2;
+                //    if (Class.valiballecommon.GetStorage().Warehouse != null)
+                //        cb_warehousePQC.SelectedItem = Class.valiballecommon.GetStorage().Warehouse;
+                //    break;
                 case 0:
 
-                    getlistWarehouse = new Database.GetListWarehouse();
                     ListWarehouse = new List<Database.WarehouseItems>();
                     ListWarehouse = getlistWarehouse.GetWarehouseItems();
-                    var listwarehouse2 = ListWarehouse.Select(d => d.MC001_Wh).Distinct().ToList();
-                    cb_warehousePQC.DataSource = listwarehouse2;
-                    if (Class.valiballecommon.GetStorage().Warehouse != null)
-                        cb_warehousePQC.SelectedItem = Class.valiballecommon.GetStorage().Warehouse;
                     break;
                 case 1:
-
-                    ListWarehouse = new List<Database.WarehouseItems>();
-                    ListWarehouse = getlistWarehouse.GetWarehouseItems();
-                    break;
-                case 2:
                     LoadDataForUI();
                     break;
 
@@ -89,11 +89,7 @@ namespace WindowsFormsApplication1.WMS.View
             ListWarehouse = new List<Database.WarehouseItems>();
             ListWarehouse = getlistWarehouse.GetWarehouseItems();
             var listwarehouse2 = ListWarehouse.Select(d => d.MC001_Wh).Distinct().ToList();
-           
-            cb_warehousePQC.DataSource = listwarehouse2;
             var wh = Class.valiballecommon.GetStorage().Warehouse;
-            if (Class.valiballecommon.GetStorage().Warehouse != null)
-                cb_warehousePQC.SelectedItem = Class.valiballecommon.GetStorage().Warehouse;
             
 
            
@@ -444,246 +440,7 @@ namespace WindowsFormsApplication1.WMS.View
 
 
         List<PQCOutStock> pQCOutStocks = new List<PQCOutStock>();
-        private void btn_AddPQCOutStock_Click(object sender, EventArgs e)
-        {
-            var isExistProduct = Database.INV.INVMB.IsExistProduct(txt_productPQCoutStock.Text.Trim());
-         if(txt_productPQCoutStock.Text.Trim() =="")
-            {
-                MessageBox.Show("You have to input product valid ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                return;
-            }
-            if (txt_LotNoPQC.Text.Trim() == "")
-            {
-                MessageBox.Show("You have to input Lot/PO valid ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                return;
-            }
-            if (nmr_quantityPQC.Value <=0 )
-            {
-                MessageBox.Show("You have to input quantity > 0 ! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                return;
-            }
-            if (isExistProduct == false)
-            {
-                MessageBox.Show("This lot not exists in database, pls check product input! ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                return;
-            }
-            var isExistLot = Database.INV.INVMM.IsExistModelLot(cb_warehousePQC.SelectedItem.ToString().Trim(),
-                txt_productPQCoutStock.Text.Trim(), txt_LotNoPQC.Text.Trim());
-            if (isExistLot)
-            {
-                MessageBox.Show("This lot already exists in warehouse "+ cb_warehousePQC.SelectedItem.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                
-                return;
-            }
-            var isExistTable = pQCOutStocks.Where(d => d.Warehouse == cb_warehousePQC.SelectedItem.ToString() && d.Product == txt_productPQCoutStock.Text && d.LotNo == txt_LotNoPQC.Text).ToList();
-            if (isExistTable.Count > 0)
-            {
-                MessageBox.Show("This lot already exists in table ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-         //   string KeyNo = Database.ERPSOFT.ERPOutPQCQR.GetKeyNo(DateTime.Now);
-            try
-            {
-                bool noMorePO = false;
-                string ProductionOrder = Database.SFC.SFCTA.getProductionOrder(pQCOutStocks, txt_productPQCoutStock.Text, out noMorePO);
-
-                if (ProductionOrder == "" && noMorePO == false)
-                {
-                    MessageBox.Show("Can't find production order matching your requirement!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                else if (noMorePO == true)
-                {
-                    var resultMes = MessageBox.Show("Production Order have to be different with others in table\nDo you want to create one by one row for import ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (resultMes == DialogResult.Yes)
-                    {
-
-                        DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ProductionOrder);
-                        if (dtSFCTA.Rows.Count == 0)
-                        {
-                            MessageBox.Show("Can't find production order matching your requirement!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        double PQCOutStock = Database.SFT.SFT_LOT.GetPQCStock(ProductionOrder);
-                        double SumQuantityProduct = pQCOutStocks.Where(d => d.ProductOrder == ProductionOrder).Select(d => d.Quantity).Sum();
-                        PQCOutStock pQCOut = new PQCOutStock();
-                        pQCOut.KeyID = "TL01";
-                    //    pQCOut.KeyNo = KeyNo;
-                        pQCOut.STT = (pQCOutStocks.Count + 1).ToString("0000");
-                        pQCOut.Product = txt_productPQCoutStock.Text.Trim();
-                        pQCOut.PQCStock = PQCOutStock- SumQuantityProduct;
-                        pQCOut.ProductOrder = ProductionOrder;
-                        pQCOut.LotNo = txt_LotNoPQC.Text.Trim();
-                        pQCOut.Quantity = double.Parse(nmr_quantityPQC.Value.ToString());
-                        pQCOut.Warehouse = cb_warehousePQC.SelectedItem.ToString();
-                        pQCOut.QRcodeGenarate = txt_productPQCoutStock.Text.Trim() + "-" + DateTime.Now.ToString("yyyyMMdd HHmmss");
-                        pQCOutStocks.Add(pQCOut);
-
-                            
-                        //pQCOutStocks.Add(new PQCOutStock
-                        //{
-                        //    KeyID = "TL01",
-                        //    KeyNo = KeyNo,
-                        //    STT = (pQCOutStocks.Count + 1).ToString("0000"),
-                        //    Product = txt_productPQCoutStock.Text,
-                    
-                        //    PQCStock =  PQCOutStock,
-                        //    ProductOrder = ProductionOrder,
-                        //    LotNo = txt_LotNoPQC.Text.Trim(),
-                        //    Quantity = double.Parse(nmr_quantityPQC.Value.ToString()),
-                        //    Warehouse = cb_warehousePQC.SelectedItem.ToString(),
-                        //    QRcodeGenarate = txt_productPQCoutStock.Text.Trim() + "-" + DateTime.Now.ToString("yyyyMMdd HHmmss")
-                        //}
-                        //    );
-                        dtgv_PQCOutStock.DataSource = null;
-                        dtgv_PQCOutStock.DataSource = pQCOutStocks;
-                    }
-                }
-                else
-                {
-                //    DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ProductionOrder);
-                    double PQCOutStock = Database.SFT.SFT_LOT.GetPQCStock(ProductionOrder);
-                    double SumQuantityProduct = pQCOutStocks.Where(d => d.ProductOrder == ProductionOrder).Select(d => d.Quantity).Sum();
-                    PQCOutStock pQCOut = new PQCOutStock();
-                    pQCOut.KeyID = "TL01";
-                   // pQCOut.KeyNo = KeyNo;
-                    pQCOut.STT = (pQCOutStocks.Count + 1).ToString("0000");
-                    pQCOut.Product = txt_productPQCoutStock.Text.Trim();
-                    pQCOut.PQCStock = PQCOutStock - SumQuantityProduct;
-                    pQCOut.ProductOrder = ProductionOrder;
-                    pQCOut.LotNo = txt_LotNoPQC.Text.Trim();
-                    pQCOut.Quantity = double.Parse(nmr_quantityPQC.Value.ToString());
-                    pQCOut.Warehouse = cb_warehousePQC.SelectedItem.ToString();
-                    pQCOut.QRcodeGenarate = txt_productPQCoutStock.Text.Trim() + "-" + DateTime.Now.ToString("yyyyMMdd HHmmss");
-                    pQCOutStocks.Add(pQCOut);
-                    //pQCOutStocks.Add(new PQCOutStock
-                    //{
-                    //    KeyID = "TL01",
-                    //    KeyNo = KeyNo,
-                    //    STT = (pQCOutStocks.Count + 1).ToString("0000"),111
-                    //    Product = txt_productPQCoutStock.Text,
-                    //    PQCStock = PQCOutStock,
-                    //    ProductOrder = ProductionOrder,
-                    //    LotNo = txt_LotNoPQC.Text.Trim(),
-                    //    Quantity = double.Parse(nmr_quantityPQC.Value.ToString()),
-                    //    Warehouse = cb_warehousePQC.SelectedItem.ToString(),
-                    //    QRcodeGenarate = txt_productPQCoutStock.Text.Trim() + "-" + DateTime.Now.ToString("yyyyMMdd HHmmss")
-                    //}
-                    //      );
-                    dtgv_PQCOutStock.DataSource = null;
-                    dtgv_PQCOutStock.DataSource = pQCOutStocks;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                SystemLog.Output(SystemLog.MSG_TYPE.Err, "btn_AddPQCOutStock_Click(object sender, EventArgs e)", ex.Message);
-            }
-        }
-
-
-
-
-        private void txt_productPQCoutStock_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string ProductDisplay = Database.MOC.MOCTA.GetProductFromMOCTA(txt_productPQCoutStock.Text);
-                txt_productPQCoutStock.Text = ProductDisplay;
-            }
-        }
-
-        private void dtgv_PQCOutStock_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            DatagridviewSetting.settingDatagridview(dtgv_PQCOutStock);
-            if(dtgv_PQCOutStock.Rows.Count > 0)
-            {
-                dtgv_PQCOutStock.Columns["KeyID"].Visible = false;
-                dtgv_PQCOutStock.Columns["KeyNo"].Visible = false;
-                dtgv_PQCOutStock.Columns["QRcodeGenarate"].Visible = false;
-
-                dtgv_PQCOutStock.Columns["ProductOrder"].HeaderText = "Production Order";
-                dtgv_PQCOutStock.Columns["LotNo"].HeaderText = "Lot No";
-                dtgv_PQCOutStock.Columns["PQCStock"].HeaderText = "PQC Stock (pcs)";
-                dtgv_PQCOutStock.Columns["PQCStock"].DefaultCellStyle.Format = "N0";
-                dtgv_PQCOutStock.Columns["Quantity"].HeaderText = "Quantity (pcs)";
-                dtgv_PQCOutStock.Columns["Quantity"].DefaultCellStyle.Format = "N0";
-
-                dtgv_PQCOutStock.Columns["STT"].ReadOnly = true;
-                dtgv_PQCOutStock.Columns["Product"].ReadOnly = true;
-                dtgv_PQCOutStock.Columns["PQCStock"].ReadOnly = true;
-                dtgv_PQCOutStock.Columns["Warehouse"].ReadOnly = true;
-            }
-
-        }
-
-
-
-        private void btn_PrintQRCode_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(IsCheckStockPQC(pQCOutStocks)== false)
-                {
-                    MessageBox.Show("PQC stock is not enough quantity to import warehouse", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (pQCOutStocks.Count > 0)
-                {
-                    string KeyNo = Database.ERPSOFT.ERPOutPQCQR.GetKeyNo(DateTime.Now);
-                    foreach (var item in pQCOutStocks)
-                    {
-                        item.KeyNo = KeyNo;
-                    }
-                    Device.Printer.PritingLabel pritingLabel = new Device.Printer.PritingLabel();
-                  var Result = pritingLabel.PrintQRCodePQCOUt(pQCOutStocks[0].KeyID + "-" + pQCOutStocks[0].KeyNo, pQCOutStocks[0].Warehouse);
-                    if (true)// khi test xong thi nho sua cho nay
-                    {
-                        for (int i = 0; i < pQCOutStocks.Count; i++)
-                        {
-                            Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();
-                            var insert = eRPOutPQCQR.InsertERPOutPQC(pQCOutStocks[i]);
-                        }
-                        Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR1 = new Database.ERPSOFT.ERPOutPQCQR();
-                        DataTable dtERPPQC = eRPOutPQCQR1.GetDataTableImportFinishedGoods(pQCOutStocks[0].KeyID + "-" + pQCOutStocks[0].KeyNo);
-                        if (dtERPPQC.Rows.Count > 0)
-                        {
-                            UpdateStatusIntoWh updateStatusIntoWh = new UpdateStatusIntoWh();
-                            var updateIntoWH = updateStatusIntoWh.UpdateSFTStatusIntoWH(dtERPPQC);
-                            txt_QRGenerate.Text = pQCOutStocks[0].KeyID + "-" + pQCOutStocks[0].KeyNo;
-                            pQCOutStocks = new List<PQCOutStock>();
-                            dtgv_PQCOutStock.DataSource = null;
-                        }
-
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-                SystemLog.Output(SystemLog.MSG_TYPE.Err, "btn_PrintQRCode_Click(object sender, EventArgs e)", ex.Message);
-                MessageBox.Show("Print QR code for import warehouse fail!\n " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-
-        }
-        private bool IsCheckStockPQC(List<PQCOutStock> pQCOutStocks  )
-        {
-            for (int i = 0; i < pQCOutStocks.Count; i++)
-            {
-                if (pQCOutStocks[i].PQCStock < pQCOutStocks[i].Quantity)
-                    return false;
-            }
-            return true;
-        }
+      
 
         private void txt_QRImport_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1172,65 +929,7 @@ namespace WindowsFormsApplication1.WMS.View
             }
         }
 
-        private void cb_warehousePQC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          var ListwarehouseName = ListWarehouse.Where(d => d.MC001_Wh == cb_warehousePQC.SelectedItem.ToString()).Select(d => d.MC002_WhName).ToList();
-        //    Class.valiballecommon.GetStorage().Warehouse = cb_warehousePQC.SelectedItem.ToString();
-            if(ListwarehouseName.Count > 0)
-            {
-                lb_warehouseNameInport.Text = ListwarehouseName[0];
-            }
-        }
-
-        private void btn_clearRowImportList_Click(object sender, EventArgs e)
-        {
-            pQCOutStocks = new List<PQCOutStock>();
-            dtgv_PQCOutStock.DataSource = null;
-        }
         int RowSelected = -1;
-        private void dtgv_PQCOutStock_MouseClick(object sender, MouseEventArgs e)
-        {
-            if(e.Button == MouseButtons.Right)
-            {
-                int currentMouseOverRow = dtgv_PQCOutStock.HitTest(e.X, e.Y).RowIndex;
-                int currentMouseOverColumns = dtgv_PQCOutStock.HitTest(e.X, e.Y).ColumnIndex;
-                if (currentMouseOverColumns > 0 && dtgv_PQCOutStock.Columns[currentMouseOverColumns].Name == "STT")
-                {
-                    ContextMenuStrip m = new ContextMenuStrip();
-                    m.Name = "Delete";
-                    m.BackColor = Color.OrangeRed;
-
-                    RowSelected = currentMouseOverRow;
-                    if (currentMouseOverRow >= 0)
-                    {
-                        m.Items.Add("Delete");
-
-                        m.ItemClicked += M_ItemClicked;
-                    }
-
-                    m.Show(dtgv_PQCOutStock, new Point(e.X, e.Y));
-                }
-            }
-        }
-
-        private void M_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            try
-            {
-                if (pQCOutStocks.Count > 0)
-                {
-                    pQCOutStocks.RemoveAt(RowSelected);
-                    dtgv_PQCOutStock.DataSource = null;
-                    dtgv_PQCOutStock.DataSource = pQCOutStocks;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                SystemLog.Output(SystemLog.MSG_TYPE.Err, " Delete Row Import List fail", ex.Message);
-            }
-          
-        }
 
         private void btn_ClearFgsImport_Click(object sender, EventArgs e)
         {
@@ -1244,8 +943,6 @@ namespace WindowsFormsApplication1.WMS.View
         {
             if(cb_Department.SelectedItem != null)
             Class.valiballecommon.GetStorage().Department = cb_Department.SelectedItem.ToString();
-            if(cb_warehousePQC.SelectedItem != null)
-            Class.valiballecommon.GetStorage().Warehouse = cb_warehousePQC.SelectedItem.ToString();
             if (cb_ClientCode.SelectedItem != null)
                 Class.valiballecommon.GetStorage().Client = cb_ClientCode.SelectedItem.ToString();
             if (cb_CurrentMonney.SelectedItem != null)
