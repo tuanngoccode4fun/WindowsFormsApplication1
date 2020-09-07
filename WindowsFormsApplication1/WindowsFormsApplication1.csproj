@@ -131,10 +131,7 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\OLD COMPANY\PROJECT FINALLY\PHAN MEM QUAN LY TAI SAN\bin\Debug\MySql.Data.dll</HintPath>
-    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="NumberConverterToText">
       <HintPath>..\..\..\..\Sample\NumberConverterToText\NumberConverterToText\NumberConverterToText\bin\Debug\NumberConverterToText.dll</HintPath>
     </Reference>
@@ -179,6 +176,7 @@
     <Compile Include="ChartDrawing\ChartDrawing.cs" />
     <Compile Include="ChartDrawing\LiveChart.cs" />
     <Compile Include="ClassMysql\ClassMySqlConnect.cs" />
+    <Compile Include="ClassMysql\Class_ExportFG_WareHouse.cs" />
     <Compile Include="ClassMysql\MySql_importfg_warehouse.cs" />
     <Compile Include="ClassMysql\Class_Import_FS_WareHouse.cs" />
     <Compile Include="Class\ClearMemory.cs" />
@@ -609,6 +607,8 @@
       <DependentUpon>TargetProdution.cs</DependentUpon>
     </Compile>
     <Compile Include="MQC\TargetProduction\TargetToDatabase.cs" />
+    <Compile Include="NewQRcode\GetImportFG.cs" />
+    <Compile Include="NewQRcode\IdentifyQR.cs" />
     <Compile Include="OVEN\Database\GetdataOven.cs" />
     <Compile Include="OVEN\OVENShow.cs">
       <SubType>Form</SubType>
@@ -1258,6 +1258,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="MySql.Data.dll" />
+    <None Include="Resources\20160719024359.jpg" />
     <Content Include="Resources\AttendanceDaily.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1500,7 +1501,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClassObject\" />
     <Folder Include="CrisisReport\Shipping\" />
     <Folder Include="MQC\Model\" />
     <Folder Include="MQC\Report\" />

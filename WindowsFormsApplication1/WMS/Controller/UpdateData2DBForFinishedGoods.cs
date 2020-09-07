@@ -92,68 +92,69 @@ namespace WindowsFormsApplication1.WMS.Controller
         }
 
 
-		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC,string Location, out string ERPDoc, out string SFTDoc)
+		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC,string Location, out string ERPDoc)
 		{
 			try
 			{
 				ERPDoc = "";
-				SFTDoc = "";
+				//SFTDoc = "";
 
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
 				string TB002 = eRPDataUpdate.getTB002("D301");
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
-				string TransNo = sFTDataUpdate.getTransnoOfSFT("D301");
-				Database.SFT.SFT_TRANSORDER_LINE sFT_TRANSORDER_LINE = new Database.SFT.SFT_TRANSORDER_LINE();
+				//string TransNo = sFTDataUpdate.getTransnoOfSFT("D301");
+				//Database.SFT.SFT_TRANSORDER_LINE sFT_TRANSORDER_LINE = new Database.SFT.SFT_TRANSORDER_LINE();
 				ConvertDataTable convertDataTable = new ConvertDataTable();
-				DataTable dtTRANSORDER_LINE = convertDataTable.ERPPQCtoSFTTRANSORDERLINE(dtERPPQC, TransNo, TB002, Location);
-				DataTable dtTRANSORDER = convertDataTable.GetDataSFTTRANSORDER(dtERPPQC, dtTRANSORDER_LINE);
-				DataTable dtWSRUN = convertDataTable.GetDataTableSFT_WS_RUN(dtERPPQC, dtTRANSORDER_LINE);
+				//DataTable dtTRANSORDER_LINE = convertDataTable.ERPPQCtoSFTTRANSORDERLINE(dtERPPQC, TransNo, TB002, Location);
+				//DataTable dtTRANSORDER = convertDataTable.GetDataSFTTRANSORDER(dtERPPQC, dtTRANSORDER_LINE);
+				//DataTable dtWSRUN = convertDataTable.GetDataTableSFT_WS_RUN(dtERPPQC, dtTRANSORDER_LINE);
 				ConvertDataERP convertDataERP = new ConvertDataERP();
 				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"Y");
-				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, TransNo,"Y");
+				//DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, TransNo,"Y");
 				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
 				DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
-				if (dtTRANSORDER_LINE.Rows.Count > 0 && dtTRANSORDER.Rows.Count > 0 && dtWSRUN.Rows.Count > 0
-					&& dtSFCTC.Rows.Count > 0 && dtSFCTB.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
+				if (
+					 //	dtTRANSORDER_LINE.Rows.Count > 0 && dtTRANSORDER.Rows.Count > 0 && dtWSRUN.Rows.Count > 0&& dtSFCTB.Rows.Count > 0 &&
+					 dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
 				{
 
-					var Result = sFT_TRANSORDER_LINE.InsertData(dtTRANSORDER_LINE);
-					if (Result == false)
-					{
-						MessageBox.Show("Insert TransOrder_Line fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
+					//var Result = sFT_TRANSORDER_LINE.InsertData(dtTRANSORDER_LINE);
+					//if (Result == false)
+					//{
+					//	MessageBox.Show("Insert TransOrder_Line fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
 
-					Database.SFT.SFT_TRANSORDER sFT_TRANSORDER = new Database.SFT.SFT_TRANSORDER();
-					var resultTransOrder = sFT_TRANSORDER.InsertData(dtTRANSORDER);
-					if (resultTransOrder == false)
-					{
-						MessageBox.Show("Insert TransOrder fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
+					//Database.SFT.SFT_TRANSORDER sFT_TRANSORDER = new Database.SFT.SFT_TRANSORDER();
+					//var resultTransOrder = sFT_TRANSORDER.InsertData(dtTRANSORDER);
+					//if (resultTransOrder == false)
+					//{
+					//	MessageBox.Show("Insert TransOrder fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
 
-					int[] sequence = new int[dtERPPQC.Rows.Count];
-					Database.SFT.SFT_WS_RUN sFT_WS_RUN = new Database.SFT.SFT_WS_RUN();
-					var resultWs_run = sFT_WS_RUN.InsertData(dtWSRUN, out sequence);
-					if (resultWs_run == false)
-					{
-						MessageBox.Show("Insert SFT_WS_RUN fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
-					Database.SFT.MODETAIL mODETAIL = new Database.SFT.MODETAIL();
-					var resultUpdate = mODETAIL.UpdateMODETAIL(dtTRANSORDER_LINE);//MOC027 ko biet la gi ?
-					if (resultUpdate == false)
-					{
-						MessageBox.Show("update Modetail fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
-					Database.SFT.SFT_LOT sFT_LOT = new Database.SFT.SFT_LOT();
-					var InsertOrUpdate = sFT_LOT.InsertUpdateLot(dtTRANSORDER_LINE);
-					if (InsertOrUpdate == false)
-					{
-						MessageBox.Show("Insert Lot fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
+					//int[] sequence = new int[dtERPPQC.Rows.Count];
+					//Database.SFT.SFT_WS_RUN sFT_WS_RUN = new Database.SFT.SFT_WS_RUN();
+					//var resultWs_run = sFT_WS_RUN.InsertData(dtWSRUN, out sequence);
+					//if (resultWs_run == false)
+					//{
+					//	MessageBox.Show("Insert SFT_WS_RUN fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
+					//Database.SFT.MODETAIL mODETAIL = new Database.SFT.MODETAIL();
+					//var resultUpdate = mODETAIL.UpdateMODETAIL(dtTRANSORDER_LINE);//MOC027 ko biet la gi ?
+					//if (resultUpdate == false)
+					//{
+					//	MessageBox.Show("update Modetail fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
+					//Database.SFT.SFT_LOT sFT_LOT = new Database.SFT.SFT_LOT();
+					//var InsertOrUpdate = sFT_LOT.InsertUpdateLot(dtTRANSORDER_LINE);
+					//if (InsertOrUpdate == false)
+					//{
+					//	MessageBox.Show("Insert Lot fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
 
 					Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
 
@@ -164,13 +165,13 @@ namespace WindowsFormsApplication1.WMS.Controller
 						return false;
 					}
 
-					Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
-					var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
-					if (InsertSFCTB == false)
-					{
-						MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
-					}
+					//Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
+					////var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
+					//if (InsertSFCTB == false)
+					//{
+					//	MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	return false;
+					//}
 					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
 					var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);
 					if (UpdateSFCTA == false)
@@ -217,7 +218,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 					}
 				}
 				ERPDoc = TB002;
-				SFTDoc = TransNo;
+				//SFTDoc = TransNo;
 
 
 			}
@@ -226,8 +227,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 
 				SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateData2DBForFinishedGoods(FinishedGoodsItems fgItems)", ex.Message);
 				ERPDoc = "";
-				SFTDoc = "";
 				return false;
+				//SFTDoc = "";
+
 			}
 			return true;
 		}
@@ -248,8 +250,8 @@ namespace WindowsFormsApplication1.WMS.Controller
 				DataTable dtTRANSORDER = convertDataTable.GetDataSFTTRANSORDER(dtERPPQC, dtTRANSORDER_LINE);
 				DataTable dtWSRUN = convertDataTable.GetDataTableSFT_WS_RUN(dtERPPQC, dtTRANSORDER_LINE);
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"N");
-				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, TransNo,"N");
+				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"N");////
+				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, TransNo,"N");///
 			
 				if (dtTRANSORDER_LINE.Rows.Count > 0 && dtTRANSORDER.Rows.Count > 0 && dtWSRUN.Rows.Count > 0
 					&& dtSFCTC.Rows.Count > 0 && dtSFCTB.Rows.Count > 0 )
@@ -293,23 +295,23 @@ namespace WindowsFormsApplication1.WMS.Controller
 						return false;
 					}
 
-					Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
+					Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();///
 
-					var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
+					var InsertSFCTC = sFCTC.InsertData(dtSFCTC);/////
 					if (InsertSFCTC == false)
 					{
 						MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						return false;
 					}
 
-					Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
+					Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();/////
 					var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
 					if (InsertSFCTB == false)
 					{
 						MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						return false;
 					}
-					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
+					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();/////
 					var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoodsNotConfirm(dtERPPQC);
 					if (UpdateSFCTA == false)
 					{
@@ -317,7 +319,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						return false;
 					}
 
-					Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();
+					Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();////function kho
 					var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC, "D301-"+TB002);
 					if (updateOutPQC == false)
 					{

@@ -34,24 +34,24 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_QRManpulation = new System.Windows.Forms.TextBox();
             this.lb_Status = new System.Windows.Forms.Label();
-            this.lbl_WarehouseImport = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_QRLocationImport = new System.Windows.Forms.TextBox();
             this.lb_QRImport = new System.Windows.Forms.Label();
             this.txt_QRImport = new System.Windows.Forms.TextBox();
-            this.txt_SFTDoc = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.txt_ERPDocCreate = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cb_locationImport = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_importSummary = new System.Windows.Forms.Button();
             this.btn_ClearFgsImport = new System.Windows.Forms.Button();
             this.btn_comfirm4 = new System.Windows.Forms.Button();
+            this.lbl_WarehouseImport = new System.Windows.Forms.Label();
             this.dtgv_import = new System.Windows.Forms.DataGridView();
             this.tabPage_Export = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -117,6 +117,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).BeginInit();
             this.tabPage_Export.SuspendLayout();
@@ -147,10 +148,10 @@
             this.tabPage_FinishedGood.Controls.Add(this.tabPage_Export);
             this.tabPage_FinishedGood.Controls.Add(this.tabPage2);
             this.tabPage_FinishedGood.Location = new System.Drawing.Point(6, 104);
-            this.tabPage_FinishedGood.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_FinishedGood.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_FinishedGood.Name = "tabPage_FinishedGood";
             this.tabPage_FinishedGood.SelectedIndex = 0;
-            this.tabPage_FinishedGood.Size = new System.Drawing.Size(963, 496);
+            this.tabPage_FinishedGood.Size = new System.Drawing.Size(1077, 538);
             this.tabPage_FinishedGood.TabIndex = 1;
             this.tabPage_FinishedGood.SelectedIndexChanged += new System.EventHandler(this.tabPage_FinishedGood_SelectedIndexChanged);
             // 
@@ -158,10 +159,10 @@
             // 
             this.tabPage1_Import.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1_Import.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1_Import.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1_Import.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1_Import.Name = "tabPage1_Import";
-            this.tabPage1_Import.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage1_Import.Size = new System.Drawing.Size(955, 470);
+            this.tabPage1_Import.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage1_Import.Size = new System.Drawing.Size(1069, 512);
             this.tabPage1_Import.TabIndex = 0;
             this.tabPage1_Import.Text = "FINISHED GOODS IMPORT";
             this.tabPage1_Import.UseVisualStyleBackColor = true;
@@ -176,12 +177,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dtgv_import, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 3);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(954, 496);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1192, 505);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -194,12 +195,12 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(950, 169);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1188, 246);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // groupBox1
@@ -207,34 +208,43 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txt_QRManpulation);
             this.groupBox1.Controls.Add(this.lb_Status);
-            this.groupBox1.Controls.Add(this.lbl_WarehouseImport);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txt_QRLocationImport);
             this.groupBox1.Controls.Add(this.lb_QRImport);
             this.groupBox1.Controls.Add(this.txt_QRImport);
-            this.groupBox1.Controls.Add(this.txt_SFTDoc);
-            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txt_ERPDocCreate);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.cb_locationImport);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(2, 59);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(946, 108);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(1184, 185);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources._20160719024359;
+            this.pictureBox2.Location = new System.Drawing.Point(25, 22);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(165, 163);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 30;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 86);
+            this.label5.Location = new System.Drawing.Point(195, 96);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 17);
@@ -244,8 +254,8 @@
             // txt_QRManpulation
             // 
             this.txt_QRManpulation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_QRManpulation.Location = new System.Drawing.Point(135, 78);
-            this.txt_QRManpulation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRManpulation.Location = new System.Drawing.Point(309, 92);
+            this.txt_QRManpulation.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRManpulation.Name = "txt_QRManpulation";
             this.txt_QRManpulation.Size = new System.Drawing.Size(218, 26);
             this.txt_QRManpulation.TabIndex = 28;
@@ -256,26 +266,16 @@
             // 
             this.lb_Status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_Status.AutoSize = true;
-            this.lb_Status.Location = new System.Drawing.Point(352, 91);
+            this.lb_Status.Location = new System.Drawing.Point(352, 168);
             this.lb_Status.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_Status.Name = "lb_Status";
             this.lb_Status.Size = new System.Drawing.Size(0, 17);
             this.lb_Status.TabIndex = 27;
             // 
-            // lbl_WarehouseImport
-            // 
-            this.lbl_WarehouseImport.AutoSize = true;
-            this.lbl_WarehouseImport.Location = new System.Drawing.Point(373, 24);
-            this.lbl_WarehouseImport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_WarehouseImport.Name = "lbl_WarehouseImport";
-            this.lbl_WarehouseImport.Size = new System.Drawing.Size(77, 17);
-            this.lbl_WarehouseImport.TabIndex = 26;
-            this.lbl_WarehouseImport.Text = "Warehouse";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 56);
+            this.label1.Location = new System.Drawing.Point(195, 57);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 17);
@@ -285,8 +285,8 @@
             // txt_QRLocationImport
             // 
             this.txt_QRLocationImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_QRLocationImport.Location = new System.Drawing.Point(135, 47);
-            this.txt_QRLocationImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRLocationImport.Location = new System.Drawing.Point(309, 53);
+            this.txt_QRLocationImport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRLocationImport.Name = "txt_QRLocationImport";
             this.txt_QRLocationImport.Size = new System.Drawing.Size(218, 26);
             this.txt_QRLocationImport.TabIndex = 24;
@@ -296,7 +296,7 @@
             // lb_QRImport
             // 
             this.lb_QRImport.AutoSize = true;
-            this.lb_QRImport.Location = new System.Drawing.Point(20, 26);
+            this.lb_QRImport.Location = new System.Drawing.Point(195, 23);
             this.lb_QRImport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_QRImport.Name = "lb_QRImport";
             this.lb_QRImport.Size = new System.Drawing.Size(76, 17);
@@ -305,46 +305,30 @@
             // 
             // txt_QRImport
             // 
+            this.txt_QRImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_QRImport.BackColor = System.Drawing.Color.Yellow;
+            this.txt_QRImport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_QRImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_QRImport.Location = new System.Drawing.Point(135, 18);
-            this.txt_QRImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRImport.ForeColor = System.Drawing.SystemColors.Info;
+            this.txt_QRImport.Location = new System.Drawing.Point(310, 15);
+            this.txt_QRImport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRImport.Name = "txt_QRImport";
-            this.txt_QRImport.Size = new System.Drawing.Size(218, 26);
+            this.txt_QRImport.Size = new System.Drawing.Size(751, 26);
             this.txt_QRImport.TabIndex = 22;
             this.txt_QRImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_QRImport.TextChanged += new System.EventHandler(this.txt_QRImport_TextChanged);
             this.txt_QRImport.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_QRImport_KeyDown);
             // 
-            // txt_SFTDoc
-            // 
-            this.txt_SFTDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_SFTDoc.Location = new System.Drawing.Point(780, 28);
-            this.txt_SFTDoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_SFTDoc.Multiline = true;
-            this.txt_SFTDoc.Name = "txt_SFTDoc";
-            this.txt_SFTDoc.Size = new System.Drawing.Size(163, 67);
-            this.txt_SFTDoc.TabIndex = 21;
-            this.txt_SFTDoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(805, 11);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(129, 17);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "SFT Doccument No ";
-            // 
             // txt_ERPDocCreate
             // 
-            this.txt_ERPDocCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_ERPDocCreate.Location = new System.Drawing.Point(612, 28);
-            this.txt_ERPDocCreate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_ERPDocCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_ERPDocCreate.Location = new System.Drawing.Point(853, 82);
+            this.txt_ERPDocCreate.Margin = new System.Windows.Forms.Padding(2);
             this.txt_ERPDocCreate.Multiline = true;
             this.txt_ERPDocCreate.Name = "txt_ERPDocCreate";
-            this.txt_ERPDocCreate.Size = new System.Drawing.Size(164, 67);
+            this.txt_ERPDocCreate.Size = new System.Drawing.Size(195, 99);
             this.txt_ERPDocCreate.TabIndex = 19;
             this.txt_ERPDocCreate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -352,28 +336,31 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(619, 11);
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label10.Location = new System.Drawing.Point(849, 56);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(126, 17);
+            this.label10.Size = new System.Drawing.Size(142, 19);
             this.label10.TabIndex = 18;
             this.label10.Text = "ERP Doccument No";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // cb_locationImport
             // 
             this.cb_locationImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_locationImport.FormattingEnabled = true;
-            this.cb_locationImport.Location = new System.Drawing.Point(446, 58);
-            this.cb_locationImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_locationImport.Location = new System.Drawing.Point(642, 52);
+            this.cb_locationImport.Margin = new System.Windows.Forms.Padding(2);
             this.cb_locationImport.Name = "cb_locationImport";
-            this.cb_locationImport.Size = new System.Drawing.Size(146, 27);
+            this.cb_locationImport.Size = new System.Drawing.Size(182, 27);
             this.cb_locationImport.TabIndex = 15;
             this.cb_locationImport.SelectedIndexChanged += new System.EventHandler(this.cb_locationImport_SelectedIndexChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(373, 63);
+            this.label8.Location = new System.Drawing.Point(577, 58);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(61, 17);
@@ -385,28 +372,41 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.btn_importSummary);
             this.groupBox2.Controls.Add(this.btn_ClearFgsImport);
             this.groupBox2.Controls.Add(this.btn_comfirm4);
+            this.groupBox2.Controls.Add(this.lbl_WarehouseImport);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(2, 2);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(946, 53);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(1184, 53);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.ForeColor = System.Drawing.Color.Red;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(546, 17);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(185, 27);
+            this.comboBox1.TabIndex = 31;
             // 
             // btn_importSummary
             // 
             this.btn_importSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_importSummary.BackColor = System.Drawing.Color.White;
+            this.btn_importSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_importSummary.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_importSummary.Image = global::WindowsFormsApplication1.Properties.Resources.ProductionPlan;
             this.btn_importSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_importSummary.Location = new System.Drawing.Point(622, 12);
-            this.btn_importSummary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_importSummary.Location = new System.Drawing.Point(736, 12);
+            this.btn_importSummary.Margin = new System.Windows.Forms.Padding(2);
             this.btn_importSummary.Name = "btn_importSummary";
             this.btn_importSummary.Size = new System.Drawing.Size(113, 36);
             this.btn_importSummary.TabIndex = 11;
@@ -423,8 +423,8 @@
             this.btn_ClearFgsImport.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ClearFgsImport.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearFgsImport.Image")));
             this.btn_ClearFgsImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ClearFgsImport.Location = new System.Drawing.Point(741, 12);
-            this.btn_ClearFgsImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ClearFgsImport.Location = new System.Drawing.Point(853, 12);
+            this.btn_ClearFgsImport.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ClearFgsImport.Name = "btn_ClearFgsImport";
             this.btn_ClearFgsImport.Size = new System.Drawing.Size(88, 36);
             this.btn_ClearFgsImport.TabIndex = 10;
@@ -438,35 +438,49 @@
             this.btn_comfirm4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_comfirm4.BackColor = System.Drawing.Color.White;
+            this.btn_comfirm4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_comfirm4.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_comfirm4.Image = ((System.Drawing.Image)(resources.GetObject("btn_comfirm4.Image")));
             this.btn_comfirm4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_comfirm4.Location = new System.Drawing.Point(838, 12);
-            this.btn_comfirm4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_comfirm4.Location = new System.Drawing.Point(956, 13);
+            this.btn_comfirm4.Margin = new System.Windows.Forms.Padding(2);
             this.btn_comfirm4.Name = "btn_comfirm4";
-            this.btn_comfirm4.Size = new System.Drawing.Size(88, 36);
+            this.btn_comfirm4.Size = new System.Drawing.Size(105, 36);
             this.btn_comfirm4.TabIndex = 6;
             this.btn_comfirm4.Text = "Confirm";
             this.btn_comfirm4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_comfirm4.UseVisualStyleBackColor = false;
             this.btn_comfirm4.Click += new System.EventHandler(this.btn_comfirm4_Click);
             // 
+            // lbl_WarehouseImport
+            // 
+            this.lbl_WarehouseImport.AutoSize = true;
+            this.lbl_WarehouseImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_WarehouseImport.ForeColor = System.Drawing.Color.Blue;
+            this.lbl_WarehouseImport.Location = new System.Drawing.Point(4, 17);
+            this.lbl_WarehouseImport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_WarehouseImport.Name = "lbl_WarehouseImport";
+            this.lbl_WarehouseImport.Size = new System.Drawing.Size(84, 19);
+            this.lbl_WarehouseImport.TabIndex = 26;
+            this.lbl_WarehouseImport.Text = "Warehouse";
+            // 
             // dtgv_import
             // 
+            this.dtgv_import.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
             this.dtgv_import.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgv_import.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dtgv_import.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgv_import.Location = new System.Drawing.Point(2, 175);
-            this.dtgv_import.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtgv_import.Location = new System.Drawing.Point(2, 252);
+            this.dtgv_import.Margin = new System.Windows.Forms.Padding(2);
             this.dtgv_import.Name = "dtgv_import";
             this.dtgv_import.ReadOnly = true;
-            this.dtgv_import.RowHeadersWidth = 51;
+            this.dtgv_import.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgv_import.RowTemplate.Height = 24;
-            this.dtgv_import.Size = new System.Drawing.Size(950, 319);
-            this.dtgv_import.TabIndex = 0;
-            this.dtgv_import.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgv_import_CellClick);
+            this.dtgv_import.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgv_import.Size = new System.Drawing.Size(1188, 251);
+            this.dtgv_import.TabIndex = 2;
             this.dtgv_import.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgv_import_DataBindingComplete);
             this.dtgv_import.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dtgv_import_MouseClick);
             // 
@@ -474,10 +488,10 @@
             // 
             this.tabPage_Export.Controls.Add(this.tableLayoutPanel3);
             this.tabPage_Export.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Export.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_Export.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_Export.Name = "tabPage_Export";
-            this.tabPage_Export.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage_Export.Size = new System.Drawing.Size(955, 470);
+            this.tabPage_Export.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage_Export.Size = new System.Drawing.Size(1069, 512);
             this.tabPage_Export.TabIndex = 1;
             this.tabPage_Export.Text = "PACKING LIST";
             this.tabPage_Export.UseVisualStyleBackColor = true;
@@ -492,12 +506,12 @@
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 1);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 229F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(954, 497);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1063, 539);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -510,12 +524,12 @@
             this.tableLayoutPanel4.Controls.Add(this.groupBox4, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.groupBox3, 0, 1);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(950, 225);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1059, 225);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // groupBox4
@@ -528,10 +542,10 @@
             this.groupBox4.Controls.Add(this.btn_SearchExport);
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(2, 2);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(946, 53);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(1055, 53);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             // 
@@ -542,8 +556,8 @@
             this.btn_ClearPickingList.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ClearPickingList.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearPickingList.Image")));
             this.btn_ClearPickingList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ClearPickingList.Location = new System.Drawing.Point(717, 10);
-            this.btn_ClearPickingList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ClearPickingList.Location = new System.Drawing.Point(1063, 10);
+            this.btn_ClearPickingList.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ClearPickingList.Name = "btn_ClearPickingList";
             this.btn_ClearPickingList.Size = new System.Drawing.Size(88, 38);
             this.btn_ClearPickingList.TabIndex = 8;
@@ -559,8 +573,8 @@
             this.btn_ComfirmExport.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ComfirmExport.Image = ((System.Drawing.Image)(resources.GetObject("btn_ComfirmExport.Image")));
             this.btn_ComfirmExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ComfirmExport.Location = new System.Drawing.Point(625, 10);
-            this.btn_ComfirmExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ComfirmExport.Location = new System.Drawing.Point(963, 15);
+            this.btn_ComfirmExport.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ComfirmExport.Name = "btn_ComfirmExport";
             this.btn_ComfirmExport.Size = new System.Drawing.Size(88, 38);
             this.btn_ComfirmExport.TabIndex = 6;
@@ -577,8 +591,8 @@
             this.btn_SearchExport.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_SearchExport.Image = global::WindowsFormsApplication1.Properties.Resources.qr_code;
             this.btn_SearchExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_SearchExport.Location = new System.Drawing.Point(810, 10);
-            this.btn_SearchExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_SearchExport.Location = new System.Drawing.Point(1156, 10);
+            this.btn_SearchExport.Margin = new System.Windows.Forms.Padding(2);
             this.btn_SearchExport.Name = "btn_SearchExport";
             this.btn_SearchExport.Size = new System.Drawing.Size(122, 38);
             this.btn_SearchExport.TabIndex = 5;
@@ -617,10 +631,10 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(2, 59);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(946, 164);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(1055, 164);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Fill the form";
@@ -630,8 +644,8 @@
             this.txt_ShipmentType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_ShipmentType.Enabled = false;
             this.txt_ShipmentType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ShipmentType.Location = new System.Drawing.Point(765, 106);
-            this.txt_ShipmentType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_ShipmentType.Location = new System.Drawing.Point(1188, 106);
+            this.txt_ShipmentType.Margin = new System.Windows.Forms.Padding(2);
             this.txt_ShipmentType.Name = "txt_ShipmentType";
             this.txt_ShipmentType.Size = new System.Drawing.Size(168, 26);
             this.txt_ShipmentType.TabIndex = 22;
@@ -642,8 +656,8 @@
             this.txt_buyerSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_buyerSelect.Enabled = false;
             this.txt_buyerSelect.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_buyerSelect.Location = new System.Drawing.Point(765, 67);
-            this.txt_buyerSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_buyerSelect.Location = new System.Drawing.Point(1188, 67);
+            this.txt_buyerSelect.Margin = new System.Windows.Forms.Padding(2);
             this.txt_buyerSelect.Name = "txt_buyerSelect";
             this.txt_buyerSelect.Size = new System.Drawing.Size(168, 26);
             this.txt_buyerSelect.TabIndex = 21;
@@ -657,8 +671,8 @@
             this.btn_ShipmentType.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ShipmentType.Image = global::WindowsFormsApplication1.Properties.Resources.search;
             this.btn_ShipmentType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ShipmentType.Location = new System.Drawing.Point(605, 101);
-            this.btn_ShipmentType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ShipmentType.Location = new System.Drawing.Point(773, 92);
+            this.btn_ShipmentType.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ShipmentType.Name = "btn_ShipmentType";
             this.btn_ShipmentType.Size = new System.Drawing.Size(138, 35);
             this.btn_ShipmentType.TabIndex = 20;
@@ -676,8 +690,8 @@
             this.btn_buyerSelected.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_buyerSelected.Image = global::WindowsFormsApplication1.Properties.Resources.search;
             this.btn_buyerSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_buyerSelected.Location = new System.Drawing.Point(605, 62);
-            this.btn_buyerSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_buyerSelected.Location = new System.Drawing.Point(773, 42);
+            this.btn_buyerSelected.Margin = new System.Windows.Forms.Padding(2);
             this.btn_buyerSelected.Name = "btn_buyerSelected";
             this.btn_buyerSelected.Size = new System.Drawing.Size(138, 34);
             this.btn_buyerSelected.TabIndex = 19;
@@ -690,8 +704,8 @@
             // picBox
             // 
             this.picBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBox.Location = new System.Drawing.Point(901, 41);
-            this.picBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picBox.Location = new System.Drawing.Point(1247, 41);
+            this.picBox.Margin = new System.Windows.Forms.Padding(2);
             this.picBox.Name = "picBox";
             this.picBox.Size = new System.Drawing.Size(31, 17);
             this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -733,7 +747,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(700, 23);
+            this.label19.Location = new System.Drawing.Point(785, 18);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(97, 17);
@@ -753,7 +767,7 @@
             // txt_InvoiceExport
             // 
             this.txt_InvoiceExport.Location = new System.Drawing.Point(455, 79);
-            this.txt_InvoiceExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_InvoiceExport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_InvoiceExport.Name = "txt_InvoiceExport";
             this.txt_InvoiceExport.Size = new System.Drawing.Size(132, 23);
             this.txt_InvoiceExport.TabIndex = 12;
@@ -772,7 +786,7 @@
             // 
             this.cb_CurrentMonney.FormattingEnabled = true;
             this.cb_CurrentMonney.Location = new System.Drawing.Point(453, 47);
-            this.cb_CurrentMonney.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_CurrentMonney.Margin = new System.Windows.Forms.Padding(2);
             this.cb_CurrentMonney.Name = "cb_CurrentMonney";
             this.cb_CurrentMonney.Size = new System.Drawing.Size(104, 25);
             this.cb_CurrentMonney.TabIndex = 10;
@@ -792,7 +806,7 @@
             // 
             this.cb_Department.FormattingEnabled = true;
             this.cb_Department.Location = new System.Drawing.Point(107, 80);
-            this.cb_Department.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_Department.Margin = new System.Windows.Forms.Padding(2);
             this.cb_Department.Name = "cb_Department";
             this.cb_Department.Size = new System.Drawing.Size(104, 25);
             this.cb_Department.TabIndex = 8;
@@ -812,7 +826,7 @@
             // 
             this.cb_ClientCode.FormattingEnabled = true;
             this.cb_ClientCode.Location = new System.Drawing.Point(107, 115);
-            this.cb_ClientCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_ClientCode.Margin = new System.Windows.Forms.Padding(2);
             this.cb_ClientCode.Name = "cb_ClientCode";
             this.cb_ClientCode.Size = new System.Drawing.Size(104, 25);
             this.cb_ClientCode.TabIndex = 6;
@@ -831,8 +845,8 @@
             // txt_DocumentExportNo
             // 
             this.txt_DocumentExportNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_DocumentExportNo.Location = new System.Drawing.Point(798, 19);
-            this.txt_DocumentExportNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_DocumentExportNo.Location = new System.Drawing.Point(1144, 19);
+            this.txt_DocumentExportNo.Margin = new System.Windows.Forms.Padding(2);
             this.txt_DocumentExportNo.Name = "txt_DocumentExportNo";
             this.txt_DocumentExportNo.Size = new System.Drawing.Size(135, 23);
             this.txt_DocumentExportNo.TabIndex = 4;
@@ -841,7 +855,7 @@
             // 
             this.dtpk_CreateDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpk_CreateDate.Location = new System.Drawing.Point(107, 47);
-            this.dtpk_CreateDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpk_CreateDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpk_CreateDate.Name = "dtpk_CreateDate";
             this.dtpk_CreateDate.Size = new System.Drawing.Size(104, 23);
             this.dtpk_CreateDate.TabIndex = 3;
@@ -860,7 +874,7 @@
             // 
             this.cb_DocType.FormattingEnabled = true;
             this.cb_DocType.Location = new System.Drawing.Point(455, 115);
-            this.cb_DocType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_DocType.Margin = new System.Windows.Forms.Padding(2);
             this.cb_DocType.Name = "cb_DocType";
             this.cb_DocType.Size = new System.Drawing.Size(104, 25);
             this.cb_DocType.TabIndex = 1;
@@ -886,12 +900,12 @@
             this.tableLayoutPanel5.Controls.Add(this.dtgv_export, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.btn_AddRow, 0, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 231);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(950, 264);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1059, 306);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // dtgv_export
@@ -901,13 +915,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgv_export.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dtgv_export.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgv_export.Location = new System.Drawing.Point(2, 33);
-            this.dtgv_export.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtgv_export.Location = new System.Drawing.Point(2, 46);
+            this.dtgv_export.Margin = new System.Windows.Forms.Padding(2);
             this.dtgv_export.Name = "dtgv_export";
             this.dtgv_export.ReadOnly = true;
             this.dtgv_export.RowHeadersWidth = 51;
             this.dtgv_export.RowTemplate.Height = 24;
-            this.dtgv_export.Size = new System.Drawing.Size(946, 229);
+            this.dtgv_export.Size = new System.Drawing.Size(1055, 258);
             this.dtgv_export.TabIndex = 0;
             this.dtgv_export.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgv_export_DataBindingComplete);
             // 
@@ -920,9 +934,9 @@
             this.btn_AddRow.Image = ((System.Drawing.Image)(resources.GetObject("btn_AddRow.Image")));
             this.btn_AddRow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_AddRow.Location = new System.Drawing.Point(2, 2);
-            this.btn_AddRow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AddRow.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AddRow.Name = "btn_AddRow";
-            this.btn_AddRow.Size = new System.Drawing.Size(80, 27);
+            this.btn_AddRow.Size = new System.Drawing.Size(80, 40);
             this.btn_AddRow.TabIndex = 0;
             this.btn_AddRow.Text = "Add";
             this.btn_AddRow.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -933,10 +947,10 @@
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel9);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tabPage2.Size = new System.Drawing.Size(955, 470);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(1069, 512);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "FINISHED GOODS EXPORT";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -951,12 +965,12 @@
             this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel11, 0, 1);
             this.tableLayoutPanel9.Location = new System.Drawing.Point(2, 3);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 2;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 229F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(954, 502);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1063, 502);
             this.tableLayoutPanel9.TabIndex = 1;
             // 
             // tableLayoutPanel10
@@ -969,12 +983,12 @@
             this.tableLayoutPanel10.Controls.Add(this.groupBox7, 0, 1);
             this.tableLayoutPanel10.Controls.Add(this.groupBox8, 0, 0);
             this.tableLayoutPanel10.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 2;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(950, 225);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1059, 225);
             this.tableLayoutPanel10.TabIndex = 1;
             // 
             // groupBox7
@@ -997,10 +1011,10 @@
             this.groupBox7.Controls.Add(this.label7);
             this.groupBox7.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox7.Location = new System.Drawing.Point(2, 69);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox7.Size = new System.Drawing.Size(946, 154);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Size = new System.Drawing.Size(1055, 154);
             this.groupBox7.TabIndex = 0;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Information";
@@ -1019,7 +1033,7 @@
             // 
             this.txt_QRManpulationEX.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_QRManpulationEX.Location = new System.Drawing.Point(155, 119);
-            this.txt_QRManpulationEX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRManpulationEX.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRManpulationEX.Name = "txt_QRManpulationEX";
             this.txt_QRManpulationEX.Size = new System.Drawing.Size(214, 26);
             this.txt_QRManpulationEX.TabIndex = 29;
@@ -1049,7 +1063,7 @@
             // 
             this.txt_QRExportLocation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_QRExportLocation.Location = new System.Drawing.Point(155, 87);
-            this.txt_QRExportLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRExportLocation.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRExportLocation.Name = "txt_QRExportLocation";
             this.txt_QRExportLocation.Size = new System.Drawing.Size(214, 26);
             this.txt_QRExportLocation.TabIndex = 26;
@@ -1070,7 +1084,7 @@
             // 
             this.txt_QRProductImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_QRProductImport.Location = new System.Drawing.Point(155, 59);
-            this.txt_QRProductImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRProductImport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRProductImport.Name = "txt_QRProductImport";
             this.txt_QRProductImport.Size = new System.Drawing.Size(297, 26);
             this.txt_QRProductImport.TabIndex = 24;
@@ -1091,7 +1105,7 @@
             // 
             this.txt_QRExport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_QRExport.Location = new System.Drawing.Point(155, 26);
-            this.txt_QRExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_QRExport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRExport.Name = "txt_QRExport";
             this.txt_QRExport.Size = new System.Drawing.Size(297, 26);
             this.txt_QRExport.TabIndex = 22;
@@ -1101,8 +1115,8 @@
             // txt_deliveryNo
             // 
             this.txt_deliveryNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_deliveryNo.Location = new System.Drawing.Point(717, 121);
-            this.txt_deliveryNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_deliveryNo.Location = new System.Drawing.Point(856, 119);
+            this.txt_deliveryNo.Margin = new System.Windows.Forms.Padding(2);
             this.txt_deliveryNo.Name = "txt_deliveryNo";
             this.txt_deliveryNo.Size = new System.Drawing.Size(146, 23);
             this.txt_deliveryNo.TabIndex = 19;
@@ -1112,7 +1126,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(626, 127);
+            this.label6.Location = new System.Drawing.Point(754, 119);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 17);
@@ -1123,8 +1137,8 @@
             // 
             this.cb_locationExport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_locationExport.FormattingEnabled = true;
-            this.cb_locationExport.Location = new System.Drawing.Point(716, 26);
-            this.cb_locationExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_locationExport.Location = new System.Drawing.Point(856, 26);
+            this.cb_locationExport.Margin = new System.Windows.Forms.Padding(2);
             this.cb_locationExport.Name = "cb_locationExport";
             this.cb_locationExport.Size = new System.Drawing.Size(146, 27);
             this.cb_locationExport.TabIndex = 15;
@@ -1133,7 +1147,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(625, 35);
+            this.label7.Location = new System.Drawing.Point(754, 30);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 17);
@@ -1150,10 +1164,10 @@
             this.groupBox8.Controls.Add(this.btn_ExportFGs);
             this.groupBox8.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.Location = new System.Drawing.Point(2, 2);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox8.Size = new System.Drawing.Size(946, 63);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox8.Size = new System.Drawing.Size(1055, 63);
             this.groupBox8.TabIndex = 1;
             this.groupBox8.TabStop = false;
             // 
@@ -1165,10 +1179,10 @@
             this.btn_ExportSummary.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ExportSummary.Image = global::WindowsFormsApplication1.Properties.Resources.ProductionPlan;
             this.btn_ExportSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ExportSummary.Location = new System.Drawing.Point(717, 15);
-            this.btn_ExportSummary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ExportSummary.Location = new System.Drawing.Point(737, 15);
+            this.btn_ExportSummary.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ExportSummary.Name = "btn_ExportSummary";
-            this.btn_ExportSummary.Size = new System.Drawing.Size(113, 36);
+            this.btn_ExportSummary.Size = new System.Drawing.Size(124, 36);
             this.btn_ExportSummary.TabIndex = 12;
             this.btn_ExportSummary.Text = "Summary";
             this.btn_ExportSummary.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1183,10 +1197,10 @@
             this.btn_ExportFGs.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ExportFGs.Image = ((System.Drawing.Image)(resources.GetObject("btn_ExportFGs.Image")));
             this.btn_ExportFGs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ExportFGs.Location = new System.Drawing.Point(848, 15);
-            this.btn_ExportFGs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_ExportFGs.Location = new System.Drawing.Point(893, 15);
+            this.btn_ExportFGs.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ExportFGs.Name = "btn_ExportFGs";
-            this.btn_ExportFGs.Size = new System.Drawing.Size(88, 38);
+            this.btn_ExportFGs.Size = new System.Drawing.Size(109, 38);
             this.btn_ExportFGs.TabIndex = 6;
             this.btn_ExportFGs.Text = "Confirm";
             this.btn_ExportFGs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1203,12 +1217,12 @@
             this.tableLayoutPanel11.Controls.Add(this.dtgv_QRimportData, 0, 1);
             this.tableLayoutPanel11.Controls.Add(this.dtgvExportFGs, 0, 0);
             this.tableLayoutPanel11.Location = new System.Drawing.Point(2, 231);
-            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 2;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(950, 269);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1059, 269);
             this.tableLayoutPanel11.TabIndex = 2;
             // 
             // dtgv_QRimportData
@@ -1219,12 +1233,12 @@
             this.dtgv_QRimportData.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dtgv_QRimportData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgv_QRimportData.Location = new System.Drawing.Point(2, 136);
-            this.dtgv_QRimportData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtgv_QRimportData.Margin = new System.Windows.Forms.Padding(2);
             this.dtgv_QRimportData.Name = "dtgv_QRimportData";
             this.dtgv_QRimportData.ReadOnly = true;
             this.dtgv_QRimportData.RowHeadersWidth = 51;
             this.dtgv_QRimportData.RowTemplate.Height = 24;
-            this.dtgv_QRimportData.Size = new System.Drawing.Size(946, 131);
+            this.dtgv_QRimportData.Size = new System.Drawing.Size(1055, 131);
             this.dtgv_QRimportData.TabIndex = 1;
             this.dtgv_QRimportData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgv_QRimportData_DataBindingComplete);
             // 
@@ -1236,12 +1250,12 @@
             this.dtgvExportFGs.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.dtgvExportFGs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvExportFGs.Location = new System.Drawing.Point(2, 2);
-            this.dtgvExportFGs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtgvExportFGs.Margin = new System.Windows.Forms.Padding(2);
             this.dtgvExportFGs.Name = "dtgvExportFGs";
             this.dtgvExportFGs.ReadOnly = true;
             this.dtgvExportFGs.RowHeadersWidth = 51;
             this.dtgvExportFGs.RowTemplate.Height = 24;
-            this.dtgvExportFGs.Size = new System.Drawing.Size(946, 130);
+            this.dtgvExportFGs.Size = new System.Drawing.Size(1055, 130);
             this.dtgvExportFGs.TabIndex = 0;
             this.dtgvExportFGs.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgvExportFGs_DataBindingComplete);
             // 
@@ -1266,22 +1280,22 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.lbl_Header);
-            this.panel1.Location = new System.Drawing.Point(351, 30);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(405, 24);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(522, 49);
+            this.panel1.Size = new System.Drawing.Size(636, 49);
             this.panel1.TabIndex = 8;
             // 
             // FinishedGoodsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(975, 605);
+            this.ClientSize = new System.Drawing.Size(1089, 647);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabPage_FinishedGood);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.Name = "FinishedGoodsUI";
-            this.Padding = new System.Windows.Forms.Padding(3, 46, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(3, 60, 3, 3);
             this.Text = "FinishedGoodsUI";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FinishedGoodsUI_FormClosing);
             this.Load += new System.EventHandler(this.FinishedGoodsUI_Load);
@@ -1293,7 +1307,9 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).EndInit();
             this.tabPage_Export.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -1324,7 +1340,6 @@
         private System.Windows.Forms.TabControl tabPage_FinishedGood;
         private System.Windows.Forms.TabPage tabPage1_Import;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dtgv_import;
         private System.Windows.Forms.TabPage tabPage_Export;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1332,8 +1347,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_comfirm4;
-        private System.Windows.Forms.TextBox txt_SFTDoc;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_ERPDocCreate;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -1404,5 +1417,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txt_QRManpulationEX;
         private System.Windows.Forms.Button btn_ExportSummary;
+        private System.Windows.Forms.DataGridView dtgv_import;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

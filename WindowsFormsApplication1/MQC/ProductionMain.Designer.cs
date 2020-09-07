@@ -49,7 +49,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.layoutMain, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 25);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.974359F));
@@ -72,7 +72,7 @@
             this.tableLayoutPanel2.Controls.Add(this.lb_Clock, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.cb_Department, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -142,7 +142,7 @@
             this.cb_Department.ForeColor = System.Drawing.Color.Khaki;
             this.cb_Department.FormattingEnabled = true;
             this.cb_Department.Location = new System.Drawing.Point(167, 2);
-            this.cb_Department.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_Department.Margin = new System.Windows.Forms.Padding(2);
             this.cb_Department.Name = "cb_Department";
             this.cb_Department.Size = new System.Drawing.Size(328, 28);
             this.cb_Department.TabIndex = 1;
@@ -157,7 +157,7 @@
             this.layoutMain.ColumnCount = 1;
             this.layoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.layoutMain.Location = new System.Drawing.Point(2, 51);
-            this.layoutMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.layoutMain.Margin = new System.Windows.Forms.Padding(2);
             this.layoutMain.Name = "layoutMain";
             this.layoutMain.RowCount = 1;
             this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -170,9 +170,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 576);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ProductionMain";
-            this.Padding = new System.Windows.Forms.Padding(14, 49, 14, 15);
+            this.Padding = new System.Windows.Forms.Padding(14, 60, 14, 15);
             this.ShadowType = MetroFramework.Forms.MetroForm.MetroFormShadowType.DropShadow;
             this.Style = MetroFramework.MetroColorStyle.Blue;
             this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;

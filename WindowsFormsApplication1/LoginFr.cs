@@ -119,16 +119,16 @@ namespace WindowsFormsApplication1
         }
         private void btn_login_Click(object sender, EventArgs e)
         {
-            MySql_importfg_warehouse tem = new MySql_importfg_warehouse();
-            if (tem.Open())
-            {
-                MessageBox.Show("Connect Mysql sucess");
-                return;
-            }
-            else
-            {
-                return;
-            }
+            //MySql_importfg_warehouse tem = new MySql_importfg_warehouse();
+            //if (tem.Open())
+            //{
+            //    MessageBox.Show("Connect Mysql sucess");
+            //    return;
+            //}
+            //else
+            //{
+            //    return;
+            //}
             if (checkdata() == false)
             { return; }
             string sqlusername = "select distinct username from m_user where  usercode = '" + cmb_user.Text + "'";

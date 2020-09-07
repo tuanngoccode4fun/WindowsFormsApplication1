@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1.ClassMysql;
+using WindowsFormsApplication1.ClassObject;
+using WindowsFormsApplication1.NewQRcode;
 using WindowsFormsApplication1.WMS.Controller;
 using WindowsFormsApplication1.WMS.Model;
 
@@ -24,6 +28,9 @@ namespace WindowsFormsApplication1.WMS.View
         DataTable dtExportFGs;
         DataTable dataQRInfor = new DataTable();
         string WarehouseImport = "";
+        StringBuilder AllitemDelete = new StringBuilder();
+        List<Import_FinishGood_WareHouse> ListImportFG = new List<Import_FinishGood_WareHouse>();
+        bool startGetTextChange = true;
         public FinishedGoodsUI()
         {
             InitializeComponent();
@@ -69,7 +76,7 @@ namespace WindowsFormsApplication1.WMS.View
                 //        cb_warehousePQC.SelectedItem = Class.valiballecommon.GetStorage().Warehouse;
                 //    break;
                 case 0:
-
+                    getlistWarehouse = new Database.GetListWarehouse();
                     ListWarehouse = new List<Database.WarehouseItems>();
                     ListWarehouse = getlistWarehouse.GetWarehouseItems();
                     break;
@@ -110,31 +117,7 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void dtgv_import_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int RowIndex = e.RowIndex;
-            int ColumnsIndex = e.ColumnIndex;
-            if (RowIndex >= 0 && ColumnsIndex >= 0)
-            {
-                if (dtgv_import.Columns[e.ColumnIndex].Name == "checkbox")
-                {
-                    try
-                    {
 
-                        dtgv_import.Rows[e.RowIndex].Cells["checkbox"].Value = true;
-                        for (int i = 0; i < dtgv_import.Rows.Count; i++)
-                        {
-                            if (i != RowIndex)
-                                dtgv_import.Rows[i].Cells["checkbox"].Value = false;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
-                        MessageBox.Show("Input data wrong format", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
-                }
-
-            }
         }
         private void DeleteAllValuesUI()
         {
@@ -477,65 +460,156 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void txt_QRImport_TextChanged(object sender, EventArgs e)
         {
-            if (txt_QRImport.Text.Length == 13)
-            {
-                DeleteAllValuesUI();
-                Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();
-                dataQRInfor = new DataTable();
-                dataQRInfor = eRPOutPQCQR.GetDataTableImportFinishedGoods(txt_QRImport.Text);
-                if (dataQRInfor.Rows.Count > 0)
-                {
-                    dtgv_import.DataSource = dataQRInfor;
-                    string Wh = dataQRInfor.Rows[0]["Warehouse"].ToString();
-                    WarehouseImport = Wh;
-                    var listLocation = ListWarehouse.Where(d => d.MC001_Wh == Wh)
-                        .Select(d => d.NL002_Location).ToList();
-                   
-                    cb_locationImport.DataSource = listLocation;
-                    cb_locationImport.SelectedIndex = -1;
-                    txt_QRLocationImport.Text = "";
-                    var WarehouseName = ListWarehouse.Where(d => d.MC001_Wh == Wh)
-                        .Select(d => d.MC002_WhName).ToList();
-                    if (WarehouseName.Count > 0)
-                        lbl_WarehouseImport.Text = "Warehouse: "+ WarehouseName[0];
-                    txt_QRLocationImport.Focus();
-                    
-                    
-                }
-                else
-                {
-                    dtgv_import.DataSource = null;
-                }
+            //if (txt_QRImport.Text.Length == 13)
+            //{
+            //    DeleteAllValuesUI();
+            //    Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();
+            //    dataQRInfor = new DataTable();
+            //    dataQRInfor = eRPOutPQCQR.GetDataTableImportFinishedGoods(txt_QRImport.Text);
+            //    if (dataQRInfor.Rows.Count > 0)
+            //    {
+            //        dtgv_import.DataSource = dataQRInfor;
+            //        string Wh = dataQRInfor.Rows[0]["Warehouse"].ToString();
+            //        WarehouseImport = Wh;
+            //        var listLocation = ListWarehouse.Where(d => d.MC001_Wh == Wh)
+            //            .Select(d => d.NL002_Location).ToList();
 
+            //        cb_locationImport.DataSource = listLocation;
+            //        cb_locationImport.SelectedIndex = -1;
+            //        txt_QRLocationImport.Text = "";
+            //        var WarehouseName = ListWarehouse.Where(d => d.MC001_Wh == Wh)
+            //            .Select(d => d.MC002_WhName).ToList();
+            //        if (WarehouseName.Count > 0)
+            //            lbl_WarehouseImport.Text = "Warehouse: "+ WarehouseName[0];
+            //        txt_QRLocationImport.Focus();
+
+
+            //    }
+            //    else
+            //    {
+            //        dtgv_import.DataSource = null;
+            //    }
+
+            //}
+            try
+            {
+                if (startGetTextChange == false || txt_QRImport.Text.Trim() == "") return;
+                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim());
+                if (valueTem != null)
+                {
+                    if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
+                    {
+                        System.Windows.Forms.MessageBox.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                    if (!IdentifyQR.IsDuplicate(ListImportFG, valueTem))
+                    {
+                        Import_FinishGood_WareHouse valueGet = (Import_FinishGood_WareHouse)valueTem.Clone();
+                        ////////
+                        string Wh = valueGet.Warehouse;
+                        WarehouseImport = Wh;
+                        var listLocation = ListWarehouse.Where(d => d.MC001_Wh.Trim() == Wh)
+                            .Select(d => d.NL002_Location).ToList();
+
+                        cb_locationImport.DataSource = listLocation;
+                        cb_locationImport.SelectedIndex = -1;
+                        txt_QRLocationImport.Text = "";
+                        var WarehouseName = ListWarehouse.Where(d => d.MC001_Wh.Trim() == Wh)
+                            .Select(d => d.MC002_WhName).ToList();
+                        if (WarehouseName.Count > 0)
+                            lbl_WarehouseImport.Text = "Warehouse: " + WarehouseName[0];
+                        txt_QRLocationImport.Focus();
+                        ///////
+                        valueGet.Id = (uint)ListImportFG.Count() + 1;
+                        ListImportFG.Add(valueGet);
+                        txt_QRImport.Text = null;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("QR code have already added in your list!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                }
+                dtgv_import.DataSource = null;
+                dtgv_import.DataSource = ListImportFG;
             }
+            catch
+            { 
+            
+            }
+
         }
 
         private void dtgv_import_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                ContextMenuStrip m = new ContextMenuStrip();
-                m.Name = "delete";
-                m.BackColor = Color.OrangeRed;
-
-                // m.MenuItems.Add(new MenuItem("delete"));
-
-
-                //int currentMouseOverRow = dtgv_materialTransfer.HitTest(e.X, e.Y).RowIndex;
-                //RowIndexClick = currentMouseOverRow;
-                //if (currentMouseOverRow >= 0)
+                //if (e.Button == MouseButtons.Right)
                 //{
-                //    m.Items.Add("Delete");
+                //    ContextMenuStrip m = new ContextMenuStrip();
+                //    m.Name = "delete";
+                //    m.BackColor = Color.OrangeRed;
 
-                //    m.ItemClicked += M_ItemClicked;
+                //   // m.MenuItems.Add(new MenuItem("delete"));
+
+
+                //    //int currentMouseOverRow = dtgv_materialTransfer.HitTest(e.X, e.Y).RowIndex;
+                //    //RowIndexClick = currentMouseOverRow;
+                //    //if (currentMouseOverRow >= 0)
+                //    //{
+                //    //    m.Items.Add("Delete");
+
+                //    //    m.ItemClicked += M_ItemClicked;
+                //    //}
+
+                //    m.Show(dtgv_import, new Point(e.X, e.Y));
+
                 //}
+                if (dtgv_import.SelectedRows.Count > 0)
+                {
+                    foreach (DataGridViewRow item in dtgv_import.SelectedRows)
+                    {
+                        AllitemDelete = new StringBuilder();
+                        AllitemDelete.Append("Id = [" + item.Cells["Id"].ToString()+"]  ");
+                    }
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        ContextMenu m = new ContextMenu();
+                        //m.MenuItems.Add(new MenuItem("Cut"));
+                        //m.MenuItems.Add(new MenuItem("Copy"));
+                        MenuItem Delete = new MenuItem("Delete");
+                        Delete.Click += Delete_Click;
+                        m.MenuItems.Add(Delete);
+                        m.Show(dtgv_import, new Point(e.X, e.Y));
 
-                m.Show(dtgv_import, new Point(e.X, e.Y));
-
+                    }
+                }
+            }
+            catch
+            { 
+            
             }
         }
 
+        private void Delete_Click(object sender, EventArgs e)
+        {
 
+            if (MessageBox.Show("Do you want delete " + AllitemDelete.ToString(), "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                if (dtgv_import.SelectedRows.Count > 0)
+                {
+                    foreach (DataGridViewRow item in dtgv_import.SelectedRows)
+                    {
+                        ListImportFG.RemoveAll(x => x.Id.ToString().Trim() == item.Cells["Id"].Value.ToString().Trim());
+                        dtgv_import.DataSource = null;
+                        dtgv_import.DataSource = ListImportFG;
+                    }
+                }
+            }
+          //  throw new NotImplementedException();
+        }
 
         private void btn_ClearPickingList_Click_1(object sender, EventArgs e)
         {
@@ -888,26 +962,26 @@ namespace WindowsFormsApplication1.WMS.View
         {
             DatagridviewSetting.settingDatagridview(dtgv_import);
             dtgv_import.AllowUserToAddRows = false;
-            dtgv_import.ReadOnly = false;
+          //  dtgv_import.ReadOnly = true;
             if (dtgv_import.Rows.Count > 0)
             {
                 dtgv_import.Columns["SubQR"].Visible = false;
-                dtgv_import.Columns["KeyID"].Visible = false;
-                dtgv_import.Columns["KeyNo"].Visible = false;
+         //       dtgv_import.Columns["KeyID"].Visible = false;
+          //      dtgv_import.Columns["KeyNo"].Visible = false;
                 dtgv_import.Columns["TL101"].Visible = false;
                 dtgv_import.Columns["TL102"].Visible = false;
                 dtgv_import.Columns["TL103"].Visible = false;
                 dtgv_import.Columns["TL104"].Visible = false;
                 dtgv_import.Columns["dateUpdate"].Visible = false;
-              //  dtgv_import.Columns["ImportFlag"].Visible = false;
+                dtgv_import.Columns["ImportFlag"].Visible = false;
                 dtgv_import.Columns["TL111"].Visible = false;
                 dtgv_import.Columns["TL112"].Visible = false;
                 dtgv_import.Columns["TL113"].Visible = false;
                 dtgv_import.Columns["TL114"].Visible = false;
-              //  dtgv_import.Columns["dateImport"].Visible = false;
+                dtgv_import.Columns["dateImport"].Visible = true;
 
                 dtgv_import.Columns["ProductOrder"].HeaderText = "Production Order";
-               
+
                 dtgv_import.Columns["Quantity"].HeaderText = "Import Quantity (pcs)";
                 dtgv_import.Columns["Quantity"].DefaultCellStyle.Format = "N0";
                 dtgv_import.Columns["LotNo"].HeaderText = "Lot No";
@@ -933,10 +1007,14 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void btn_ClearFgsImport_Click(object sender, EventArgs e)
         {
+            startGetTextChange = false;
             txt_QRImport.Text = "";
-
+            lbl_WarehouseImport.Text = "Warehouse";
+            cb_locationImport.DataSource = null;
+            ListImportFG = new List<Import_FinishGood_WareHouse>();
             dataQRInfor = new DataTable();
-            dtgv_import.DataSource = null;
+            dtgv_import.DataSource = ListImportFG;
+            startGetTextChange = true;
         }
 
         private void FinishedGoodsUI_FormClosing(object sender, FormClosingEventArgs e)
@@ -1043,7 +1121,7 @@ namespace WindowsFormsApplication1.WMS.View
                     txt_QRLocationImport.Text = "";
                     txt_QRManpulation.Text = "";
                     txt_ERPDocCreate.Text = "";
-                    txt_SFTDoc.Text = "";
+                    //txt_SFTDoc.Text = "";
                     txt_QRImport.Focus();
                 }
                
@@ -1051,34 +1129,45 @@ namespace WindowsFormsApplication1.WMS.View
         }
         private void FunctionImportWarehouse()
         {
-
-
             txt_ERPDocCreate.Text = "";
-            txt_SFTDoc.Text = "";
-            for (int i = 0; i < dataQRInfor.Rows.Count; i++)
-            {
-                if (dataQRInfor.Rows[i]["ImportFlag"] != null && dataQRInfor.Rows[i]["ImportFlag"].ToString() == "Y")
-                {
-                    MessageBox.Show("This request already imported into warehouse", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+           // txt_SFTDoc.Text = "";
+            //for (int i = 0; i < dataQRInfor.Rows.Count; i++)
+            //{
+            //    if (dataQRInfor.Rows[i]["ImportFlag"] != null && dataQRInfor.Rows[i]["ImportFlag"].ToString() == "Y")
+            //    {
+            //        MessageBox.Show("This request already imported into warehouse", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return;
+            //    }
 
-            }
-            if(txt_QRLocationImport.Text == "")
-            {
-                MessageBox.Show("You must select location !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-             if (cb_locationImport.Items.Cast<string>().Any(cbi => cbi.Trim() ==txt_QRLocationImport.Text.Trim()) == false)
-            {
-                MessageBox.Show("Location must belong to warehouse: "+WarehouseImport, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            FinishedGoodsItems finishedGoods = new FinishedGoodsItems();
+            //}
+            //if(txt_QRLocationImport.Text == "")
+            //{
+            //    MessageBox.Show("You must select location !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+            // if (cb_locationImport.Items.Cast<string>().Any(cbi => cbi.Trim() ==txt_QRLocationImport.Text.Trim()) == false)
+            //{
+            //    MessageBox.Show("Location must belong to warehouse: "+WarehouseImport, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+            //// update new QR
+            ///
+            UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
+            string ERPDoc = ""; //string SFTDoc = "";
             dataQRInfor = dtgv_import.DataSource as DataTable;
+            var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc);
+            if (Update)
+            {
+                txt_ERPDocCreate.Text = "D301-" + ERPDoc;
+                //txt_SFTDoc.Text = "D301-" + SFTDoc;
+                lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
+            }
 
-            var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();
+            //////
+            /*FinishedGoodsItems finishedGoods = new FinishedGoodsItems();
+            dataQRInfor = dtgv_import.DataSource as DataTable;
+            var testlist = dataQRInfor.AsEnumerable();
+            var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();// check 1 producorder or many producorder
             if (ListPO.Count != ListPO.Distinct().Count())
             {
                 for (int i = 0; i < dataQRInfor.Rows.Count; i++)
@@ -1091,7 +1180,7 @@ namespace WindowsFormsApplication1.WMS.View
                     string productOrder = dtrow.Rows[0]["ProductOrder"].ToString();
                     string product = dtrow.Rows[0]["Product"].ToString().Trim();
                     double Quantity = double.Parse(dtrow.Rows[0]["Quantity"].ToString());
-                    double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);
+                    double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
                     var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
 
                     var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
@@ -1167,7 +1256,7 @@ namespace WindowsFormsApplication1.WMS.View
                         lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
                     }
                 }
-            }
+            }*/
             
         }
 
@@ -1247,6 +1336,16 @@ namespace WindowsFormsApplication1.WMS.View
         {
             ExportSummary exportSummary = new ExportSummary();
             exportSummary.ShowDialog();
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

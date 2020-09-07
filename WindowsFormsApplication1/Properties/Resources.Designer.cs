@@ -61,6 +61,16 @@ namespace WindowsFormsApplication1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _20160719024359 {
+            get {
+                object obj = ResourceManager.GetObject("20160719024359", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] AbsenceForm_v1 {
