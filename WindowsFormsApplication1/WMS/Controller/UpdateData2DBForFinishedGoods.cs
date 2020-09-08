@@ -100,8 +100,8 @@ namespace WindowsFormsApplication1.WMS.Controller
 				//SFTDoc = "";
 
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002("D301");
-				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
+				string TB002 = eRPDataUpdate.getTB002("D301");//fix
+				//SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
 				//string TransNo = sFTDataUpdate.getTransnoOfSFT("D301");
 				//Database.SFT.SFT_TRANSORDER_LINE sFT_TRANSORDER_LINE = new Database.SFT.SFT_TRANSORDER_LINE();
 				ConvertDataTable convertDataTable = new ConvertDataTable();

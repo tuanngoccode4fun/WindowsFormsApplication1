@@ -266,6 +266,7 @@ namespace WindowsFormsApplication1
             {
                 WMS.View.FinishedGoodsUI finishedGoodsUI = new WMS.View.FinishedGoodsUI();
                 finishedGoodsUI.Show();
+                
             }
             else
             {

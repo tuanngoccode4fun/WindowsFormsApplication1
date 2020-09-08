@@ -57,8 +57,8 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btn_ClearPickingList = new System.Windows.Forms.Button();
             this.btn_ComfirmExport = new System.Windows.Forms.Button();
+            this.btn_ClearPickingList = new System.Windows.Forms.Button();
             this.btn_SearchExport = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_ShipmentType = new System.Windows.Forms.TextBox();
@@ -91,6 +91,8 @@
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cb_locationExport = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.txt_QRManpulationEX = new System.Windows.Forms.TextBox();
             this.lbl_ScanQRImport = new System.Windows.Forms.Label();
@@ -102,8 +104,6 @@
             this.txt_QRExport = new System.Windows.Forms.TextBox();
             this.txt_deliveryNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cb_locationExport = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btn_ExportSummary = new System.Windows.Forms.Button();
             this.btn_ExportFGs = new System.Windows.Forms.Button();
@@ -388,6 +388,8 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.ForeColor = System.Drawing.Color.Red;
             this.comboBox1.FormattingEnabled = true;
@@ -537,8 +539,8 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.btn_ClearPickingList);
             this.groupBox4.Controls.Add(this.btn_ComfirmExport);
+            this.groupBox4.Controls.Add(this.btn_ClearPickingList);
             this.groupBox4.Controls.Add(this.btn_SearchExport);
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(2, 2);
@@ -549,6 +551,23 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             // 
+            // btn_ComfirmExport
+            // 
+            this.btn_ComfirmExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ComfirmExport.BackColor = System.Drawing.Color.White;
+            this.btn_ComfirmExport.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.btn_ComfirmExport.Image = ((System.Drawing.Image)(resources.GetObject("btn_ComfirmExport.Image")));
+            this.btn_ComfirmExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_ComfirmExport.Location = new System.Drawing.Point(743, 12);
+            this.btn_ComfirmExport.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ComfirmExport.Name = "btn_ComfirmExport";
+            this.btn_ComfirmExport.Size = new System.Drawing.Size(88, 38);
+            this.btn_ComfirmExport.TabIndex = 9;
+            this.btn_ComfirmExport.Text = "Confirm";
+            this.btn_ComfirmExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_ComfirmExport.UseVisualStyleBackColor = false;
+            this.btn_ComfirmExport.Visible = false;
+            // 
             // btn_ClearPickingList
             // 
             this.btn_ClearPickingList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -556,7 +575,7 @@
             this.btn_ClearPickingList.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ClearPickingList.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearPickingList.Image")));
             this.btn_ClearPickingList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ClearPickingList.Location = new System.Drawing.Point(1063, 10);
+            this.btn_ClearPickingList.Location = new System.Drawing.Point(835, 12);
             this.btn_ClearPickingList.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ClearPickingList.Name = "btn_ClearPickingList";
             this.btn_ClearPickingList.Size = new System.Drawing.Size(88, 38);
@@ -566,24 +585,6 @@
             this.btn_ClearPickingList.UseVisualStyleBackColor = false;
             this.btn_ClearPickingList.Click += new System.EventHandler(this.btn_ClearPickingList_Click_1);
             // 
-            // btn_ComfirmExport
-            // 
-            this.btn_ComfirmExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ComfirmExport.BackColor = System.Drawing.Color.White;
-            this.btn_ComfirmExport.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.btn_ComfirmExport.Image = ((System.Drawing.Image)(resources.GetObject("btn_ComfirmExport.Image")));
-            this.btn_ComfirmExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ComfirmExport.Location = new System.Drawing.Point(963, 15);
-            this.btn_ComfirmExport.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_ComfirmExport.Name = "btn_ComfirmExport";
-            this.btn_ComfirmExport.Size = new System.Drawing.Size(88, 38);
-            this.btn_ComfirmExport.TabIndex = 6;
-            this.btn_ComfirmExport.Text = "Confirm";
-            this.btn_ComfirmExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_ComfirmExport.UseVisualStyleBackColor = false;
-            this.btn_ComfirmExport.Visible = false;
-            this.btn_ComfirmExport.Click += new System.EventHandler(this.btn_ComfirmExport_Click);
-            // 
             // btn_SearchExport
             // 
             this.btn_SearchExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -591,7 +592,7 @@
             this.btn_SearchExport.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_SearchExport.Image = global::WindowsFormsApplication1.Properties.Resources.qr_code;
             this.btn_SearchExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_SearchExport.Location = new System.Drawing.Point(1156, 10);
+            this.btn_SearchExport.Location = new System.Drawing.Point(929, 12);
             this.btn_SearchExport.Margin = new System.Windows.Forms.Padding(2);
             this.btn_SearchExport.Name = "btn_SearchExport";
             this.btn_SearchExport.Size = new System.Drawing.Size(122, 38);
@@ -644,7 +645,7 @@
             this.txt_ShipmentType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_ShipmentType.Enabled = false;
             this.txt_ShipmentType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ShipmentType.Location = new System.Drawing.Point(1188, 106);
+            this.txt_ShipmentType.Location = new System.Drawing.Point(882, 116);
             this.txt_ShipmentType.Margin = new System.Windows.Forms.Padding(2);
             this.txt_ShipmentType.Name = "txt_ShipmentType";
             this.txt_ShipmentType.Size = new System.Drawing.Size(168, 26);
@@ -656,7 +657,7 @@
             this.txt_buyerSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_buyerSelect.Enabled = false;
             this.txt_buyerSelect.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_buyerSelect.Location = new System.Drawing.Point(1188, 67);
+            this.txt_buyerSelect.Location = new System.Drawing.Point(882, 63);
             this.txt_buyerSelect.Margin = new System.Windows.Forms.Padding(2);
             this.txt_buyerSelect.Name = "txt_buyerSelect";
             this.txt_buyerSelect.Size = new System.Drawing.Size(168, 26);
@@ -671,10 +672,10 @@
             this.btn_ShipmentType.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ShipmentType.Image = global::WindowsFormsApplication1.Properties.Resources.search;
             this.btn_ShipmentType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ShipmentType.Location = new System.Drawing.Point(773, 92);
+            this.btn_ShipmentType.Location = new System.Drawing.Point(640, 97);
             this.btn_ShipmentType.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ShipmentType.Name = "btn_ShipmentType";
-            this.btn_ShipmentType.Size = new System.Drawing.Size(138, 35);
+            this.btn_ShipmentType.Size = new System.Drawing.Size(138, 47);
             this.btn_ShipmentType.TabIndex = 20;
             this.btn_ShipmentType.Text = "Transportation";
             this.btn_ShipmentType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -690,13 +691,12 @@
             this.btn_buyerSelected.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_buyerSelected.Image = global::WindowsFormsApplication1.Properties.Resources.search;
             this.btn_buyerSelected.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_buyerSelected.Location = new System.Drawing.Point(773, 42);
+            this.btn_buyerSelected.Location = new System.Drawing.Point(640, 50);
             this.btn_buyerSelected.Margin = new System.Windows.Forms.Padding(2);
             this.btn_buyerSelected.Name = "btn_buyerSelected";
-            this.btn_buyerSelected.Size = new System.Drawing.Size(138, 34);
+            this.btn_buyerSelected.Size = new System.Drawing.Size(138, 43);
             this.btn_buyerSelected.TabIndex = 19;
             this.btn_buyerSelected.Text = "Buyer Select";
-            this.btn_buyerSelected.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_buyerSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_buyerSelected.UseVisualStyleBackColor = false;
             this.btn_buyerSelected.Click += new System.EventHandler(this.btn_buyerSelected_Click);
@@ -704,7 +704,7 @@
             // picBox
             // 
             this.picBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBox.Location = new System.Drawing.Point(1247, 41);
+            this.picBox.Location = new System.Drawing.Point(1019, 40);
             this.picBox.Margin = new System.Windows.Forms.Padding(2);
             this.picBox.Name = "picBox";
             this.picBox.Size = new System.Drawing.Size(31, 17);
@@ -747,7 +747,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(785, 18);
+            this.label19.Location = new System.Drawing.Point(815, 18);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(97, 17);
@@ -766,7 +766,7 @@
             // 
             // txt_InvoiceExport
             // 
-            this.txt_InvoiceExport.Location = new System.Drawing.Point(455, 79);
+            this.txt_InvoiceExport.Location = new System.Drawing.Point(452, 79);
             this.txt_InvoiceExport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_InvoiceExport.Name = "txt_InvoiceExport";
             this.txt_InvoiceExport.Size = new System.Drawing.Size(132, 23);
@@ -775,7 +775,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(373, 82);
+            this.label17.Location = new System.Drawing.Point(361, 82);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(53, 17);
@@ -795,7 +795,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(373, 50);
+            this.label16.Location = new System.Drawing.Point(365, 50);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(66, 17);
@@ -845,7 +845,7 @@
             // txt_DocumentExportNo
             // 
             this.txt_DocumentExportNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_DocumentExportNo.Location = new System.Drawing.Point(1144, 19);
+            this.txt_DocumentExportNo.Location = new System.Drawing.Point(916, 15);
             this.txt_DocumentExportNo.Margin = new System.Windows.Forms.Padding(2);
             this.txt_DocumentExportNo.Name = "txt_DocumentExportNo";
             this.txt_DocumentExportNo.Size = new System.Drawing.Size(135, 23);
@@ -873,7 +873,7 @@
             // cb_DocType
             // 
             this.cb_DocType.FormattingEnabled = true;
-            this.cb_DocType.Location = new System.Drawing.Point(455, 115);
+            this.cb_DocType.Location = new System.Drawing.Point(453, 115);
             this.cb_DocType.Margin = new System.Windows.Forms.Padding(2);
             this.cb_DocType.Name = "cb_DocType";
             this.cb_DocType.Size = new System.Drawing.Size(104, 25);
@@ -883,7 +883,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(362, 120);
+            this.label12.Location = new System.Drawing.Point(359, 120);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(92, 17);
@@ -996,6 +996,8 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.cb_locationExport);
+            this.groupBox7.Controls.Add(this.label7);
             this.groupBox7.Controls.Add(this.label23);
             this.groupBox7.Controls.Add(this.txt_QRManpulationEX);
             this.groupBox7.Controls.Add(this.lbl_ScanQRImport);
@@ -1007,8 +1009,6 @@
             this.groupBox7.Controls.Add(this.txt_QRExport);
             this.groupBox7.Controls.Add(this.txt_deliveryNo);
             this.groupBox7.Controls.Add(this.label6);
-            this.groupBox7.Controls.Add(this.cb_locationExport);
-            this.groupBox7.Controls.Add(this.label7);
             this.groupBox7.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox7.Location = new System.Drawing.Point(2, 69);
             this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
@@ -1018,6 +1018,30 @@
             this.groupBox7.TabIndex = 0;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Information";
+            // 
+            // cb_locationExport
+            // 
+            this.cb_locationExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_locationExport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_locationExport.FormattingEnabled = true;
+            this.cb_locationExport.Location = new System.Drawing.Point(856, 34);
+            this.cb_locationExport.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_locationExport.Name = "cb_locationExport";
+            this.cb_locationExport.Size = new System.Drawing.Size(185, 27);
+            this.cb_locationExport.TabIndex = 32;
+            this.cb_locationExport.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(754, 38);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 17);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Location";
+            this.label7.Visible = false;
             // 
             // label23
             // 
@@ -1118,7 +1142,7 @@
             this.txt_deliveryNo.Location = new System.Drawing.Point(856, 119);
             this.txt_deliveryNo.Margin = new System.Windows.Forms.Padding(2);
             this.txt_deliveryNo.Name = "txt_deliveryNo";
-            this.txt_deliveryNo.Size = new System.Drawing.Size(146, 23);
+            this.txt_deliveryNo.Size = new System.Drawing.Size(185, 23);
             this.txt_deliveryNo.TabIndex = 19;
             this.txt_deliveryNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1132,28 +1156,6 @@
             this.label6.Size = new System.Drawing.Size(60, 17);
             this.label6.TabIndex = 18;
             this.label6.Text = "ERP Doc";
-            // 
-            // cb_locationExport
-            // 
-            this.cb_locationExport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_locationExport.FormattingEnabled = true;
-            this.cb_locationExport.Location = new System.Drawing.Point(856, 26);
-            this.cb_locationExport.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_locationExport.Name = "cb_locationExport";
-            this.cb_locationExport.Size = new System.Drawing.Size(146, 27);
-            this.cb_locationExport.TabIndex = 15;
-            this.cb_locationExport.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(754, 30);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 17);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Location";
-            this.label7.Visible = false;
             // 
             // groupBox8
             // 
@@ -1182,7 +1184,7 @@
             this.btn_ExportSummary.Location = new System.Drawing.Point(737, 15);
             this.btn_ExportSummary.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ExportSummary.Name = "btn_ExportSummary";
-            this.btn_ExportSummary.Size = new System.Drawing.Size(124, 36);
+            this.btn_ExportSummary.Size = new System.Drawing.Size(152, 44);
             this.btn_ExportSummary.TabIndex = 12;
             this.btn_ExportSummary.Text = "Summary";
             this.btn_ExportSummary.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1200,7 +1202,7 @@
             this.btn_ExportFGs.Location = new System.Drawing.Point(893, 15);
             this.btn_ExportFGs.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ExportFGs.Name = "btn_ExportFGs";
-            this.btn_ExportFGs.Size = new System.Drawing.Size(109, 38);
+            this.btn_ExportFGs.Size = new System.Drawing.Size(148, 44);
             this.btn_ExportFGs.TabIndex = 6;
             this.btn_ExportFGs.Text = "Confirm";
             this.btn_ExportFGs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1294,9 +1296,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabPage_FinishedGood);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.MinimizeBox = false;
             this.Name = "FinishedGoodsUI";
             this.Padding = new System.Windows.Forms.Padding(3, 60, 3, 3);
             this.Text = "FinishedGoodsUI";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FinishedGoodsUI_FormClosing);
             this.Load += new System.EventHandler(this.FinishedGoodsUI_Load);
             this.Controls.SetChildIndex(this.tabPage_FinishedGood, 0);
@@ -1366,8 +1370,6 @@
         private System.Windows.Forms.TextBox txt_QRExport;
         private System.Windows.Forms.TextBox txt_deliveryNo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cb_locationExport;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button btn_ExportFGs;
         private System.Windows.Forms.Label label9;
@@ -1380,7 +1382,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btn_ClearPickingList;
-        private System.Windows.Forms.Button btn_ComfirmExport;
         private System.Windows.Forms.Button btn_SearchExport;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lb_CurrentyName;
@@ -1420,5 +1421,8 @@
         private System.Windows.Forms.DataGridView dtgv_import;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btn_ComfirmExport;
+        private System.Windows.Forms.ComboBox cb_locationExport;
+        private System.Windows.Forms.Label label7;
     }
 }
