@@ -88,6 +88,20 @@ namespace WindowsFormsApplication1.WMS.View
             }
         }
 
+        private void Update_list_location(string nameWarehouse)
+        {
+            var listLocation = ListWarehouse.Where(d => d.MC001_Wh.Trim() == nameWarehouse)
+                .Select(d => d.NL002_Location).ToList();
+            Class.valiballecommon.GetStorage().Warehouse = nameWarehouse;
+            cb_locationImport.DataSource = listLocation;
+            cb_locationImport.SelectedIndex = -1;
+            txt_QRLocationImport.Text = "";
+            var WarehouseName = ListWarehouse.Where(d => d.MC001_Wh.Trim() == nameWarehouse)
+                .Select(d => d.MC002_WhName).ToList();
+            if (WarehouseName.Count > 0)
+                lbl_WarehouseImport.Text = "Warehouse: " + WarehouseName[0];
+            txt_QRImport.Focus();
+        }
         private void FinishedGoodsUI_Load(object sender, EventArgs e)
         {
 
@@ -96,10 +110,14 @@ namespace WindowsFormsApplication1.WMS.View
             ListWarehouse = new List<Database.WarehouseItems>();
             ListWarehouse = getlistWarehouse.GetWarehouseItems();
             var listwarehouse2 = ListWarehouse.Select(d => d.MC001_Wh).Distinct().ToList();
-            var wh = Class.valiballecommon.GetStorage().Warehouse;
-            
+            cmboxWareHouse.DataSource = null;
+            cmboxWareHouse.DataSource = listwarehouse2.ToList();
+            var wh = Class.valiballecommon.GetStorage().Warehouse.Trim();
+            cmboxWareHouse.SelectedIndex = listwarehouse2.ToList().FindIndex(x => x.Trim() == wh.Trim());
+            /////////
+            Update_list_location(wh);
 
-           
+
         }
 
         private void btn_search4_Click(object sender, EventArgs e)
@@ -497,7 +515,13 @@ namespace WindowsFormsApplication1.WMS.View
                 Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim());
                 if (valueTem != null)
                 {
-                    if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
+                    if (valueTem.Warehouse.Trim() != cmboxWareHouse.SelectedItem.ToString().Trim())
+                    {
+                        System.Windows.Forms.MessageBox.Show(string.Format("It's different item WareHouse between your warehouse {0} and {1}", cmboxWareHouse.SelectedItem.ToString().Trim(), valueTem.Warehouse), "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                    if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem)&& ListImportFG.Count > 0)
                     {
                         System.Windows.Forms.MessageBox.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txt_QRImport.Text = null;
@@ -507,19 +531,7 @@ namespace WindowsFormsApplication1.WMS.View
                     {
                         Import_FinishGood_WareHouse valueGet = (Import_FinishGood_WareHouse)valueTem.Clone();
                         ////////
-                        string Wh = valueGet.Warehouse;
-                        WarehouseImport = Wh;
-                        var listLocation = ListWarehouse.Where(d => d.MC001_Wh.Trim() == Wh)
-                            .Select(d => d.NL002_Location).ToList();
-
-                        cb_locationImport.DataSource = listLocation;
-                        cb_locationImport.SelectedIndex = -1;
-                        txt_QRLocationImport.Text = "";
-                        var WarehouseName = ListWarehouse.Where(d => d.MC001_Wh.Trim() == Wh)
-                            .Select(d => d.MC002_WhName).ToList();
-                        if (WarehouseName.Count > 0)
-                            lbl_WarehouseImport.Text = "Warehouse: " + WarehouseName[0];
-                        txt_QRLocationImport.Focus();
+                      
                         ///////
                         valueGet.Id = (uint)ListImportFG.Count() + 1;
                         ListImportFG.Add(valueGet);
@@ -995,7 +1007,7 @@ namespace WindowsFormsApplication1.WMS.View
                 dtgv_import.Columns["LotNo"].ReadOnly = true;
                 dtgv_import.Columns["Warehouse"].ReadOnly = true;
                 dtgv_import.Columns["dateCreate"].ReadOnly = true;
-                dtgv_import.Columns["dateCreate"].ReadOnly = true;
+                dtgv_import.Columns["dateCreate"].Visible = false;
                 dtgv_import.Columns["ImportFlag"].ReadOnly = true;
                 dtgv_import.Columns["dateImport"].ReadOnly = true;
 
@@ -1025,6 +1037,8 @@ namespace WindowsFormsApplication1.WMS.View
                 Class.valiballecommon.GetStorage().Client = cb_ClientCode.SelectedItem.ToString();
             if (cb_CurrentMonney.SelectedItem != null)
                 Class.valiballecommon.GetStorage().Currency = cb_CurrentMonney.SelectedItem.ToString();
+            if (cmboxWareHouse.SelectedItem != null)
+                Class.valiballecommon.GetStorage().Warehouse = cmboxWareHouse.SelectedItem.ToString();// tuanngoc
         }
 
         private void btn_importSummary_Click(object sender, EventArgs e)
@@ -1346,6 +1360,11 @@ namespace WindowsFormsApplication1.WMS.View
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmboxWareHouse_DropDownClosed(object sender, EventArgs e)
+        {
+            Update_list_location(cmboxWareHouse.SelectedItem.ToString().Trim());
         }
     }
 }

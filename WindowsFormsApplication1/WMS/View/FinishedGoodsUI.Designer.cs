@@ -47,7 +47,7 @@
             this.cb_locationImport = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmboxWareHouse = new System.Windows.Forms.ComboBox();
             this.btn_importSummary = new System.Windows.Forms.Button();
             this.btn_ClearFgsImport = new System.Windows.Forms.Button();
             this.btn_comfirm4 = new System.Windows.Forms.Button();
@@ -307,16 +307,15 @@
             // 
             this.txt_QRImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_QRImport.BackColor = System.Drawing.Color.Yellow;
+            this.txt_QRImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txt_QRImport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_QRImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_QRImport.ForeColor = System.Drawing.SystemColors.Info;
+            this.txt_QRImport.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txt_QRImport.Location = new System.Drawing.Point(310, 15);
             this.txt_QRImport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRImport.Name = "txt_QRImport";
             this.txt_QRImport.Size = new System.Drawing.Size(751, 26);
             this.txt_QRImport.TabIndex = 22;
-            this.txt_QRImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txt_QRImport.TextChanged += new System.EventHandler(this.txt_QRImport_TextChanged);
             this.txt_QRImport.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_QRImport_KeyDown);
             // 
@@ -372,7 +371,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.cmboxWareHouse);
             this.groupBox2.Controls.Add(this.btn_importSummary);
             this.groupBox2.Controls.Add(this.btn_ClearFgsImport);
             this.groupBox2.Controls.Add(this.btn_comfirm4);
@@ -386,17 +385,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // comboBox1
+            // cmboxWareHouse
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Red;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(546, 17);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(185, 27);
-            this.comboBox1.TabIndex = 31;
+            this.cmboxWareHouse.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmboxWareHouse.ForeColor = System.Drawing.Color.Red;
+            this.cmboxWareHouse.FormattingEnabled = true;
+            this.cmboxWareHouse.Location = new System.Drawing.Point(25, 18);
+            this.cmboxWareHouse.Name = "cmboxWareHouse";
+            this.cmboxWareHouse.Size = new System.Drawing.Size(185, 27);
+            this.cmboxWareHouse.TabIndex = 31;
+            this.cmboxWareHouse.DropDownClosed += new System.EventHandler(this.cmboxWareHouse_DropDownClosed);
             // 
             // btn_importSummary
             // 
@@ -459,7 +457,7 @@
             this.lbl_WarehouseImport.AutoSize = true;
             this.lbl_WarehouseImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_WarehouseImport.ForeColor = System.Drawing.Color.Blue;
-            this.lbl_WarehouseImport.Location = new System.Drawing.Point(4, 17);
+            this.lbl_WarehouseImport.Location = new System.Drawing.Point(221, 21);
             this.lbl_WarehouseImport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_WarehouseImport.Name = "lbl_WarehouseImport";
             this.lbl_WarehouseImport.Size = new System.Drawing.Size(84, 19);
@@ -1419,7 +1417,7 @@
         private System.Windows.Forms.TextBox txt_QRManpulationEX;
         private System.Windows.Forms.Button btn_ExportSummary;
         private System.Windows.Forms.DataGridView dtgv_import;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmboxWareHouse;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_ComfirmExport;
         private System.Windows.Forms.ComboBox cb_locationExport;
