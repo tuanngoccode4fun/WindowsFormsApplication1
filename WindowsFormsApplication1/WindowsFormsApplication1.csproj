@@ -612,6 +612,7 @@
     <Compile Include="MQC\TargetProduction\TargetToDatabase.cs" />
     <Compile Include="NewQRcode\GetImportFG.cs" />
     <Compile Include="NewQRcode\IdentifyQR.cs" />
+    <Compile Include="NewQRcode\ListToDatatable.cs" />
     <Compile Include="OVEN\Database\GetdataOven.cs" />
     <Compile Include="OVEN\OVENShow.cs">
       <SubType>Form</SubType>

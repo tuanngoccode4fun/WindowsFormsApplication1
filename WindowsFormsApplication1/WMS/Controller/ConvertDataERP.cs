@@ -48,7 +48,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["TC004"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[0];
                 dt.Rows[i]["TC005"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[1];
                 dt.Rows[i]["TC006"] = "0020";
-                DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());
+                DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());/// 
                 dt.Rows[i]["TC007"] = dtSFCTA.Rows[0]["TA004"].ToString();
                 dt.Rows[i]["TC008"] = "";
                 dt.Rows[i]["TC009"] = "";

@@ -1168,7 +1168,7 @@ namespace WindowsFormsApplication1.WMS.View
             ///
             UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
             string ERPDoc = ""; //string SFTDoc = "";
-            dataQRInfor = dtgv_import.DataSource as DataTable;
+            dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
             var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc);
             if (Update)
             {
