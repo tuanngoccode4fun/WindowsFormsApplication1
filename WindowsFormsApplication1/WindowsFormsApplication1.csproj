@@ -175,12 +175,10 @@
   <ItemGroup>
     <Compile Include="ChartDrawing\ChartDrawing.cs" />
     <Compile Include="ChartDrawing\LiveChart.cs" />
-    <Compile Include="ClassMysql\ClassMySqlConnect.cs" />
     <Compile Include="ClassMysql\Class_ExportFG_WareHouse.cs" />
     <Compile Include="ClassMysql\DbMySQLConnect.cs" />
     <Compile Include="ClassMysql\DBUtilsMySQL.cs" />
     <Compile Include="ClassMysql\MysqlMES.cs" />
-    <Compile Include="ClassMysql\MySql_importfg_warehouse.cs" />
     <Compile Include="ClassMysql\Class_Import_FS_WareHouse.cs" />
     <Compile Include="Class\ClearMemory.cs" />
     <Compile Include="Class\ClearObject.cs" />
