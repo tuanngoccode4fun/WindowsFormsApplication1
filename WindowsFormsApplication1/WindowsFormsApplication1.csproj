@@ -180,6 +180,7 @@
     <Compile Include="ClassMysql\DBUtilsMySQL.cs" />
     <Compile Include="ClassMysql\MysqlMES.cs" />
     <Compile Include="ClassMysql\Class_Import_FS_WareHouse.cs" />
+    <Compile Include="ClassMysql\SIUD_Mes.cs" />
     <Compile Include="Class\ClearMemory.cs" />
     <Compile Include="Class\ClearObject.cs" />
     <Compile Include="Class\DateTimeControl.cs" />

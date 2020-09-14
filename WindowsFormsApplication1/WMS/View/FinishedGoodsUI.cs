@@ -151,7 +151,9 @@ namespace WindowsFormsApplication1.WMS.View
                var MessageBoxResult = MessageBox.Show("Are you sure want to import finished goods into warehouse ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (MessageBoxResult == DialogResult.Yes)
                 {
-                    FunctionImportWarehouse();
+                    dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
+                    SIUD_Mes.Insert(dataQRInfor);
+                  // FunctionImportWarehouse();
                     dtgv_import.DataSource = null;
 
                 }
@@ -1179,98 +1181,98 @@ namespace WindowsFormsApplication1.WMS.View
 
             //////
             /*FinishedGoodsItems finishedGoods = new FinishedGoodsItems();
-            dataQRInfor = dtgv_import.DataSource as DataTable;
-            var testlist = dataQRInfor.AsEnumerable();
-            var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();// check 1 producorder or many producorder
-            if (ListPO.Count != ListPO.Distinct().Count())
-            {
-                for (int i = 0; i < dataQRInfor.Rows.Count; i++)
-                {
-                    DataTable dtrow = new DataTable();
-                    dtrow = dataQRInfor.Clone();
-                    dtrow.LoadDataRow(dataQRInfor.Rows[i].ItemArray, true);
-                    UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
-                    string ERPDoc = ""; string SFTDoc = "";
-                    string productOrder = dtrow.Rows[0]["ProductOrder"].ToString();
-                    string product = dtrow.Rows[0]["Product"].ToString().Trim();
-                    double Quantity = double.Parse(dtrow.Rows[0]["Quantity"].ToString());
-                    double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
-                    var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+            //dataQRInfor = dtgv_import.DataSource as DataTable;
+            //var testlist = dataQRInfor.AsEnumerable();
+            //var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();// check 1 producorder or many producorder
+            //if (ListPO.Count != ListPO.Distinct().Count())
+            //{
+            //    for (int i = 0; i < dataQRInfor.Rows.Count; i++)
+            //    {
+            //        DataTable dtrow = new DataTable();
+            //        dtrow = dataQRInfor.Clone();
+            //        dtrow.LoadDataRow(dataQRInfor.Rows[i].ItemArray, true);
+            //        UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
+            //        string ERPDoc = ""; string SFTDoc = "";
+            //        string productOrder = dtrow.Rows[0]["ProductOrder"].ToString();
+            //        string product = dtrow.Rows[0]["Product"].ToString().Trim();
+            //        double Quantity = double.Parse(dtrow.Rows[0]["Quantity"].ToString());
+            //        double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
+            //        var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
 
-                    var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
-                    // KIEM TRA KHOI LUONG, SO LUONG, NEU KHOI LUONG DU THI TRA LAI 'TRUE', ELSE FALSE
-                    if (ischeckSFCTA == false || ischeckMOCTA == false)
-                    {
-                        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dtrow, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
-                        if (Update == true)
-                        {
-                            txt_ERPDocCreate.Text += "D301-" + ERPDoc + Environment.NewLine;
-                            txt_SFTDoc.Text += "D301-" + SFTDoc + Environment.NewLine;
-                            MessageBox.Show("D301-" + ERPDoc + " cannot confirm because not enough quantity or packing weight", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            lb_Status.Text = "Importing Finished Goods success, but this doccument is not confirm on ERP : D301-" + ERPDoc;
-                        }
-
-
-                    }
-                    else
-                    {
+            //        var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+            //        // KIEM TRA KHOI LUONG, SO LUONG, NEU KHOI LUONG DU THI TRA LAI 'TRUE', ELSE FALSE
+            //        if (ischeckSFCTA == false || ischeckMOCTA == false)
+            //        {
+            //            var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dtrow, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
+            //            if (Update == true)
+            //            {
+            //                txt_ERPDocCreate.Text += "D301-" + ERPDoc + Environment.NewLine;
+            //                txt_SFTDoc.Text += "D301-" + SFTDoc + Environment.NewLine;
+            //                MessageBox.Show("D301-" + ERPDoc + " cannot confirm because not enough quantity or packing weight", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                lb_Status.Text = "Importing Finished Goods success, but this doccument is not confirm on ERP : D301-" + ERPDoc;
+            //            }
 
 
-                        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dtrow, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
-                        if (Update == true)
-                        {
-                            txt_ERPDocCreate.Text += "D301-" + ERPDoc + Environment.NewLine;
-                            txt_SFTDoc.Text += "D301-" + SFTDoc + Environment.NewLine;
-                            lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
-                        }
-                    }
+            //        }
+            //        else
+            //        {
 
 
-                }
-            }
-            else
-            {
-                bool IsEnoughWeight = true;
-                for (int i = 0; i < dataQRInfor.Rows.Count; i++)
-                {
-                    string productOrder = dataQRInfor.Rows[i]["ProductOrder"].ToString();
-                    string product = dataQRInfor.Rows[i]["Product"].ToString();
-                    double Quantity = double.Parse(dataQRInfor.Rows[i]["Quantity"].ToString());
+            //            var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dtrow, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
+            //            if (Update == true)
+            //            {
+            //                txt_ERPDocCreate.Text += "D301-" + ERPDoc + Environment.NewLine;
+            //                txt_SFTDoc.Text += "D301-" + SFTDoc + Environment.NewLine;
+            //                lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
+            //            }
+            //        }
 
-                    double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);
-                    var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
-                    var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
-                    if (ischeckMOCTA == false || ischeckSFCTA == false)
-                    {
-                        IsEnoughWeight = false;
-                        break;
-                    }
-                }
 
-                UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
-                string ERPDoc = ""; string SFTDoc = "";
-                if (IsEnoughWeight == false)
-                {
-                    var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
-                    if (Update)
-                    {
-                        txt_ERPDocCreate.Text = "D301-" + ERPDoc;
-                        txt_SFTDoc.Text = "D301-" + SFTDoc;
-                        MessageBox.Show("D301-" + ERPDoc + " cannot confirm because not enough quantity or packing weight", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        lb_Status.Text = "Importing Finished Goods success, but this doccument is not confirm on ERP : D301-" + ERPDoc;
-                    }
-                }
-                else
-                {
-                    var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
-                    if (Update)
-                    {
-                        txt_ERPDocCreate.Text = "D301-" + ERPDoc;
-                        txt_SFTDoc.Text = "D301-" + SFTDoc;
-                        lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
-                    }
-                }
-            }*/
+            //    }
+            //}
+            //else
+            //{
+            //    bool IsEnoughWeight = true;
+            //    for (int i = 0; i < dataQRInfor.Rows.Count; i++)
+            //    {
+            //        string productOrder = dataQRInfor.Rows[i]["ProductOrder"].ToString();
+            //        string product = dataQRInfor.Rows[i]["Product"].ToString();
+            //        double Quantity = double.Parse(dataQRInfor.Rows[i]["Quantity"].ToString());
+
+            //        double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);
+            //        var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+            //        var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+            //        if (ischeckMOCTA == false || ischeckSFCTA == false)
+            //        {
+            //            IsEnoughWeight = false;
+            //            break;
+            //        }
+            //    }
+
+            //    UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
+            //    string ERPDoc = ""; string SFTDoc = "";
+            //    if (IsEnoughWeight == false)
+            //    {
+            //        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
+            //        if (Update)
+            //        {
+            //            txt_ERPDocCreate.Text = "D301-" + ERPDoc;
+            //            txt_SFTDoc.Text = "D301-" + SFTDoc;
+            //            MessageBox.Show("D301-" + ERPDoc + " cannot confirm because not enough quantity or packing weight", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //            lb_Status.Text = "Importing Finished Goods success, but this doccument is not confirm on ERP : D301-" + ERPDoc;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
+            //        if (Update)
+            //        {
+            //            txt_ERPDocCreate.Text = "D301-" + ERPDoc;
+            //            txt_SFTDoc.Text = "D301-" + SFTDoc;
+            //            lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
+            //        }
+            //    }
+            //}*/
             
         }
 

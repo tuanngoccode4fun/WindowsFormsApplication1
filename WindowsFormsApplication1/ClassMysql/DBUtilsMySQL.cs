@@ -11,16 +11,13 @@ namespace TLMSMESGETDATA.SQLUpload
     {
         public static MySqlConnection GetDBConnection()
         {
-
-
             string datasource = @"127.0.0.1";
             string port = "3306";
-            string database = "mes_2";
+            string database = "mes_interface";
             string username = "root";
-            string password = "";
-
-
+            string password = "0000";
             return DbMySQLConnect.GetDBConnection(datasource, port, database, username, password);
         }
+     
     }
 }
