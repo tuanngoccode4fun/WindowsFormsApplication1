@@ -21,7 +21,9 @@ namespace UploadDataToDatabase
 
 
 
-            return DBSQLServerUtils.GetDBConnection(datasource, database, username, password);
+            //  return DBSQLServerUtils.GetDBConnection(datasource, database, username, password);
+            string connecString = string.Format("Data Source=ADMIN;Initial Catalog={0};Integrated Security=True", database);
+            return new SqlConnection(connecString);
         }
         public static SqlConnection GetDBHRConnection()
         {

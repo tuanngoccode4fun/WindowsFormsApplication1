@@ -1027,6 +1027,33 @@ namespace UploadDataToDatabase.Class
         }
 
 
+        public bool SendMailReportObnormal()
+        {
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                mail.From = new MailAddress("only4testproject@gmail.com");
+                mail.To.Add("tuanngoccode4fun@gmail.com");
+                mail.Subject = "Mail for Test";
+                mail.Body = "Hello Tuanngoc";
+                SmtpServer.Port = 587;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("only4testproject@gmail.com", "tuanngoc123$");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                mail.Dispose();
+                SmtpServer.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+            }
+            return false;
+        }
+
 
         public bool SendAttendanceReport(ScheduleReportItems items, List<EmailNeedSend> emailNeedSends, DateTime dateReport)
         {

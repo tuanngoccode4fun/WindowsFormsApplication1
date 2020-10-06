@@ -42,6 +42,7 @@ namespace UploadDataToDatabase
 
         string PathFoler = @"C:\ERP_Temp\";
         public string MQCForm = Environment.CurrentDirectory + @"\Resources\MQC-PQC_Template.xlsx";
+        public string Directory_AbnormalCaseImport = Environment.CurrentDirectory + @"\Resources\Abnormal_Import_FS_WareHouse.xlsx";
         bool isExportExcel = false;
         enum ReportType {Daily,Weekly,Monthly,Yearly,Non}
 
@@ -486,23 +487,23 @@ namespace UploadDataToDatabase
                                     DateTime DateTo = DateTime.Now.Date + new TimeSpan(11, 0, 0);
 
                                     var isOK = sendmail.SendMailwithExportExceMQCbyCompanyMail(DateFrom, DateTo, item, emailNeeds);
-                                  
+
                                     if (isOK)
                                     {
                                         InsertSendMailtoRecord(item, item.AttachedFolder);
                                         isExportExcel = false;
-                                       
+
                                     }
                                     else Logfile.Output(StatusLog.Normal, "Send mail MQC_Daily fail ");
                                 }
-                                else if(item.ReportName =="AttendanceReport")
+                                else if (item.ReportName == "AttendanceReport")
                                 {
                                     SendMailFunction sendmail = new SendMailFunction();
                                     DateTime DateReport = DateTime.Now;
                                     if (DateTime.Now.Date.DayOfWeek == DayOfWeek.Monday)
-                                      DateReport = DateTime.Now.Date.AddDays(-3);
-                                    else if (DateTime.Now.Date.DayOfWeek == DayOfWeek.Tuesday|| DateTime.Now.Date.DayOfWeek == DayOfWeek.Wednesday|| 
-                                        DateTime.Now.Date.DayOfWeek == DayOfWeek.Thursday|| DateTime.Now.Date.DayOfWeek == DayOfWeek.Friday)
+                                        DateReport = DateTime.Now.Date.AddDays(-3);
+                                    else if (DateTime.Now.Date.DayOfWeek == DayOfWeek.Tuesday || DateTime.Now.Date.DayOfWeek == DayOfWeek.Wednesday ||
+                                        DateTime.Now.Date.DayOfWeek == DayOfWeek.Thursday || DateTime.Now.Date.DayOfWeek == DayOfWeek.Friday)
                                         DateReport = DateTime.Now.Date.AddDays(-1);
 
                                     if (DateTime.Now.DayOfWeek != DayOfWeek.Sunday && DateTime.Now.DayOfWeek != DayOfWeek.Saturday)
@@ -518,6 +519,12 @@ namespace UploadDataToDatabase
                                         else Logfile.Output(StatusLog.Normal, "Send mail MQC_Daily fail ");
                                     }
                                 }
+                                else if (item.ReportName == "Abnormal_ImportFsWareHouse")
+                                {
+                                    SendMailFunction sendmail = new SendMailFunction();
+                                    var isOK = sendmail.SendMailReportObnormal();
+                                }
+
                             }
                         }
                     }

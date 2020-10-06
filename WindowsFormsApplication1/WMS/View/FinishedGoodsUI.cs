@@ -153,7 +153,7 @@ namespace WindowsFormsApplication1.WMS.View
                 {
                     dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
                     SIUD_Mes.Insert(dataQRInfor);
-                  // FunctionImportWarehouse();
+                     FunctionImportWarehouse();
                     dtgv_import.DataSource = null;
 
                 }
@@ -514,7 +514,7 @@ namespace WindowsFormsApplication1.WMS.View
             try
             {
                 if (startGetTextChange == false || txt_QRImport.Text.Trim() == "") return;
-                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim());
+                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim(),cmboxWareHouse.Text.Trim());
                 if (valueTem != null)
                 {
                     if (valueTem.Warehouse.Trim() != cmboxWareHouse.SelectedItem.ToString().Trim())

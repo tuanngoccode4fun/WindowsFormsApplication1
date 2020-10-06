@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1.NewQRcode
     
     class IdentifyQR
     {
-      static int countItem =7; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
+      static int countItem =10; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
 
       static public  bool IsCorrectFormat(string txtInput)
         {

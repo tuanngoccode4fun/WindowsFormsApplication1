@@ -173,7 +173,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 					//	return false;
 					//}
 					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
-					var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);
+					var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
 					if (UpdateSFCTA == false)
 					{
 						MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
