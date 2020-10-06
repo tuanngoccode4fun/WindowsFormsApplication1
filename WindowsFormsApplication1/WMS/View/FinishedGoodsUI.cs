@@ -153,7 +153,7 @@ namespace WindowsFormsApplication1.WMS.View
                 {
                     dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
                     SIUD_Mes.Insert(dataQRInfor);
-                     FunctionImportWarehouse();
+                   FunctionImportWarehouse();
                     dtgv_import.DataSource = null;
 
                 }
@@ -1024,7 +1024,8 @@ namespace WindowsFormsApplication1.WMS.View
             startGetTextChange = false;
             txt_QRImport.Text = "";
             lbl_WarehouseImport.Text = "Warehouse";
-            cb_locationImport.DataSource = null;
+            txt_QRLocationImport.Text = null;
+            cb_locationImport.SelectedIndex=-1;
             ListImportFG = new List<Import_FinishGood_WareHouse>();
             dataQRInfor = new DataTable();
             dtgv_import.DataSource = ListImportFG;
