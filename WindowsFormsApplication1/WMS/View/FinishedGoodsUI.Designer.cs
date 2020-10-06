@@ -52,7 +52,6 @@
             this.btn_ClearFgsImport = new System.Windows.Forms.Button();
             this.btn_comfirm4 = new System.Windows.Forms.Button();
             this.lbl_WarehouseImport = new System.Windows.Forms.Label();
-            this.dtgv_import = new System.Windows.Forms.DataGridView();
             this.tabPage_Export = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -112,6 +111,7 @@
             this.dtgvExportFGs = new System.Windows.Forms.DataGridView();
             this.lbl_Header = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dtgv_import = new System.Windows.Forms.DataGridView();
             this.tabPage_FinishedGood.SuspendLayout();
             this.tabPage1_Import.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -119,7 +119,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).BeginInit();
             this.tabPage_Export.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -137,6 +136,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgv_QRimportData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvExportFGs)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_FinishedGood
@@ -182,7 +182,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1250, 505);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1123, 505);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -200,7 +200,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1246, 246);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1119, 246);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // groupBox1
@@ -225,7 +225,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(1242, 185);
+            this.groupBox1.Size = new System.Drawing.Size(1115, 185);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information";
@@ -314,7 +314,7 @@
             this.txt_QRImport.Location = new System.Drawing.Point(310, 15);
             this.txt_QRImport.Margin = new System.Windows.Forms.Padding(2);
             this.txt_QRImport.Name = "txt_QRImport";
-            this.txt_QRImport.Size = new System.Drawing.Size(809, 26);
+            this.txt_QRImport.Size = new System.Drawing.Size(801, 26);
             this.txt_QRImport.TabIndex = 22;
             this.txt_QRImport.TextChanged += new System.EventHandler(this.txt_QRImport_TextChanged);
             this.txt_QRImport.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_QRImport_KeyDown);
@@ -323,7 +323,7 @@
             // 
             this.txt_ERPDocCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_ERPDocCreate.Location = new System.Drawing.Point(911, 82);
+            this.txt_ERPDocCreate.Location = new System.Drawing.Point(916, 77);
             this.txt_ERPDocCreate.Margin = new System.Windows.Forms.Padding(2);
             this.txt_ERPDocCreate.Multiline = true;
             this.txt_ERPDocCreate.Name = "txt_ERPDocCreate";
@@ -337,7 +337,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label10.Location = new System.Drawing.Point(907, 56);
+            this.label10.Location = new System.Drawing.Point(912, 52);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(142, 19);
@@ -352,7 +352,7 @@
             this.cb_locationImport.Location = new System.Drawing.Point(642, 52);
             this.cb_locationImport.Margin = new System.Windows.Forms.Padding(2);
             this.cb_locationImport.Name = "cb_locationImport";
-            this.cb_locationImport.Size = new System.Drawing.Size(182, 27);
+            this.cb_locationImport.Size = new System.Drawing.Size(244, 27);
             this.cb_locationImport.TabIndex = 15;
             this.cb_locationImport.SelectedIndexChanged += new System.EventHandler(this.cb_locationImport_SelectedIndexChanged);
             // 
@@ -381,7 +381,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(1242, 53);
+            this.groupBox2.Size = new System.Drawing.Size(1115, 53);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -405,7 +405,7 @@
             this.btn_importSummary.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_importSummary.Image = global::WindowsFormsApplication1.Properties.Resources.ProductionPlan;
             this.btn_importSummary.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_importSummary.Location = new System.Drawing.Point(794, 12);
+            this.btn_importSummary.Location = new System.Drawing.Point(773, 12);
             this.btn_importSummary.Margin = new System.Windows.Forms.Padding(2);
             this.btn_importSummary.Name = "btn_importSummary";
             this.btn_importSummary.Size = new System.Drawing.Size(113, 36);
@@ -423,7 +423,7 @@
             this.btn_ClearFgsImport.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_ClearFgsImport.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearFgsImport.Image")));
             this.btn_ClearFgsImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ClearFgsImport.Location = new System.Drawing.Point(911, 12);
+            this.btn_ClearFgsImport.Location = new System.Drawing.Point(899, 13);
             this.btn_ClearFgsImport.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ClearFgsImport.Name = "btn_ClearFgsImport";
             this.btn_ClearFgsImport.Size = new System.Drawing.Size(88, 36);
@@ -442,7 +442,7 @@
             this.btn_comfirm4.ForeColor = System.Drawing.Color.DarkOliveGreen;
             this.btn_comfirm4.Image = ((System.Drawing.Image)(resources.GetObject("btn_comfirm4.Image")));
             this.btn_comfirm4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_comfirm4.Location = new System.Drawing.Point(1014, 13);
+            this.btn_comfirm4.Location = new System.Drawing.Point(1006, 13);
             this.btn_comfirm4.Margin = new System.Windows.Forms.Padding(2);
             this.btn_comfirm4.Name = "btn_comfirm4";
             this.btn_comfirm4.Size = new System.Drawing.Size(105, 36);
@@ -463,26 +463,6 @@
             this.lbl_WarehouseImport.Size = new System.Drawing.Size(84, 19);
             this.lbl_WarehouseImport.TabIndex = 26;
             this.lbl_WarehouseImport.Text = "Warehouse";
-            // 
-            // dtgv_import
-            // 
-            this.dtgv_import.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
-            this.dtgv_import.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtgv_import.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.dtgv_import.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgv_import.Location = new System.Drawing.Point(2, 252);
-            this.dtgv_import.Margin = new System.Windows.Forms.Padding(2);
-            this.dtgv_import.Name = "dtgv_import";
-            this.dtgv_import.ReadOnly = true;
-            this.dtgv_import.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtgv_import.RowTemplate.Height = 24;
-            this.dtgv_import.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgv_import.Size = new System.Drawing.Size(1246, 251);
-            this.dtgv_import.TabIndex = 2;
-            this.dtgv_import.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgv_import_DataBindingComplete);
-            this.dtgv_import.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dtgv_import_MouseClick);
             // 
             // tabPage_Export
             // 
@@ -1286,6 +1266,26 @@
             this.panel1.Size = new System.Drawing.Size(694, 49);
             this.panel1.TabIndex = 8;
             // 
+            // dtgv_import
+            // 
+            this.dtgv_import.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.dtgv_import.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgv_import.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.dtgv_import.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgv_import.Location = new System.Drawing.Point(2, 252);
+            this.dtgv_import.Margin = new System.Windows.Forms.Padding(2);
+            this.dtgv_import.Name = "dtgv_import";
+            this.dtgv_import.ReadOnly = true;
+            this.dtgv_import.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtgv_import.RowTemplate.Height = 24;
+            this.dtgv_import.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgv_import.Size = new System.Drawing.Size(1119, 251);
+            this.dtgv_import.TabIndex = 2;
+            this.dtgv_import.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dtgv_import_DataBindingComplete);
+            this.dtgv_import.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dtgv_import_MouseClick);
+            // 
             // FinishedGoodsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -1312,7 +1312,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).EndInit();
             this.tabPage_Export.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1333,6 +1332,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvExportFGs)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgv_import)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1416,11 +1416,11 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txt_QRManpulationEX;
         private System.Windows.Forms.Button btn_ExportSummary;
-        private System.Windows.Forms.DataGridView dtgv_import;
         private System.Windows.Forms.ComboBox cmboxWareHouse;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_ComfirmExport;
         private System.Windows.Forms.ComboBox cb_locationExport;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dtgv_import;
     }
 }
