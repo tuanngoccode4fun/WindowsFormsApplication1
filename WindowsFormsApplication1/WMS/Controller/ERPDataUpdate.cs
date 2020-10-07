@@ -14,6 +14,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 		public string getTB002(string TB001)
 		{
 			string TB002= "";
+			///TB025 Tháng khai báo
+			///TB001 Loại phiếu chuyển
+			///TB002 Mã phiếu chuyển
 			string sqlQuerry = " select max(TB002)+1 from SFCTB where TB001 = '"+TB001+ "' and TB025 ='"+ DateTime.Now.ToString("yyyyMM")+"' " ;
 			SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
 			TB002 = sqlTLVN2.sqlExecuteScalarString(sqlQuerry);

@@ -101,11 +101,11 @@ namespace WindowsFormsApplication1.WMS.Controller
 				string TB002 = eRPDataUpdate.getTB002("D301");//fix
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"Y");
-				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
-				DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
-				if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
-				{
+				//DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"Y");
+				//DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
+				//DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
+				//if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
+				//{
 					//Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
 					//var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
 					//if (InsertSFCTC == false)
@@ -157,7 +157,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 					//	MessageBox.Show("Insert import status fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					//	return false;
 					//}
-				}
+				//}
 				ERPDoc = TB002;
 			}
 			catch (Exception ex)

@@ -1147,26 +1147,26 @@ namespace WindowsFormsApplication1.WMS.View
         private void FunctionImportWarehouse()
         {
             txt_ERPDocCreate.Text = "";
-           // txt_SFTDoc.Text = "";
-            //for (int i = 0; i < dataQRInfor.Rows.Count; i++)
-            //{
-            //    if (dataQRInfor.Rows[i]["ImportFlag"] != null && dataQRInfor.Rows[i]["ImportFlag"].ToString() == "Y")
-            //    {
-            //        MessageBox.Show("This request already imported into warehouse", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
+          //  txt_SFTDoc.Text = "";
+            for (int i = 0; i < dataQRInfor.Rows.Count; i++)
+            {
+                if (dataQRInfor.Rows[i]["ImportFlag"] != null && dataQRInfor.Rows[i]["ImportFlag"].ToString() == "Y")
+                {
+                    MessageBox.Show("This request already imported into warehouse", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            //}
-            //if(txt_QRLocationImport.Text == "")
-            //{
-            //    MessageBox.Show("You must select location !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
-            // if (cb_locationImport.Items.Cast<string>().Any(cbi => cbi.Trim() ==txt_QRLocationImport.Text.Trim()) == false)
-            //{
-            //    MessageBox.Show("Location must belong to warehouse: "+WarehouseImport, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            }
+            if (txt_QRLocationImport.Text == "")
+            {
+                MessageBox.Show("You must select location !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (cb_locationImport.Items.Cast<string>().Any(cbi => cbi.Trim() == txt_QRLocationImport.Text.Trim()) == false)
+            {
+                MessageBox.Show("Location must belong to warehouse: " + WarehouseImport, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             //// update new QR
             ///
             UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();

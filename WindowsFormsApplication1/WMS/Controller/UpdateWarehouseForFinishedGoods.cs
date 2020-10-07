@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 iNVItems.Location = location;
                 iNVItems.ImportDate = DateTime.Now;
                 iNVItems.MainLocation = location;
-                iNVItems.ImportQR = dtERPPQC.Rows[i]["KeyID"].ToString().Trim() +"-"+ dtERPPQC.Rows[i]["KeyNo"].ToString().Trim();
+                iNVItems.ImportQR = null;// dtERPPQC.Rows[i]["KeyID"].ToString().Trim() +"-"+ dtERPPQC.Rows[i]["KeyNo"].ToString().Trim();
                    
                     Database.INVMFUpdate iNVMFUpdate = new Database.INVMFUpdate();
                 var UpdateINVMF = iNVMFUpdate.InsertINVMF(iNVItems, dtADMMF);
