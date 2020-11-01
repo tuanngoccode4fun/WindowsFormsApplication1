@@ -28,6 +28,23 @@ namespace WindowsFormsApplication1.WMS.Controller
 			return TB002;
 
 		}
+		public string getTF002(string TF001)
+		{
+			string TB002 = "";
+			///TB025 Tháng khai báo
+			///TB001 Loại phiếu chuyển
+			///TB002 Mã phiếu chuyển
+			string sqlQuerry = " select max(TF002)+1 from MOCTF where TF001 = '" + TF001 + "' and TF012 like '%" + DateTime.Now.ToString("yyyyMM") + "%' ";
+			SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
+			TB002 = sqlTLVN2.sqlExecuteScalarString(sqlQuerry);
+			if (TB002 == "" || TB002 == string.Empty)
+			{
+				TB002 = DateTime.Now.ToString("yyMM") + "0001";
+			}
+
+			return TB002;
+
+		}
 		public bool InsertSFCTCForFinishedGoods(FinishedGoodsItems fgItems,DataTable dtADMMF, DataTable dtSFCTA, DataTable dtMODELLOT, string TB002)
 		{
 			try
@@ -90,7 +107,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TC001")
 						{
-							valueCell = "D301";
+							valueCell = Properties.Settings.Default.Doc_No;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TC002")
 						{
@@ -366,7 +383,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB001")
 						{
-							valueCell = "D301";
+							valueCell = Properties.Settings.Default.Doc_No;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB002")
 						{
@@ -482,7 +499,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB038")
 						{
-							valueCell = "D301";
+							valueCell = Properties.Settings.Default.Doc_No;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB039")
 						{

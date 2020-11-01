@@ -20,7 +20,7 @@ namespace WindowsFormsApplication1.NewQRcode
                   Temp.TransactionID = Regex.Replace(txtInput, " ", "");
                   Temp.UserID = Class.valiballecommon.GetStorage().UserName;
                   Temp.STT = "0001";// arraydata[1];
-                  Temp.ProductOrder = /*arraydata[2]*/ "Not found";
+                  Temp.ProductOrder = "B511-20100019";//"B511-20100154";
                   Temp.Product = arraydata[2];
                   Temp.Quantity =Convert.ToUInt32( arraydata[4]);
                   Temp.LotNo = arraydata[7];

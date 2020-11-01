@@ -1175,30 +1175,30 @@ namespace WindowsFormsApplication1.WMS.View
             var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc);
             if (Update)
             {
-                txt_ERPDocCreate.Text = "D301-" + ERPDoc;
-                //txt_SFTDoc.Text = "D301-" + SFTDoc;
-                lb_Status.Text = "Importing Finished Goods success : D301-" + ERPDoc;
+                txt_ERPDocCreate.Text = Properties.Settings.Default.Doc_No+"-" + ERPDoc;
+                //txt_SFTDoc.Text = Properties.Settings.Default.Doc_No+"-" + SFTDoc;
+                lb_Status.Text = "Importing Finished Goods success :"+ Properties.Settings.Default.Doc_No + "-" + ERPDoc;
             }
 
             //////
             /*FinishedGoodsItems finishedGoods = new FinishedGoodsItems();
-            //dataQRInfor = dtgv_import.DataSource as DataTable;
-            //var testlist = dataQRInfor.AsEnumerable();
-            //var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();// check 1 producorder or many producorder
-            //if (ListPO.Count != ListPO.Distinct().Count())
-            //{
-            //    for (int i = 0; i < dataQRInfor.Rows.Count; i++)
-            //    {
-            //        DataTable dtrow = new DataTable();
-            //        dtrow = dataQRInfor.Clone();
-            //        dtrow.LoadDataRow(dataQRInfor.Rows[i].ItemArray, true);
-            //        UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
-            //        string ERPDoc = ""; string SFTDoc = "";
-            //        string productOrder = dtrow.Rows[0]["ProductOrder"].ToString();
-            //        string product = dtrow.Rows[0]["Product"].ToString().Trim();
-            //        double Quantity = double.Parse(dtrow.Rows[0]["Quantity"].ToString());
-            //        double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
-            //        var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+            dataQRInfor = dtgv_import.DataSource as DataTable;
+            var testlist = dataQRInfor.AsEnumerable();
+            var ListPO = dataQRInfor.AsEnumerable().Select(x => x.Field<string>("ProductOrder")).ToList();// check 1 producorder or many producorder
+            if (ListPO.Count != ListPO.Distinct().Count())
+            {
+                for (int i = 0; i < dataQRInfor.Rows.Count; i++)
+                {
+                    DataTable dtrow = new DataTable();
+                    dtrow = dataQRInfor.Clone();
+                    dtrow.LoadDataRow(dataQRInfor.Rows[i].ItemArray, true);
+                    UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
+                    string ERPDoc = ""; string SFTDoc = "";
+                    string productOrder = dtrow.Rows[0]["ProductOrder"].ToString();
+                    string product = dtrow.Rows[0]["Product"].ToString().Trim();
+                    double Quantity = double.Parse(dtrow.Rows[0]["Quantity"].ToString());
+                    double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
+                    var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
 
             //        var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
             //        // KIEM TRA KHOI LUONG, SO LUONG, NEU KHOI LUONG DU THI TRA LAI 'TRUE', ELSE FALSE
@@ -1254,7 +1254,7 @@ namespace WindowsFormsApplication1.WMS.View
             //    string ERPDoc = ""; string SFTDoc = "";
             //    if (IsEnoughWeight == false)
             //    {
-            //        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
+            /        var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoodsNotConfirm(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc, out SFTDoc);
             //        if (Update)
             //        {
             //            txt_ERPDocCreate.Text = "D301-" + ERPDoc;

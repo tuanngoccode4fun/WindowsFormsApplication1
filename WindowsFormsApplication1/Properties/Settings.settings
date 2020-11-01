@@ -26,5 +26,8 @@
     <Setting Name="intTimerOvenShow" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">6000</Value>
     </Setting>
+    <Setting Name="Doc_No" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B581</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

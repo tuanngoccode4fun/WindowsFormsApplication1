@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Windows;
 
 namespace WindowsFormsApplication1.WMS.Controller
 {
@@ -42,17 +43,26 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["MODI_AP"] = DBNull.Value;
                 dt.Rows[i]["MODI_PRID"] = DBNull.Value;
 
-                dt.Rows[i]["TC001"] = "D301";
+                dt.Rows[i]["TC001"] = Properties.Settings.Default.Doc_No;
                 dt.Rows[i]["TC002"] = TB002;
                 dt.Rows[i]["TC003"] = (i + 1).ToString("0000");
                 dt.Rows[i]["TC004"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[0];
                 dt.Rows[i]["TC005"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[1];
                 dt.Rows[i]["TC006"] = "0020";
                 DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());/// 
-                dt.Rows[i]["TC007"] = dtSFCTA.Rows[0]["TA004"].ToString();
+                if (dtSFCTA.Rows.Count == 0)
+                {
+                        MessageBox.Show("dtSFCTA =" + dtSFCTA.Rows.Count.ToString());
+                }
+                else
+                {
+                        dt.Rows[i]["TC007"] = dtSFCTA.Rows[0]["TA004"].ToString();
+                        dt.Rows[i]["TC010"] = dtSFCTA.Rows[0]["TA020"].ToString();
+                        dt.Rows[i]["TC023"] = dtSFCTA.Rows[0]["TA006"].ToString();
+                    }
                 dt.Rows[i]["TC008"] = "";
                 dt.Rows[i]["TC009"] = "";
-                dt.Rows[i]["TC010"] = dtSFCTA.Rows[0]["TA020"].ToString();
+                //dt.Rows[i]["TC010"] = dtSFCTA.Rows[0]["TA020"].ToString();
                     dt.Rows[i]["TC011"] = DBNull.Value;
                     dt.Rows[i]["TC012"] = DBNull.Value;
                     dt.Rows[i]["TC013"] = "1";
@@ -65,7 +75,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["TC020"] = 0;
                 dt.Rows[i]["TC021"] = 0;
                 dt.Rows[i]["TC022"] = confirm;
-                dt.Rows[i]["TC023"] = dtSFCTA.Rows[0]["TA006"].ToString();
+                //dt.Rows[i]["TC023"] = dtSFCTA.Rows[0]["TA006"].ToString();
                 dt.Rows[i]["TC024"] = DBNull.Value;
                 dt.Rows[i]["TC025"] = 0;
                 dt.Rows[i]["TC026"] = "N";
@@ -179,7 +189,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());
                 dt.Rows[i]["TB036"] = dtSFCTA.Rows[0]["TA018"].ToString();
                 dt.Rows[i]["TB037"] = 0;
-                dt.Rows[i]["TB038"] = "D301";
+                dt.Rows[i]["TB038"] = Properties.Settings.Default.Doc_No;
                 dt.Rows[i]["TB039"] = TransNo;
                 dt.Rows[i]["UDF06"] = 0;
                 dt.Rows[i]["UDF07"] = 0;
@@ -239,7 +249,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                     dt.Rows[i]["MODI_AP"] = DBNull.Value;
                     dt.Rows[i]["MODI_PRID"] = DBNull.Value;
 
-                    dt.Rows[i]["TG001"] = "D301";
+                    dt.Rows[i]["TG001"] = Properties.Settings.Default.Doc_No;
                     dt.Rows[i]["TG002"] = TB002;
                     dt.Rows[i]["TG003"] = (i + 1).ToString("0000");
                     dt.Rows[i]["TG004"] = ERPPQC.Rows[i]["Product"].ToString().Trim();

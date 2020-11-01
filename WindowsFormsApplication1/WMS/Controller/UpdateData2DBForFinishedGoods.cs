@@ -18,9 +18,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 				GetdataSFTToDataTable getdataSFTToDataTable = new GetdataSFTToDataTable();
 				DataTable dtLotMODETAL = getdataSFTToDataTable.GetDataTableLOTMODETAIL(fgItems.productCode);
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002("D301");
+				string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
-				string TransNo = sFTDataUpdate.getTransnoOfSFT("D301");
+				string TransNo = sFTDataUpdate.getTransnoOfSFT(Properties.Settings.Default.Doc_No);
 				
 				Database.ADMMFUpdate aDMMF = new ADMMFUpdate();
 				DataTable dtADMMF = aDMMF.GetDtADMFFByUser(Class.valiballecommon.GetStorage().UserName);
@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, "D301-" + TransNo + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Properties.Settings.Default.Doc_No+"-" + TransNo + " is created !", "");
 				}
 
 				var Update2ERP = eRPDataUpdate.UploadtoERPDBForFinishedGoods(fgItems,dtADMMF, dtLotMODETAL, TB002, TransNo);
@@ -41,14 +41,14 @@ namespace WindowsFormsApplication1.WMS.Controller
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, "D301-" + TB002 + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Properties.Settings.Default.Doc_No+"-" + TB002 + " is created !", "");
 				}
 				Database.Model.INVItems iNVItems = new Database.Model.INVItems();
 				iNVItems.Product = fgItems.product;
 				iNVItems.ProductCode = fgItems.productCode;
 				iNVItems.Lot = fgItems.lot;
 				iNVItems.Create_Date = fgItems.ImportDate;
-				iNVItems.TypeDoccument = "D301";
+				iNVItems.TypeDoccument = Properties.Settings.Default.Doc_No;
 				iNVItems.DoccumentNo = TB002;
 				iNVItems.STTDoc = "0001";
 				iNVItems.Warehouse = fgItems.Warehouse;
@@ -97,67 +97,71 @@ namespace WindowsFormsApplication1.WMS.Controller
 			try
 			{
 				ERPDoc = "";
+				//Properties.Settings.Default.Doc_No
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002("D301");//fix
+				//string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);//fix
+				string TB002 = eRPDataUpdate.getTF002(Properties.Settings.Default.Doc_No);//fix
+
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-				//DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"Y");
-				//DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
-				//DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
-				//if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
-				//{
-					//Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
-					//var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
-					//if (InsertSFCTC == false)
+                //DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location, "Y");
+				//DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, "", "Y");// NO SFT
+				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
+                DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
+                if (/*dtSFCTC.Rows.Count > 0 &&*/ dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
+                {
+     //               Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
+     //               var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
+     //               if (InsertSFCTC == false)
+     //               {
+     //                   MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+     //                   return false;
+     //               }
+					//Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
+					//var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
+					//if (InsertSFCTB == false)
 					//{
-					//	MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					//	MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					//	return false;
 					//}
 					//Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
-					//var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
-					//if (UpdateSFCTA == false)
-					//{
-					//	MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
+     //               var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
+     //               if (UpdateSFCTA == false)
+     //               {
+     //                   MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+     //                   return false;
+     //               }
 
-					//Database.MOC.MOCTG mOCTG = new Database.MOC.MOCTG();
-					//var insertMoctg = mOCTG.InsertData(dtMOCTG);
-					//if (insertMoctg == false)
-					//{
-					//	MessageBox.Show("Insert MOCTG fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
+                    Database.MOC.MOCTG mOCTG = new Database.MOC.MOCTG();
+                    var insertMoctg = mOCTG.InsertData(dtMOCTG);
+                    if (insertMoctg == false)
+                    {
+                        MessageBox.Show("Insert MOCTG fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
 
-					//Database.MOC.MOCTF mOCTF = new Database.MOC.MOCTF();
-					//var insertMOCTF = mOCTF.InsertData(dtMOCTF);
-					//if (insertMOCTF == false)
-					//{
-					//	MessageBox.Show("Insert MOCTF fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
-					//Database.MOC.MOCTA mOCTA = new Database.MOC.MOCTA();
-					//var updateMOCTA = mOCTA.UpdateMOCTAForFinishedGoods(dtERPPQC);
-					//if (updateMOCTA == false)
-					//{
-					//	MessageBox.Show("update MOCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
-					UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
+                    Database.MOC.MOCTF mOCTF = new Database.MOC.MOCTF();
+                    var insertMOCTF = mOCTF.InsertData(dtMOCTF);
+                    if (insertMOCTF == false)
+                    {
+                        MessageBox.Show("Insert MOCTF fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                    Database.MOC.MOCTA mOCTA = new Database.MOC.MOCTA();
+                    var updateMOCTA = mOCTA.UpdateMOCTAForFinishedGoods(dtERPPQC);
+                    if (updateMOCTA == false)
+                    {
+                        MessageBox.Show("update MOCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                    UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
 					var UpdateWarehouse = updateWarehouseForFinishedGoods.UpdateWarehouse(dtERPPQC, TB002, Location);
 					if (UpdateWarehouse == false)
 					{
 						MessageBox.Show("update stock warehouse fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 						return false;
 					}
-					//Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();
-					//var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC,"D301-"+TB002);
-					//if (updateOutPQC == false)
-					//{
-					//	MessageBox.Show("Insert import status fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
-				//}
+				}
 				ERPDoc = TB002;
 			}
 			catch (Exception ex)
@@ -176,9 +180,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 				SFTDoc = "";
 
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002("D301");
+				string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
-				string TransNo = sFTDataUpdate.getTransnoOfSFT("D301");
+				string TransNo = sFTDataUpdate.getTransnoOfSFT(Properties.Settings.Default.Doc_No);
 				Database.SFT.SFT_TRANSORDER_LINE sFT_TRANSORDER_LINE = new Database.SFT.SFT_TRANSORDER_LINE();
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				DataTable dtTRANSORDER_LINE = convertDataTable.ERPPQCtoSFTTRANSORDERLINE(dtERPPQC, TransNo, TB002, Location);
@@ -255,7 +259,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 					}
 
 					Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();////function kho
-					var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC, "D301-"+TB002);
+					var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC, Properties.Settings.Default.Doc_No+"-"+TB002);
 					if (updateOutPQC == false)
 					{
 						MessageBox.Show("Insert import status fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
