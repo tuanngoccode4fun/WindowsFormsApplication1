@@ -21,6 +21,7 @@ namespace WindowsFormsApplication1.WMS.View
     public partial class FinishedGoodsUI : CommonFormMetro
     {
         List<Database.WarehouseItems> ListWarehouse = new List<Database.WarehouseItems>();
+        List<string> listDocNo = new List<string>();
         DataTable dtLoaiChungTu;
         DataTable dtKhachHang;
         DataTable dtBoPhan;
@@ -116,7 +117,14 @@ namespace WindowsFormsApplication1.WMS.View
             cmboxWareHouse.SelectedIndex = listwarehouse2.ToList().FindIndex(x => x.Trim() == wh.Trim());
             /////////
             Update_list_location(wh);
-
+            /// Tuanngoc Add
+            listDocNo = new List<string>();
+            listDocNo= GetListDocNo.GetListForCombox();
+            cmboxDocNo.DataSource = null;
+            cmboxDocNo.DataSource = listDocNo.ToList();
+            cmboxDocNo.SelectedIndex = -1;
+            var doc = (Class.valiballecommon.GetStorage().DocNo == null) ? "": Class.valiballecommon.GetStorage().DocNo.Trim();
+            cmboxDocNo.SelectedIndex = listDocNo.ToList().FindIndex(x => x.Trim() == doc.Trim());
 
         }
 
@@ -1042,6 +1050,8 @@ namespace WindowsFormsApplication1.WMS.View
                 Class.valiballecommon.GetStorage().Currency = cb_CurrentMonney.SelectedItem.ToString();
             if (cmboxWareHouse.SelectedItem != null)
                 Class.valiballecommon.GetStorage().Warehouse = cmboxWareHouse.SelectedItem.ToString();// tuanngoc
+            if (cmboxDocNo.SelectedItem != null)
+                Class.valiballecommon.GetStorage().DocNo = cmboxDocNo.SelectedItem.ToString();// tuanngoc
         }
 
         private void btn_importSummary_Click(object sender, EventArgs e)

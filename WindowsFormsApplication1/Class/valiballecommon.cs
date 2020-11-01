@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1.Class
         public string Client { get; set; }
         public string Currency { get; set; }
         
+        public string DocNo { get; set; }
 
         //class Storage_Static
         //{

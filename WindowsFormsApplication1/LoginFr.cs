@@ -85,6 +85,8 @@ namespace WindowsFormsApplication1
                 Class.valiballecommon.GetStorage().Department = SettingGet.Department;
                 Class.valiballecommon.GetStorage().Currency = SettingGet.Currency;
                 Class.valiballecommon.GetStorage().Client = SettingGet.Client;
+                //tuanngoc
+                Class.valiballecommon.GetStorage().DocNo = SettingGet.DocNo;
             }
             else
             {
