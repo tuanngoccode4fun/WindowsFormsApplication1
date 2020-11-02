@@ -34,6 +34,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmboxDocNo = new System.Windows.Forms.ComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_QRManpulation = new System.Windows.Forms.TextBox();
@@ -47,8 +49,6 @@
             this.cb_locationImport = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmboxDocNo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.cmboxWareHouse = new System.Windows.Forms.ComboBox();
             this.btn_importSummary = new System.Windows.Forms.Button();
             this.btn_ClearFgsImport = new System.Windows.Forms.Button();
@@ -234,6 +234,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Location = new System.Drawing.Point(576, 99);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 19);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "DocNo";
+            // 
+            // cmboxDocNo
+            // 
+            this.cmboxDocNo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmboxDocNo.ForeColor = System.Drawing.Color.Red;
+            this.cmboxDocNo.FormattingEnabled = true;
+            this.cmboxDocNo.Location = new System.Drawing.Point(642, 96);
+            this.cmboxDocNo.Name = "cmboxDocNo";
+            this.cmboxDocNo.Size = new System.Drawing.Size(244, 27);
+            this.cmboxDocNo.TabIndex = 33;
+            this.cmboxDocNo.DropDownClosed += new System.EventHandler(this.cmboxDocNo_DropDownClosed);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources._20160719024359;
@@ -388,28 +411,6 @@
             this.groupBox2.Size = new System.Drawing.Size(1115, 53);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            // 
-            // cmboxDocNo
-            // 
-            this.cmboxDocNo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmboxDocNo.ForeColor = System.Drawing.Color.Red;
-            this.cmboxDocNo.FormattingEnabled = true;
-            this.cmboxDocNo.Location = new System.Drawing.Point(642, 96);
-            this.cmboxDocNo.Name = "cmboxDocNo";
-            this.cmboxDocNo.Size = new System.Drawing.Size(244, 27);
-            this.cmboxDocNo.TabIndex = 33;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(576, 99);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 19);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "DocNo";
             // 
             // cmboxWareHouse
             // 

@@ -107,7 +107,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TC001")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TC002")
 						{
@@ -383,7 +383,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB001")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB002")
 						{
@@ -499,7 +499,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB038")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TB039")
 						{

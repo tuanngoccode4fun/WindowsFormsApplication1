@@ -18,9 +18,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 				GetdataSFTToDataTable getdataSFTToDataTable = new GetdataSFTToDataTable();
 				DataTable dtLotMODETAL = getdataSFTToDataTable.GetDataTableLOTMODETAIL(fgItems.productCode);
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
-				string TransNo = sFTDataUpdate.getTransnoOfSFT(Properties.Settings.Default.Doc_No);
+				string TransNo = sFTDataUpdate.getTransnoOfSFT(Class.valiballecommon.GetStorage().DocNo);
 				
 				Database.ADMMFUpdate aDMMF = new ADMMFUpdate();
 				DataTable dtADMMF = aDMMF.GetDtADMFFByUser(Class.valiballecommon.GetStorage().UserName);
@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, Properties.Settings.Default.Doc_No+"-" + TransNo + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo+"-" + TransNo + " is created !", "");
 				}
 
 				var Update2ERP = eRPDataUpdate.UploadtoERPDBForFinishedGoods(fgItems,dtADMMF, dtLotMODETAL, TB002, TransNo);
@@ -41,14 +41,14 @@ namespace WindowsFormsApplication1.WMS.Controller
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, Properties.Settings.Default.Doc_No+"-" + TB002 + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo+"-" + TB002 + " is created !", "");
 				}
 				Database.Model.INVItems iNVItems = new Database.Model.INVItems();
 				iNVItems.Product = fgItems.product;
 				iNVItems.ProductCode = fgItems.productCode;
 				iNVItems.Lot = fgItems.lot;
 				iNVItems.Create_Date = fgItems.ImportDate;
-				iNVItems.TypeDoccument = Properties.Settings.Default.Doc_No;
+				iNVItems.TypeDoccument = Class.valiballecommon.GetStorage().DocNo;
 				iNVItems.DoccumentNo = TB002;
 				iNVItems.STTDoc = "0001";
 				iNVItems.Warehouse = fgItems.Warehouse;
@@ -97,10 +97,10 @@ namespace WindowsFormsApplication1.WMS.Controller
 			try
 			{
 				ERPDoc = "";
-				//Properties.Settings.Default.Doc_No
+				//Class.valiballecommon.GetStorage().DocNo
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				//string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);//fix
-				string TB002 = eRPDataUpdate.getTF002(Properties.Settings.Default.Doc_No);//fix
+				//string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
+				string TB002 = eRPDataUpdate.getTF002(Class.valiballecommon.GetStorage().DocNo);//fix
 
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				ConvertDataERP convertDataERP = new ConvertDataERP();
@@ -180,9 +180,9 @@ namespace WindowsFormsApplication1.WMS.Controller
 				SFTDoc = "";
 
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002(Properties.Settings.Default.Doc_No);
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
-				string TransNo = sFTDataUpdate.getTransnoOfSFT(Properties.Settings.Default.Doc_No);
+				string TransNo = sFTDataUpdate.getTransnoOfSFT(Class.valiballecommon.GetStorage().DocNo);
 				Database.SFT.SFT_TRANSORDER_LINE sFT_TRANSORDER_LINE = new Database.SFT.SFT_TRANSORDER_LINE();
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				DataTable dtTRANSORDER_LINE = convertDataTable.ERPPQCtoSFTTRANSORDERLINE(dtERPPQC, TransNo, TB002, Location);
@@ -259,7 +259,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 					}
 
 					Database.ERPSOFT.ERPOutPQCQR eRPOutPQCQR = new Database.ERPSOFT.ERPOutPQCQR();////function kho
-					var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC, Properties.Settings.Default.Doc_No+"-"+TB002);
+					var updateOutPQC = eRPOutPQCQR.UpdateImportWarehouse(dtERPPQC, Class.valiballecommon.GetStorage().DocNo+"-"+TB002);
 					if (updateOutPQC == false)
 					{
 						MessageBox.Show("Insert import status fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

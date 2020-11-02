@@ -54,7 +54,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TRANSTYPE")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TRANSNO")
 						{
@@ -140,7 +140,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TO007")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TO008")
 						{
@@ -349,7 +349,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "WR002")
 						{
-							valueCell = Properties.Settings.Default.Doc_No+"-"+TB002;//phai tinh toan
+							valueCell = Class.valiballecommon.GetStorage().DocNo+"-"+TB002;//phai tinh toan
 						}
 						else if (dtHeader.Columns[j].ColumnName == "WR003")
 						{
@@ -514,7 +514,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TRANSORDERTYPE")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TRANSNO")
 						{
@@ -695,7 +695,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TL011")
 						{
-							valueCell = Properties.Settings.Default.Doc_No;
+							valueCell = Class.valiballecommon.GetStorage().DocNo;
 						}
 						else if (dtHeader.Columns[j].ColumnName == "TL012")
 						{

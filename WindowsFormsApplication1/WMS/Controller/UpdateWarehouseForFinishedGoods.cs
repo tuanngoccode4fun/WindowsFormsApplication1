@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 iNVItems.ProductCode = dtERPPQC.Rows[i]["ProductOrder"].ToString().Trim();
                 iNVItems.Lot = dtERPPQC.Rows[i]["LotNo"].ToString().Trim();
                 iNVItems.Create_Date = DateTime.Now;
-                iNVItems.TypeDoccument = Properties.Settings.Default.Doc_No;
+                iNVItems.TypeDoccument = Class.valiballecommon.GetStorage().DocNo;
                 iNVItems.DoccumentNo = TB002;// DEM LEN TU BANG SFCTB TB002
                 iNVItems.STTDoc = dtERPPQC.Rows[i]["STT"].ToString().Trim();/// NO 0001-> 
                 iNVItems.Warehouse = dtERPPQC.Rows[i]["Warehouse"].ToString().Trim();

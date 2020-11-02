@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["CREATE_DATE"] = DateTime.Now;
                 dt.Rows[i]["MODI_DATE"] = DBNull.Value;
                 dt.Rows[i]["FLAG"] = "0";
-                dt.Rows[i]["TRANSORDERTYPE"] = Properties.Settings.Default.Doc_No;
+                dt.Rows[i]["TRANSORDERTYPE"] = Class.valiballecommon.GetStorage().DocNo;
                 dt.Rows[i]["TRANSNO"] = TranSorder;
                 dt.Rows[i]["SN"] = (i + 1).ToString("0000");
                 dt.Rows[i]["MOTYPE"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[0];
@@ -81,7 +81,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["TL008"] = "0";
                 dt.Rows[i]["TL009"] = dtLot.Rows[0]["PKUNIT"];
                 dt.Rows[i]["TL010"] = DateTime.Now.Date.ToString("yyyyMMdd");
-                dt.Rows[i]["TL011"] = Properties.Settings.Default.Doc_No;
+                dt.Rows[i]["TL011"] = Class.valiballecommon.GetStorage().DocNo;
                 dt.Rows[i]["TL012"] = TB002;
                 dt.Rows[i]["TL013"] = "N";
                 dt.Rows[i]["TL014"] = "";

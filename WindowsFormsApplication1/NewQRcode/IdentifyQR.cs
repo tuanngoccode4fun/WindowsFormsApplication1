@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using WindowsFormsApplication1.ClassMysql;
 using WindowsFormsApplication1.ClassObject;
+using WindowsFormsApplication1.NewQRcode.UI_mesage;
+using WindowsFormsApplication1.WMS.View;
 
 namespace WindowsFormsApplication1.NewQRcode
 {
@@ -13,23 +16,29 @@ namespace WindowsFormsApplication1.NewQRcode
     class IdentifyQR
     {
       static int countItem =10; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
-
-      static public  bool IsCorrectFormat(string txtInput)
+        static void messageView(string content, bool status)
+        {
+            MessageBoxUI tem = new MessageBoxUI(content, status);
+            tem.TopMost = true;
+            tem.StartPosition = FormStartPosition.CenterParent;
+            tem.ShowDialog();
+        }
+        static public  bool IsCorrectFormat(string txtInput)
         {
             int countCurrent = System.Text.RegularExpressions.Regex.Replace(txtInput, " ", "").Split(';').Count();
             if (txtInput.Trim().StartsWith("s")!=true)
             {
-                MessageBox.Show("QR code not start with \"s\" ", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                messageView("QR code not start with \"s\" ", false);
                 return false;
             }
             if (txtInput.Trim().EndsWith("e") != true)
             {
-                MessageBox.Show("QR code not end with \"e\" ", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                messageView("QR code not end with \"e\" ",false);
                 return false;
             }
             if (countCurrent != countItem)
             {
-                MessageBox.Show(string.Format("QR input not enough item spec = {0}, current {1}",countItem, countCurrent), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                messageView(string.Format("QR input not enough item spec = {0}, current {1}",countItem, countCurrent),false);
                 return false;    
             }
             return true;

@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["MODI_AP"] = DBNull.Value;
                 dt.Rows[i]["MODI_PRID"] = DBNull.Value;
 
-                dt.Rows[i]["TC001"] = Properties.Settings.Default.Doc_No;
+                dt.Rows[i]["TC001"] = Class.valiballecommon.GetStorage().DocNo;
                 dt.Rows[i]["TC002"] = TB002;
                 dt.Rows[i]["TC003"] = (i + 1).ToString("0000");
                 dt.Rows[i]["TC004"] = ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Split('-')[0];
@@ -189,7 +189,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());
                 dt.Rows[i]["TB036"] = dtSFCTA.Rows[0]["TA018"].ToString();
                 dt.Rows[i]["TB037"] = 0;
-                dt.Rows[i]["TB038"] = Properties.Settings.Default.Doc_No;
+                dt.Rows[i]["TB038"] = Class.valiballecommon.GetStorage().DocNo;
                 dt.Rows[i]["TB039"] = TransNo;
                 dt.Rows[i]["UDF06"] = 0;
                 dt.Rows[i]["UDF07"] = 0;
@@ -249,7 +249,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                     dt.Rows[i]["MODI_AP"] = DBNull.Value;
                     dt.Rows[i]["MODI_PRID"] = DBNull.Value;
 
-                    dt.Rows[i]["TG001"] = Properties.Settings.Default.Doc_No;
+                    dt.Rows[i]["TG001"] = Class.valiballecommon.GetStorage().DocNo;
                     dt.Rows[i]["TG002"] = TB002;
                     dt.Rows[i]["TG003"] = (i + 1).ToString("0000");
                     dt.Rows[i]["TG004"] = ERPPQC.Rows[i]["Product"].ToString().Trim();
