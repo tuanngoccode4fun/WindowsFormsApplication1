@@ -24,11 +24,11 @@ namespace WindowsFormsApplication1.NewQRcode.UI_mesage
             m_Timer.Tick += M_Timer_Tick;
             m_Timer.Start();
         }
-        public MessageBoxUI(string content,bool status)
+        public MessageBoxUI(string content,bool status,int timer)
         {
             InitializeComponent();
             m_Timer.Enabled = true;
-            m_Timer.Interval = 1000;
+            m_Timer.Interval = timer;
             m_Timer.Tick += M_Timer_Tick;
             m_Timer.Start();
             lb_messagebox.Text = content;
@@ -38,6 +38,8 @@ namespace WindowsFormsApplication1.NewQRcode.UI_mesage
 
         private void M_Timer_Tick(object sender, EventArgs e)
         {
+            m_Timer.Stop();
+            m_Timer.Enabled = false;
             this.Close();
         }
 

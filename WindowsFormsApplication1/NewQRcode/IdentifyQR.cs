@@ -16,29 +16,22 @@ namespace WindowsFormsApplication1.NewQRcode
     class IdentifyQR
     {
       static int countItem =10; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
-        static void messageView(string content, bool status)
-        {
-            MessageBoxUI tem = new MessageBoxUI(content, status);
-            tem.TopMost = true;
-            tem.StartPosition = FormStartPosition.CenterParent;
-            tem.ShowDialog();
-        }
         static public  bool IsCorrectFormat(string txtInput)
         {
             int countCurrent = System.Text.RegularExpressions.Regex.Replace(txtInput, " ", "").Split(';').Count();
             if (txtInput.Trim().StartsWith("s")!=true)
             {
-                messageView("QR code not start with \"s\" ", false);
+              ClassMessageBoxUI.Show ("QR code not start with \"s\" ", false);
                 return false;
             }
             if (txtInput.Trim().EndsWith("e") != true)
             {
-                messageView("QR code not end with \"e\" ",false);
+                ClassMessageBoxUI.Show("QR code not end with \"e\" ",false);
                 return false;
             }
             if (countCurrent != countItem)
             {
-                messageView(string.Format("QR input not enough item spec = {0}, current {1}",countItem, countCurrent),false);
+                ClassMessageBoxUI.Show(string.Format("QR input not enough item spec = {0}, current {1}",countItem, countCurrent),false);
                 return false;    
             }
             return true;
@@ -49,7 +42,7 @@ namespace WindowsFormsApplication1.NewQRcode
                          && listInput.Any(x => x.Product == itemInput.Product)
                          && listInput.Any(x => x.ProductOrder == itemInput.ProductOrder)
                          && listInput.Any(x => x.Quantity == itemInput.Quantity)
-                         && listInput.Any(x => x.STT == itemInput.STT)
+                         //&& listInput.Any(x => x.STT == itemInput.STT)
                          && listInput.Any(x => x.SubQR == itemInput.SubQR)
                          && listInput.Any(x => x.TL101 == itemInput.TL101)
                          && listInput.Any(x => x.TL102 == itemInput.TL102)

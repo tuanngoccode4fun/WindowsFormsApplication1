@@ -7,6 +7,8 @@ using WindowsFormsApplication1.WMS.Model;
 using System.Data;
 using WindowsFormsApplication1.Database;
 using System.Windows.Forms;
+using WindowsFormsApplication1.NewQRcode.UI_mesage;
+
 namespace WindowsFormsApplication1.WMS.Controller
 {
   public  class UpdateData2DBForFinishedGoods
@@ -136,7 +138,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                     var insertMoctg = mOCTG.InsertData(dtMOCTG);
                     if (insertMoctg == false)
                     {
-                        MessageBox.Show("Insert MOCTG fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						ClassMessageBoxUI.Show("Insert MOCTG fail ", false);
                         return false;
                     }
 
@@ -144,22 +146,21 @@ namespace WindowsFormsApplication1.WMS.Controller
                     var insertMOCTF = mOCTF.InsertData(dtMOCTF);
                     if (insertMOCTF == false)
                     {
-                        MessageBox.Show("Insert MOCTF fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						ClassMessageBoxUI.Show("Insert MOCTF fail ", false);
                         return false;
                     }
                     Database.MOC.MOCTA mOCTA = new Database.MOC.MOCTA();
                     var updateMOCTA = mOCTA.UpdateMOCTAForFinishedGoods(dtERPPQC);
                     if (updateMOCTA == false)
                     {
-                        MessageBox.Show("update MOCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						ClassMessageBoxUI.Show("update MOCTA fail ",false);
                         return false;
                     }
                     UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
 					var UpdateWarehouse = updateWarehouseForFinishedGoods.UpdateWarehouse(dtERPPQC, TB002, Location);
 					if (UpdateWarehouse == false)
 					{
-						MessageBox.Show("update stock warehouse fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-						return false;
+						ClassMessageBoxUI.Show("update stock warehouse fail ", false);
 					}
 				}
 				ERPDoc = TB002;

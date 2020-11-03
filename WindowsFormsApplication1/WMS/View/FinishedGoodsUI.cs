@@ -62,14 +62,6 @@ namespace WindowsFormsApplication1.WMS.View
 
 
         }
-         void messageView(string content, bool status)
-        {
-            MessageBoxUI tem = new MessageBoxUI(content, status);
-            tem.Owner = this;
-            tem.TopMost = true;
-            tem.StartPosition = FormStartPosition.CenterParent;
-            tem.ShowDialog();
-        }
         private void tabPage_FinishedGood_SelectedIndexChanged(object sender, EventArgs e)
         {
             Database.GetListWarehouse getlistWarehouse = new Database.GetListWarehouse();
@@ -178,12 +170,12 @@ namespace WindowsFormsApplication1.WMS.View
                     {
                         if (Class.valiballecommon.GetStorage().DocNo == null)
                         {
-                            messageView("Plese choose DocNo ?",false);
+                            ClassMessageBoxUI.Show("Plese choose DocNo ?",false);
                             return;
                         }
                         if (dtgv_import.Rows.Count == 0)
                         {
-                            messageView("Plese add new item barcode ?", false);
+                            ClassMessageBoxUI.Show("Plese add new item barcode ?", false);
                             return;
                         }
 
@@ -548,18 +540,18 @@ namespace WindowsFormsApplication1.WMS.View
             try
             {
                 if (startGetTextChange == false || txt_QRImport.Text.Trim() == "") return;
-                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim(), cmboxWareHouse.Text.Trim());
+                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(txt_QRImport.Text.Trim(), cmboxWareHouse.Text.Trim(), dtgv_import);
                 if (valueTem != null)
                 {
                     if (valueTem.Warehouse.Trim() != cmboxWareHouse.SelectedItem.ToString().Trim())
                     {
-                        messageView(string.Format("It's different item WareHouse between your warehouse {0} and {1}", cmboxWareHouse.SelectedItem.ToString().Trim(), valueTem.Warehouse), false);
+                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between your warehouse {0} and {1}", cmboxWareHouse.SelectedItem.ToString().Trim(), valueTem.Warehouse), false);
                         txt_QRImport.Text = null;
                         return;
                     }
                     if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
                     {
-                        messageView(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), false);
+                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), false);
                         txt_QRImport.Text = null;
                         return;
                     }
@@ -575,7 +567,7 @@ namespace WindowsFormsApplication1.WMS.View
                     }
                     else
                     {
-                        messageView("QR code have already added in your list!",  false);
+                        ClassMessageBoxUI.Show("QR code have already added in your list!",  false);
                         txt_QRImport.Text = null;
                         return;
                     }
@@ -585,7 +577,7 @@ namespace WindowsFormsApplication1.WMS.View
             }
             catch(Exception ex)
             {
-                messageView(ex.Message, false);
+                ClassMessageBoxUI.Show(ex.Message, false);
             }
 
         }
@@ -1187,19 +1179,19 @@ namespace WindowsFormsApplication1.WMS.View
             {
                 if (dataQRInfor.Rows[i]["ImportFlag"] != null && dataQRInfor.Rows[i]["ImportFlag"].ToString() == "Y")
                 {
-                    messageView("This request already imported into warehouse", false); 
+                    ClassMessageBoxUI.Show("This request already imported into warehouse", false); 
                     return false;
                 }
 
             }
             if (txt_QRLocationImport.Text == "")
             {
-                messageView("You must select location !", false);
+                ClassMessageBoxUI.Show("You must select location !", false);
                 return false;
             }
             if (cb_locationImport.Items.Cast<string>().Any(cbi => cbi.Trim() == txt_QRLocationImport.Text.Trim()) == false)
             {
-                messageView("Location must belong to warehouse: " + WarehouseImport, false);
+                ClassMessageBoxUI.Show("Location must belong to warehouse: " + WarehouseImport, false);
             }
             if (ListImportFG.Count == 0)
             {
@@ -1229,7 +1221,7 @@ namespace WindowsFormsApplication1.WMS.View
                     cb_locationImport.SelectedIndex = -1;
                     dtgv_import.DataSource = null;
                     ListImportFG = new List<Import_FinishGood_WareHouse>();
-                    messageView("Import all complete!", true);
+                    ClassMessageBoxUI.Show("Import all complete!", true);
                 }
             }
 

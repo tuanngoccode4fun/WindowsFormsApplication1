@@ -613,6 +613,7 @@
     <Compile Include="NewQRcode\GetListDocNo.cs" />
     <Compile Include="NewQRcode\IdentifyQR.cs" />
     <Compile Include="NewQRcode\ListToDatatable.cs" />
+    <Compile Include="NewQRcode\UI mesage\ClassMessageBoxUI.cs" />
     <Compile Include="NewQRcode\UI mesage\MessageBoxUI.cs">
       <SubType>Form</SubType>
     </Compile>
