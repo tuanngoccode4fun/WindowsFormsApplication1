@@ -212,7 +212,7 @@ namespace WindowsFormsApplication1.WMS.Controller
             }
             return dt;
         }
-        public DataTable GetDataTableMOCTG(DataTable ERPPQC, string TB002, string location)
+        public DataTable GetDataTableMOCTG(DataTable ERPPQC, string TB002)
         {
             DataTable dt = new DataTable();
             try
@@ -284,7 +284,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                     dt.Rows[i]["TG032"] = 0;
                  
                     dt.Rows[i]["TG033"] ="2";
-                    dt.Rows[i]["TG034"] = location;
+                    dt.Rows[i]["TG034"] = ERPPQC.Rows[i]["Location"].ToString();//add tuanngoc
                     dt.Rows[i]["TG035"] = 0;
                     dt.Rows[i]["TG036"] = 0;
                     dt.Rows[i]["TG037"] = "0";
@@ -320,7 +320,7 @@ namespace WindowsFormsApplication1.WMS.Controller
             return dt;
         }
 
-        public DataTable GetDataTableMOCTF(DataTable MOCTG, string TB002, string location)
+        public DataTable GetDataTableMOCTF(DataTable MOCTG, string TB002)
         {
             DataTable dt = new DataTable();
             try

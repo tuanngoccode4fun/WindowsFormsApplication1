@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 {
    public class UpdateWarehouseForFinishedGoods
     {
-        public bool UpdateWarehouse(DataTable dtERPPQC, string TB002, string location)
+        public bool UpdateWarehouse(DataTable dtERPPQC, string TB002)
         {
             try
             {
@@ -34,9 +34,9 @@ namespace WindowsFormsApplication1.WMS.Controller
                 double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(dtERPPQC.Rows[i]["Product"].ToString().Trim(), double.Parse(dtERPPQC.Rows[i]["Quantity"].ToString()));
                 iNVItems.PackageQty = SLDongGoi;
                 iNVItems.Note = dtERPPQC.Rows[i]["ProductOrder"].ToString().Trim();
-                iNVItems.Location = location;
+                iNVItems.Location = dtERPPQC.Rows[i]["Location"].ToString().Trim();
                 iNVItems.ImportDate = DateTime.Now;
-                iNVItems.MainLocation = location;
+                iNVItems.MainLocation = dtERPPQC.Rows[i]["Location"].ToString().Trim();
                 iNVItems.ImportQR = null;// dtERPPQC.Rows[i]["KeyID"].ToString().Trim() +"-"+ dtERPPQC.Rows[i]["KeyNo"].ToString().Trim();
                    
                     Database.INVMFUpdate iNVMFUpdate = new Database.INVMFUpdate();

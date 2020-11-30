@@ -94,7 +94,7 @@ namespace WindowsFormsApplication1.WMS.Controller
         }
 
 
-		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC,string Location, out string ERPDoc)
+		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC,out string ERPDoc)
 		{
 			try
 			{
@@ -108,8 +108,8 @@ namespace WindowsFormsApplication1.WMS.Controller
 				ConvertDataERP convertDataERP = new ConvertDataERP();
                 //DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location, "Y");
 				//DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, "", "Y");// NO SFT
-				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002, Location);
-                DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002, Location);
+				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002);
+                DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002);
                 if (/*dtSFCTC.Rows.Count > 0 &&*/ dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
                 {
      //               Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
@@ -157,7 +157,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                         return false;
                     }
                     UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
-					var UpdateWarehouse = updateWarehouseForFinishedGoods.UpdateWarehouse(dtERPPQC, TB002, Location);
+					var UpdateWarehouse = updateWarehouseForFinishedGoods.UpdateWarehouse(dtERPPQC, TB002);
 					if (UpdateWarehouse == false)
 					{
 						ClassMessageBoxUI.Show("update stock warehouse fail ", false);

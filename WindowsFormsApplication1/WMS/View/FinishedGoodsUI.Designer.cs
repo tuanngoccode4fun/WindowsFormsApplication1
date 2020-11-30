@@ -311,6 +311,7 @@
             // 
             // txt_QRLocationImport
             // 
+            this.txt_QRLocationImport.Enabled = false;
             this.txt_QRLocationImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_QRLocationImport.Location = new System.Drawing.Point(309, 53);
             this.txt_QRLocationImport.Margin = new System.Windows.Forms.Padding(2);
@@ -318,7 +319,6 @@
             this.txt_QRLocationImport.Size = new System.Drawing.Size(218, 26);
             this.txt_QRLocationImport.TabIndex = 24;
             this.txt_QRLocationImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_QRLocationImport.TextChanged += new System.EventHandler(this.txt_QRLocationImport_TextChanged);
             // 
             // lb_QRImport
             // 
@@ -374,6 +374,7 @@
             // 
             // cb_locationImport
             // 
+            this.cb_locationImport.Enabled = false;
             this.cb_locationImport.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_locationImport.FormattingEnabled = true;
             this.cb_locationImport.Location = new System.Drawing.Point(642, 52);

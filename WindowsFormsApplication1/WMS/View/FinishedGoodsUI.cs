@@ -553,6 +553,7 @@ namespace WindowsFormsApplication1.WMS.View
                                 cb_locationImport.SelectedIndex = listLocation.FindIndex(x=> x.Trim()== arraydata[1]);
                                 txt_QRLocationImport.Text = arraydata[1];
                                 ListImportFG.Where(x => x.Id == ListImportFG.Count).ToList().ForEach(k => k.Location = arraydata[1]);
+                                ListImportFG.Where(x => x.Id == ListImportFG.Count).ToList().ForEach(k => k.Warehouse = arraydata[0]);
                                 dtgv_import.DataSource = null;
                                 dtgv_import.DataSource = ListImportFG;
                                 status_IsInput = false;
@@ -1334,7 +1335,7 @@ namespace WindowsFormsApplication1.WMS.View
                 UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
                 string ERPDoc = ""; //string SFTDoc = "";
                 dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
-                var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, txt_QRLocationImport.Text.Trim(), out ERPDoc);
+                var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
                 if (Update)
                 {
                     txt_ERPDocCreate.Text = Class.valiballecommon.GetStorage().DocNo + "-" + ERPDoc;
