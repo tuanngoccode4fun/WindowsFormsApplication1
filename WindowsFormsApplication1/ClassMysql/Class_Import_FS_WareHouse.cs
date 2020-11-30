@@ -11,6 +11,7 @@ namespace WindowsFormsApplication1.ClassObject
         public UInt32 Id { get; set; }
         public string TransactionID { get; set; }
         public string STT { get; set; }
+        public string Location { get; set; }
         public string UserID { get; set; }
         public string ProductOrder { get; set; }
         public string Product { get; set; }
