@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1.NewQRcode
     
     class IdentifyQR
     {
-      static int countItem =11; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
+      static int countItem =10; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
         static public  bool IsCorrectFormat(string txtInput)
         {
             int countCurrent = System.Text.RegularExpressions.Regex.Replace(txtInput, " ", "").Split(';').Count();
@@ -29,9 +29,9 @@ namespace WindowsFormsApplication1.NewQRcode
                 ClassMessageBoxUI.Show("QR code not end with \"e\" ",false);
                 return false;
             }
-            if (countCurrent != countItem)
+            if (countCurrent < countItem)
             {
-                ClassMessageBoxUI.Show(string.Format("QR input not enough item spec = {0}, current {1}",countItem, countCurrent),false);
+                ClassMessageBoxUI.Show(string.Format("QR input not enough item spec > {0}, current {1}",countItem, countCurrent),false);
                 return false;    
             }
             return true;

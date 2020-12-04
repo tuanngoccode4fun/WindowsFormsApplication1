@@ -38,6 +38,8 @@ namespace WindowsFormsApplication1.WMS.View
         List<Import_FinishGood_WareHouse> ListImportFG = new List<Import_FinishGood_WareHouse>();
         bool startGetTextChange = true;
         bool status_IsInput = false;
+        Timer timerGetQR_Total;
+        Timer timerGetQR_Min;
         public FinishedGoodsUI()
         {
             InitializeComponent();
@@ -63,7 +65,136 @@ namespace WindowsFormsApplication1.WMS.View
             }
             WindowState = FormWindowState.Maximized;
             lbl_Header.Text = "FINISHED GOODS IMPORT/ EXPORT";
+            InitializeTimer_Total();
+            InitializeTimer_Min();
+        }
+        private void InitializeTimer_Total()
+        {
+            timerGetQR_Total = new Timer();
+            timerGetQR_Total.Enabled = false;
+            timerGetQR_Total.Interval = 2000;
+            timerGetQR_Total.Tick += TimerGetQR_Total_Tick;
+        }
+        private void StartTimer_Total()
+        {
+            timerGetQR_Total.Enabled = true;
+            timerGetQR_Total.Start();
+            StartTimer_Min();
+        }
+        private void StopTimer_Total()
+        {
+            timerGetQR_Total.Enabled = false;
+            timerGetQR_Total.Stop();
+        }
+        private void InitializeTimer_Min()
+        {
+            timerGetQR_Min = new Timer();
+            timerGetQR_Min.Enabled = false;
+            timerGetQR_Min.Interval = 100;
+            timerGetQR_Min.Tick += TimerGetQR_Min_Tick; 
+        }
 
+        private void TimerGetQR_Min_Tick(object sender, EventArgs e)
+        {
+            StopTimer_Min();
+            ReceiveQR();
+            if (timerGetQR_Total.Enabled == true)
+            {
+                StartTimer_Min();
+            }
+        }
+        private void TimerGetQR_Total_Tick(object sender, EventArgs e)
+        {
+            StopTimer_Total();
+            startGetTextChange = false;
+            ReceiveQR();
+            startGetTextChange = true;
+        }
+        private void StartTimer_Min()
+        {
+            timerGetQR_Min.Enabled = true;
+            timerGetQR_Min.Start();
+        }
+        private void StopTimer_Min()
+        {
+            timerGetQR_Min.Enabled = false;
+            timerGetQR_Min.Stop();
+        }
+
+        private void ReceiveQR()
+        {
+            string texInput = null;
+            try
+            {
+                texInput = txt_QRImport.Text.Trim();
+                if (startGetTextChange == false || texInput == "") return;
+                if (texInput.StartsWith("s") && texInput.EndsWith("e"))
+                {
+                    StopTimer_Total();
+                    txt_QRImport.Text = null;
+                    string[] arraydata = Regex.Replace(texInput, " ", "").TrimStart('s').TrimEnd('e').Split(';');
+                    if (arraydata.Count() <= 3)
+                    {
+                        AutoProcess(texInput);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (timerGetQR_Total.Enabled == false)/// after total finish, We have to message, other situation not display.
+                    {
+                        ClassMessageBoxUI.Show("Your QR must be include char START: \"s\" and STOP: \"e\" ", false);
+                        txt_QRImport.Text = null;
+                        txt_QRImport.Focus();
+                    }
+                    return;
+                }
+                if (status_IsInput)
+                {
+                    ClassMessageBoxUI.Show("Please scan your location for add new item!", false);
+                    return;
+                }
+                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(texInput, cmboxWareHouse.Text.Trim(), dtgv_import);
+                if (valueTem != null)
+                {
+                    if (valueTem.Warehouse.Trim() != cmboxWareHouse.SelectedItem.ToString().Trim())
+                    {
+                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between your warehouse {0} and {1}", cmboxWareHouse.SelectedItem.ToString().Trim(), valueTem.Warehouse), false);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                    if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
+                    {
+                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), false);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                    if (!IdentifyQR.IsDuplicate(ListImportFG, valueTem))
+                    {
+                        Import_FinishGood_WareHouse valueGet = (Import_FinishGood_WareHouse)valueTem.Clone();
+                        ////////
+
+                        ///////
+                        valueGet.Id = (uint)ListImportFG.Count() + 1;
+                        ListImportFG.Add(valueGet);
+                        txt_QRImport.Text = null;
+                    }
+                    else
+                    {
+                        ClassMessageBoxUI.Show("QR code have already added in your list!", false);
+                        txt_QRImport.Text = null;
+                        return;
+                    }
+                    status_IsInput = true;
+                }
+                dtgv_import.DataSource = null;
+                dtgv_import.DataSource = ListImportFG;
+
+            }
+            catch (Exception ex)
+            {
+                ClassMessageBoxUI.Show(ex.Message, false);
+            }
 
         }
         private void tabPage_FinishedGood_SelectedIndexChanged(object sender, EventArgs e)
@@ -602,7 +733,7 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void txt_QRImport_TextChanged(object sender, EventArgs e)
         {
-            string texInput = null;
+
             //if (txt_QRImport.Text.Length == 13)
             //{
             //    DeleteAllValuesUI();
@@ -634,72 +765,10 @@ namespace WindowsFormsApplication1.WMS.View
             //    }
 
             //}
-            try
+            if (timerGetQR_Total.Enabled == false&& startGetTextChange==true)
             {
-                texInput = txt_QRImport.Text.Trim();
-                txt_QRImport.Text = null;
-                if (startGetTextChange == false || texInput == "") return;
-                if (texInput.StartsWith("s") && texInput.EndsWith("e"))
-                {
-                    string[] arraydata = Regex.Replace(texInput, " ", "").TrimStart('s').TrimEnd('e').Split(';');
-                    if (arraydata.Count() <= 3)
-                    {
-                        AutoProcess(texInput);
-                        return;
-                    }
-                }
-                else
-                {
-                    return;
-                }
-                if (status_IsInput)
-                {
-                    ClassMessageBoxUI.Show("Please scan your location for add new item!", false);
-                    return;
-                }
-                Import_FinishGood_WareHouse valueTem = GetImportFG.ConvertQR2DataTable(texInput, cmboxWareHouse.Text.Trim(), dtgv_import);
-                if (valueTem != null)
-                {
-                    if (valueTem.Warehouse.Trim() != cmboxWareHouse.SelectedItem.ToString().Trim())
-                    {
-                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between your warehouse {0} and {1}", cmboxWareHouse.SelectedItem.ToString().Trim(), valueTem.Warehouse), false);
-                        txt_QRImport.Text = null;
-                        return;
-                    }
-                    if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
-                    {
-                        ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), false);
-                        txt_QRImport.Text = null;
-                        return;
-                    }
-                    if (!IdentifyQR.IsDuplicate(ListImportFG, valueTem))
-                    {
-                        Import_FinishGood_WareHouse valueGet = (Import_FinishGood_WareHouse)valueTem.Clone();
-                        ////////
-
-                        ///////
-                        valueGet.Id = (uint)ListImportFG.Count() + 1;
-                        ListImportFG.Add(valueGet);
-                        txt_QRImport.Text = null;
-                    }
-                    else
-                    {
-                        ClassMessageBoxUI.Show("QR code have already added in your list!", false);
-                        txt_QRImport.Text = null;
-                        return;
-                    }
-                    status_IsInput = true;
-                }
-                dtgv_import.DataSource = null;
-                dtgv_import.DataSource = ListImportFG;
-             
+                StartTimer_Total();
             }
-            catch (Exception ex)
-            {
-                ClassMessageBoxUI.Show(ex.Message, false);
-            }
-            txt_QRImport.Text = null;
-
         }
 
         private void dtgv_import_MouseClick(object sender, MouseEventArgs e)
@@ -755,18 +824,30 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void Delete_Click(object sender, EventArgs e)
         {
-
-            if (MessageBox.Show("Do you want delete " + AllitemDelete.ToString(), "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            try
             {
-                if (dtgv_import.SelectedRows.Count > 0)
+                AllitemDelete = new StringBuilder();
+                AllitemDelete.Append("Id= ");
+                foreach (DataGridViewRow item in dtgv_import.SelectedRows)
                 {
-                    foreach (DataGridViewRow item in dtgv_import.SelectedRows)
+                    AllitemDelete.Append(" ["+item.Cells["Id"].Value.ToString().Trim() + "] ");
+                }
+                if (MessageBox.Show("Do you want delete " + AllitemDelete.ToString(), "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    if (dtgv_import.SelectedRows.Count > 0)
                     {
-                        ListImportFG.RemoveAll(x => x.Id.ToString().Trim() == item.Cells["Id"].Value.ToString().Trim());
-                        dtgv_import.DataSource = null;
-                        dtgv_import.DataSource = ListImportFG;
+                        foreach (DataGridViewRow item in dtgv_import.SelectedRows)
+                        {
+                            ListImportFG.RemoveAll(x => x.Id.ToString().Trim() == item.Cells["Id"].Value.ToString().Trim());
+                            dtgv_import.DataSource = null;
+                            dtgv_import.DataSource = ListImportFG;
+                        }
                     }
                 }
+            }
+            catch
+            { 
+            
             }
             //  throw new NotImplementedException();
         }
@@ -1120,47 +1201,54 @@ namespace WindowsFormsApplication1.WMS.View
         }
         private void dtgv_import_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            DatagridviewSetting.settingDatagridview(dtgv_import);
-            dtgv_import.AllowUserToAddRows = false;
-            //  dtgv_import.ReadOnly = true;
-            if (dtgv_import.Rows.Count > 0)
+            try
             {
-                dtgv_import.Columns["SubQR"].Visible = false;
-                //       dtgv_import.Columns["KeyID"].Visible = false;
-                //      dtgv_import.Columns["KeyNo"].Visible = false;
-                dtgv_import.Columns["TL101"].Visible = false;
-                dtgv_import.Columns["TL102"].Visible = false;
-                dtgv_import.Columns["TL103"].Visible = false;
-                dtgv_import.Columns["TL104"].Visible = false;
-                dtgv_import.Columns["dateUpdate"].Visible = false;
-                dtgv_import.Columns["ImportFlag"].Visible = false;
-                dtgv_import.Columns["TL111"].Visible = false;
-                dtgv_import.Columns["TL112"].Visible = false;
-                dtgv_import.Columns["TL113"].Visible = false;
-                dtgv_import.Columns["TL114"].Visible = false;
-                dtgv_import.Columns["dateImport"].Visible = true;
+                DatagridviewSetting.settingDatagridview(dtgv_import);
+                dtgv_import.AllowUserToAddRows = false;
+                //  dtgv_import.ReadOnly = true;
+                if (dtgv_import.Rows.Count > 0)
+                {
+                    dtgv_import.Columns["SubQR"].Visible = false;
+                    //       dtgv_import.Columns["KeyID"].Visible = false;
+                    //      dtgv_import.Columns["KeyNo"].Visible = false;
+                    dtgv_import.Columns["TL101"].Visible = false;
+                    dtgv_import.Columns["TL102"].Visible = false;
+                    dtgv_import.Columns["TL103"].Visible = false;
+                    dtgv_import.Columns["TL104"].Visible = false;
+                    dtgv_import.Columns["dateUpdate"].Visible = false;
+                    dtgv_import.Columns["ImportFlag"].Visible = false;
+                    dtgv_import.Columns["TL111"].Visible = false;
+                    dtgv_import.Columns["TL112"].Visible = false;
+                    dtgv_import.Columns["TL113"].Visible = false;
+                    dtgv_import.Columns["TL114"].Visible = false;
+                    dtgv_import.Columns["dateImport"].Visible = true;
 
-                dtgv_import.Columns["ProductOrder"].HeaderText = "Production Order";
+                    dtgv_import.Columns["ProductOrder"].HeaderText = "Production Order";
 
-                dtgv_import.Columns["Quantity"].HeaderText = "Import Quantity (pcs)";
-                dtgv_import.Columns["Quantity"].DefaultCellStyle.Format = "N0";
-                dtgv_import.Columns["LotNo"].HeaderText = "Lot No";
-                dtgv_import.Columns["dateCreate"].HeaderText = "Request's Date";
-                dtgv_import.Columns["ImportFlag"].HeaderText = "Already Imported";
-                dtgv_import.Columns["dateImport"].HeaderText = "Import Date";
-                dtgv_import.Columns["ProductOrder"].ReadOnly = true;
-                dtgv_import.Columns["Product"].ReadOnly = true;
-                dtgv_import.Columns["STT"].ReadOnly = true;
-                dtgv_import.Columns["Location"].ReadOnly = true;
-                dtgv_import.Columns["Quantity"].ReadOnly = true;
-                dtgv_import.Columns["LotNo"].ReadOnly = true;
-                dtgv_import.Columns["Warehouse"].ReadOnly = true;
-                dtgv_import.Columns["dateCreate"].ReadOnly = true;
-                dtgv_import.Columns["dateCreate"].Visible = false;
-                dtgv_import.Columns["ImportFlag"].ReadOnly = true;
-                dtgv_import.Columns["dateImport"].ReadOnly = true;
+                    dtgv_import.Columns["Quantity"].HeaderText = "Import Quantity (pcs)";
+                    dtgv_import.Columns["Quantity"].DefaultCellStyle.Format = "N0";
+                    dtgv_import.Columns["LotNo"].HeaderText = "Lot No";
+                    dtgv_import.Columns["dateCreate"].HeaderText = "Request's Date";
+                    dtgv_import.Columns["ImportFlag"].HeaderText = "Already Imported";
+                    dtgv_import.Columns["dateImport"].HeaderText = "Import Date";
+                    dtgv_import.Columns["ProductOrder"].ReadOnly = true;
+                    dtgv_import.Columns["Product"].ReadOnly = true;
+                    dtgv_import.Columns["STT"].ReadOnly = true;
+                    dtgv_import.Columns["Location"].ReadOnly = true;
+                    dtgv_import.Columns["Quantity"].ReadOnly = true;
+                    dtgv_import.Columns["LotNo"].ReadOnly = true;
+                    dtgv_import.Columns["Warehouse"].ReadOnly = true;
+                    dtgv_import.Columns["dateCreate"].ReadOnly = true;
+                    dtgv_import.Columns["dateCreate"].Visible = false;
+                    dtgv_import.Columns["ImportFlag"].ReadOnly = true;
+                    dtgv_import.Columns["dateImport"].ReadOnly = true;
 
 
+                }
+            }
+            catch (Exception ex)
+            {
+                ClassMessageBoxUI.Show(ex.Message, false);
             }
         }
 
@@ -1546,5 +1634,7 @@ namespace WindowsFormsApplication1.WMS.View
             // Properties.Settings.Default.Save();
             SaveObject.Save_data(LoginFr.PathSaveConfig, Class.valiballecommon.GetStorage());
         }
+
+
     }
 }
