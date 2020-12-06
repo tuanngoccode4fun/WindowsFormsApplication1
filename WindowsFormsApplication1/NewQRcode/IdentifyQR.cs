@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1.NewQRcode
       static int countItem =10; //typeof(Class_ExportFG_WareHouse).GetProperties().Count();// HAVE CHANGE IF REAL DATA
         static public  bool IsCorrectFormat(string txtInput)
         {
-            int countCurrent = System.Text.RegularExpressions.Regex.Replace(txtInput, " ", "").Split(';').Count();
+            string[] ListCurrentItem = System.Text.RegularExpressions.Regex.Replace(txtInput, " ", "").Split(';');
             if (txtInput.Trim().StartsWith("s")!=true)
             {
               ClassMessageBoxUI.Show ("QR code not start with \"s\" ", false);
@@ -29,9 +29,14 @@ namespace WindowsFormsApplication1.NewQRcode
                 ClassMessageBoxUI.Show("QR code not end with \"e\" ",false);
                 return false;
             }
-            if (countCurrent < countItem)
+            if (ListCurrentItem[ListCurrentItem.Count() - 1].Trim() != "*e")
             {
-                ClassMessageBoxUI.Show(string.Format("QR input not enough item spec > {0}, current {1}",countItem, countCurrent),false);
+                ClassMessageBoxUI.Show("You can't use this QR code. Please contact your admin!", false);
+                return false;
+            }
+            if (ListCurrentItem.Count() < countItem)
+            {
+                ClassMessageBoxUI.Show(string.Format("QR input not enough item spec > {0}, current {1}",countItem, ListCurrentItem.Count()),false);
                 return false;    
             }
             return true;

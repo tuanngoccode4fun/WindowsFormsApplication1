@@ -1635,6 +1635,9 @@ namespace WindowsFormsApplication1.WMS.View
             SaveObject.Save_data(LoginFr.PathSaveConfig, Class.valiballecommon.GetStorage());
         }
 
+        private void label11_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

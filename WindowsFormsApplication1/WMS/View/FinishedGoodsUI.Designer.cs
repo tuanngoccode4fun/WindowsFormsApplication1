@@ -114,6 +114,7 @@
             this.dtgvExportFGs = new System.Windows.Forms.DataGridView();
             this.lbl_Header = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabPage_FinishedGood.SuspendLayout();
             this.tabPage1_Import.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1314,11 +1315,23 @@
             this.panel1.Size = new System.Drawing.Size(694, 49);
             this.panel1.TabIndex = 8;
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(1041, 89);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(96, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Version: 1001.0";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
             // FinishedGoodsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 647);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabPage_FinishedGood);
             this.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
@@ -1331,6 +1344,7 @@
             this.Load += new System.EventHandler(this.FinishedGoodsUI_Load);
             this.Controls.SetChildIndex(this.tabPage_FinishedGood, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
             this.tabPage_FinishedGood.ResumeLayout(false);
             this.tabPage1_Import.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1362,6 +1376,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1452,5 +1467,6 @@
         private System.Windows.Forms.DataGridView dtgv_import;
         private System.Windows.Forms.ComboBox cmboxDocNo;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label11;
     }
 }
