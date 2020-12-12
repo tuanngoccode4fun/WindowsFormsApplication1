@@ -1323,7 +1323,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(96, 13);
             this.label11.TabIndex = 9;
-            this.label11.Text = "Version: 1001.0";
+            this.label11.Text = "Version: 1001.1";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // FinishedGoodsUI

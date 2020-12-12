@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1.NewQRcode
                   Temp.TransactionID = Regex.Replace(txtInput, " ", "");
                   Temp.UserID = Class.valiballecommon.GetStorage().UserName;
                   Temp.STT = (dtinput.Rows.Count+1).ToString("D4");
-                  Temp.ProductOrder = "B511-20100019";//"B511-20100154";
+                  Temp.ProductOrder = ReturnProductOrder(arraydata[1]);//"B511-20100019";//"B511-20100154";
                   Temp.Product = arraydata[2];
                   Temp.Quantity =Convert.ToUInt32( arraydata[4]);
                   Temp.LotNo = arraydata[7];
@@ -30,6 +30,21 @@ namespace WindowsFormsApplication1.NewQRcode
                   return Temp;
                 }
             return null ;
+        }
+    static string ReturnProductOrder(string text)
+        {
+            try
+            {
+                if (text.ToCharArray().Count() > 4)
+                {
+                    return (text.Substring(0, 4) + "-" + text.Substring(4));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Logfile.Output(Log.StatusLog.Error,"ReturnProductOrder: " + ex.Message);
+            }
+            return null;
         }
     }
 }
