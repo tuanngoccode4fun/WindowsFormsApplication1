@@ -21,9 +21,17 @@ namespace WindowsFormsApplication1
             SqlCommand cmd = new SqlCommand(sql, conn);
             try
             {
-                outstring = cmd.ExecuteScalar().ToString();
-                conn.Close();
-                return outstring;
+                if (cmd.ExecuteScalar() != null)
+                {
+                    outstring = cmd.ExecuteScalar().ToString();
+                    conn.Close();
+                    return outstring;
+                }
+                else
+                {
+                    conn.Close();
+                    return String.Empty;
+                }
             }
             catch (Exception ex)
             {

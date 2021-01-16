@@ -10,7 +10,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 {
   public  class ConvertDataERP
     {
-        public DataTable GetDataTableSFCTC(DataTable ERPPQC, string TB002,string location,string confirm)
+        public DataTable GetDataTableSFCTC(DataTable ERPPQC, string TB002,string confirm)
         {
             DataTable dt = new DataTable();
             try
@@ -96,19 +96,19 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["TC039"] = 0; 
                 dt.Rows[i]["TC041"] = ERPPQC.Rows[i]["Warehouse"].ToString().Trim();
                 
-                DataTable dtLot = Database.SFT.SFT_LOT.GetDataTableLot(ERPPQC.Rows[i]["ProductOrder"].ToString());
-                dt.Rows[i]["TC042"] = (double.Parse(ERPPQC.Rows[i]["Quantity"].ToString()))*(double.Parse(dtLot.Rows[0]["PKQTYPER"].ToString()));
-                dt.Rows[i]["TC043"] = (double.Parse(ERPPQC.Rows[i]["Quantity"].ToString())) * (double.Parse(dtLot.Rows[0]["PKQTYPER"].ToString()));
+                //DataTable dtLot = Database.SFT.SFT_LOT.GetDataTableLot(ERPPQC.Rows[i]["ProductOrder"].ToString());
+               // dt.Rows[i]["TC042"] = (double.Parse(ERPPQC.Rows[i]["Quantity"].ToString()))*(double.Parse(dtLot.Rows[0]["PKQTYPER"].ToString()));
+                //dt.Rows[i]["TC043"] = (double.Parse(ERPPQC.Rows[i]["Quantity"].ToString())) * (double.Parse(dtLot.Rows[0]["PKQTYPER"].ToString()));
                 dt.Rows[i]["TC044"] = 0;
                 dt.Rows[i]["TC045"] = 0;
                 dt.Rows[i]["TC046"] = 0;
                 dt.Rows[i]["TC047"] = ERPPQC.Rows[i]["Product"].ToString().Trim();
-                    DataTable dtINVMB = Database.INV.INVMB.GetDatabyProduct(ERPPQC.Rows[i]["Product"].ToString().Trim());
+               /*     DataTable dtINVMB = Database.INV.INVMB.GetDatabyProduct(ERPPQC.Rows[i]["Product"].ToString().Trim());
                 dt.Rows[i]["TC048"] = dtINVMB.Rows[0]["MB002"].ToString();
-                    dt.Rows[i]["TC049"] = dtINVMB.Rows[0]["MB003"].ToString();
-                    dt.Rows[i]["TC050"] = dtLot.Rows[0]["PKUNIT"].ToString();
+                    dt.Rows[i]["TC049"] = dtINVMB.Rows[0]["MB003"].ToString();*/ //Temporate ignore wait confirm.
+                   // dt.Rows[i]["TC050"] = dtLot.Rows[0]["PKUNIT"].ToString();
                     dt.Rows[i]["TC051"] = 0;
-                dt.Rows[i]["TC052"] =location;
+                dt.Rows[i]["TC052"] = ERPPQC.Rows[i]["Location"].ToString();//add tuanngoc;
                 dt.Rows[i]["TC053"] = 0;
                 dt.Rows[i]["TC054"] = 0;
                 dt.Rows[i]["TC055"] = "N";
@@ -186,8 +186,8 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["TB029"] = 0;
                 dt.Rows[i]["TB030"] = 0;
                 dt.Rows[i]["TB031"] = 0;
-                DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());
-                dt.Rows[i]["TB036"] = dtSFCTA.Rows[0]["TA018"].ToString();
+                //DataTable dtSFCTA = Database.SFC.SFCTA.GetDataTableSFCTA(ERPPQC.Rows[i]["ProductOrder"].ToString());
+                //dt.Rows[i]["TB036"] = dtSFCTA.Rows[0]["TA018"].ToString();
                 dt.Rows[i]["TB037"] = 0;
                 dt.Rows[i]["TB038"] = Class.valiballecommon.GetStorage().DocNo;
                 dt.Rows[i]["TB039"] = TransNo;
@@ -198,7 +198,7 @@ namespace WindowsFormsApplication1.WMS.Controller
                 dt.Rows[i]["UDF10"] = 0;
                
 
-                var SumQty = ERPPQC.AsEnumerable().Sum(x =>x.Field<decimal>("Quantity"));
+                var SumQty = ERPPQC.Rows[i]["Quantity"].ToString().Trim();/*ERPPQC.AsEnumerable().Sum(x =>x.Field<decimal>("Quantity"));*/
                     dt.Rows[i]["TB200"] = SumQty;
                     dt.Rows[i]["TB201"] = SumQty;
                     dt.Rows[i]["TB202"] = 0;

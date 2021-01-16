@@ -101,38 +101,38 @@ namespace WindowsFormsApplication1.WMS.Controller
 				ERPDoc = "";
 				//Class.valiballecommon.GetStorage().DocNo
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				//string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
-				string TB002 = eRPDataUpdate.getTF002(Class.valiballecommon.GetStorage().DocNo);//fix
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
+				//string TB002 = eRPDataUpdate.getTF002(Class.valiballecommon.GetStorage().DocNo);//fix disable 22/12/2020
 
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-                //DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location, "Y");
-				//DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, "", "Y");// NO SFT
+                DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, "Y");
+				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, "", "Y");// NO SFT
 				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002);
                 DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002);
-                if (/*dtSFCTC.Rows.Count > 0 &&*/ dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
+                if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
                 {
-     //               Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
-     //               var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
-     //               if (InsertSFCTC == false)
-     //               {
-     //                   MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-     //                   return false;
-     //               }
-					//Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
-					//var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
-					//if (InsertSFCTB == false)
-					//{
-					//	MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-					//	return false;
-					//}
-					//Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
-     //               var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
-     //               if (UpdateSFCTA == false)
-     //               {
-     //                   MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-     //                   return false;
-     //               }
+                    Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
+                    var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
+                    if (InsertSFCTC == false)
+                    {
+                        MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+					Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
+					var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
+					if (InsertSFCTB == false)
+					{
+						MessageBox.Show("Insert SFCTB fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return false;
+					}
+					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
+                    var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
+                    if (UpdateSFCTA == false)
+                    {
+                        MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
 
                     Database.MOC.MOCTG mOCTG = new Database.MOC.MOCTG();
                     var insertMoctg = mOCTG.InsertData(dtMOCTG);
@@ -190,7 +190,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 				DataTable dtTRANSORDER = convertDataTable.GetDataSFTTRANSORDER(dtERPPQC, dtTRANSORDER_LINE);
 				DataTable dtWSRUN = convertDataTable.GetDataTableSFT_WS_RUN(dtERPPQC, dtTRANSORDER_LINE);
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, Location,"N");////
+				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002,"N");////
 				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, TransNo,"N");///
 			
 				if (dtTRANSORDER_LINE.Rows.Count > 0 && dtTRANSORDER.Rows.Count > 0 && dtWSRUN.Rows.Count > 0
