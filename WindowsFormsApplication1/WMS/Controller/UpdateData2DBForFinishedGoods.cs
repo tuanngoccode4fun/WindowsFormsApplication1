@@ -173,6 +173,19 @@ namespace WindowsFormsApplication1.WMS.Controller
 			}
 			return true;
 		}
+		public bool UpdateDataDBForAllDeparment(DataTable dtERPPQC, out string ERPDoc)
+		{
+			ERPDoc = null;
+			try
+			{
+
+			}
+			catch (Exception ex)
+			{
+				SystemLog.Output(SystemLog.MSG_TYPE.Err,"Exception message", "UpdateDataDBForAllDeparment :" + ex.Message);
+			}
+			return false;
+		}
 		public bool UpdateDataDBForFinishedGoodsNotConfirm(DataTable dtERPPQC, string Location, out string ERPDoc, out string SFTDoc)
 		{
 			try

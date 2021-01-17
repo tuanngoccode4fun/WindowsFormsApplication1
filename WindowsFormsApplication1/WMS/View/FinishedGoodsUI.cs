@@ -163,12 +163,14 @@ namespace WindowsFormsApplication1.WMS.View
                         txt_QRImport.Text = null;
                         return;
                     }
+                    /// check all data same warehouse or not
                     if (IdentifyQR.IsWrongWareHouse(ListImportFG, valueTem) && ListImportFG.Count > 0)
                     {
                         ClassMessageBoxUI.Show(string.Format("It's different item WareHouse between {0} and {1}", ListImportFG[0].Warehouse, valueTem.Warehouse), false);
                         txt_QRImport.Text = null;
                         return;
                     }
+                    ///// check data input duplicate or not
                     if (!IdentifyQR.IsDuplicate(ListImportFG, valueTem))
                     {
                         Import_FinishGood_WareHouse valueGet = (Import_FinishGood_WareHouse)valueTem.Clone();
@@ -289,8 +291,15 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void btn_comfirm4_Click(object sender, EventArgs e)
         {
-            confirm_auto(true);
+            //confirm_auto(true);
+            sql_CheckCondition.QueryResult temp = sql_CheckCondition.Is_stageManagement("AD-APTZ0084C");
+            sql_CheckCondition.QueryResult temp_1 = sql_CheckCondition.Is_lotManagement("BMH8201733193-5");
+            sql_CheckCondition.QueryResult temp_2 = sql_CheckCondition.Is_lotManagement("BMH8201733193-6");
         }
+        /// <summary>
+        /// confirm is true when we have to confirm message if other case is false. It will be for auto functio no need confirm message before insert 
+        /// </summary>
+        /// <param name="confirm"></param>
         void confirm_auto(bool confirm)
         {
             var MessageBoxResult = DialogResult.Yes;
@@ -316,7 +325,7 @@ namespace WindowsFormsApplication1.WMS.View
                         }
                         if (dtgv_import.Rows.Count == 0)
                         {
-                            ClassMessageBoxUI.Show("Plese add new item barcode ?", false);
+                            ClassMessageBoxUI.Show("Please add new item barcode ?", false);
                             return;
                         }
 
