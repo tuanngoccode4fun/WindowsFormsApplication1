@@ -1448,7 +1448,7 @@ namespace WindowsFormsApplication1.WMS.View
                 }
             }
 
-            //////
+            //////*
             /*FinishedGoodsItems finishedGoods = new FinishedGoodsItems();
             dataQRInfor = dtgv_import.DataSource as DataTable;
             var testlist = dataQRInfor.AsEnumerable();

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsFormsApplication1.ClassObject;
 
 namespace WindowsFormsApplication1.NewQRcode
 {
@@ -24,21 +25,19 @@ namespace WindowsFormsApplication1.NewQRcode
         /// <param name="TB002"></param>
         /// <param name="IsCheckQuantity_Weight"></param>
         /// <returns></returns>
-        public static sql_CheckCondition.QueryResult InsertHaveStageManagementAndLotManagement(DataTable ERPPQC, string TB002, bool IsCheckQuantity_Weight)
+        public static sql_CheckCondition.QueryResult InsertHaveStageManagementAndLotManagement(DataRow ERPPQC,int i, bool IsCheckQuantity_Weight)
         {
             try
             {
                 conn.Open();
                 string fullText = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory+ @"\NewQRcode\FileQuerySQL\Insert import warehouse full confirm or not confirm.sql");
                 string script = null;
-                for (int i = 0; i < ERPPQC.Rows.Count; i++)
-                {
-                    script = fullText.Replace("@PO_VALUE", ERPPQC.Rows[i]["ProductOrder"].ToString().Trim().Replace("-",""))
-                                            .Replace("@LOT_VALUE", ERPPQC.Rows[i]["LotNo"].ToString().Trim())
+                script = fullText.Replace("@PO_VALUE", ERPPQC["ProductOrder"].ToString().Trim().Replace("-",""))
+                                            .Replace("@LOT_VALUE", ERPPQC["LotNo"].ToString().Trim())
                                             .Replace("@USER_VALUE", Class.valiballecommon.GetStorage().UserName)
-                                            .Replace("@WAREHOUSE_VALUE", ERPPQC.Rows[i]["Warehouse"].ToString().Trim())
-                                            .Replace("@LOCATION_VALUE", ERPPQC.Rows[i]["Location"].ToString())
-                                            .Replace("@QUANTITY_VALUE", ERPPQC.Rows[i]["Quantity"].ToString())
+                                            .Replace("@WAREHOUSE_VALUE", ERPPQC["Warehouse"].ToString().Trim())
+                                            .Replace("@LOCATION_VALUE", ERPPQC["Location"].ToString())
+                                            .Replace("@QUANTITY_VALUE", ERPPQC["Quantity"].ToString())
                                             .Replace("@TF001_VALUE", Class.valiballecommon.GetStorage().DocNo)
                                             .Replace("@STT_VALUE", (i + 1).ToString("0000"))
                                             .Replace("@Confirm_VALUE", ReturnYN(IsCheckQuantity_Weight));
@@ -46,7 +45,6 @@ namespace WindowsFormsApplication1.NewQRcode
                     {
                         command.ExecuteNonQuery();
                     }
-                }
                 return sql_CheckCondition.QueryResult.OK;
             }
             catch (Exception ex)

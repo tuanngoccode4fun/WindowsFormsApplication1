@@ -8,6 +8,7 @@ using System.Data;
 using WindowsFormsApplication1.Database;
 using System.Windows.Forms;
 using WindowsFormsApplication1.NewQRcode.UI_mesage;
+using WindowsFormsApplication1.NewQRcode;
 
 namespace WindowsFormsApplication1.WMS.Controller
 {
@@ -179,10 +180,44 @@ namespace WindowsFormsApplication1.WMS.Controller
 			try
 			{
 				ERPDoc = "";
-				//Class.valiballecommon.GetStorage().DocNo
-				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
-				NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC, TB002, true);
+				for (int i = 0; i < dtERPPQC.Rows.Count; i++)
+				{
+					string productOrder = dtERPPQC.Rows[i]["ProductOrder"].ToString();
+					string product = dtERPPQC.Rows[i]["Product"].ToString().Trim();
+					double Quantity = double.Parse(dtERPPQC.Rows[i]["Quantity"].ToString());
+					double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
+					var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+					var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+					sql_CheckCondition.QueryResult statusStage= sql_CheckCondition.Is_stageManagement(product);
+					sql_CheckCondition.QueryResult statusLot  =  sql_CheckCondition.Is_lotManagement(product);
+					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK)
+					{
+						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i],i, true);
+						}
+						else
+                        {
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+						}
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK)
+					{
+					
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG)
+					{ 
+					
+					}
+					else if(statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
+					{ 
+					
+					}
+					else
+					{
+
+					}
+				}
 			}
 			catch (Exception ex)
 			{
