@@ -291,10 +291,11 @@ namespace WindowsFormsApplication1.WMS.View
 
         private void btn_comfirm4_Click(object sender, EventArgs e)
         {
-            //confirm_auto(true);
-            sql_CheckCondition.QueryResult temp = sql_CheckCondition.Is_stageManagement("AD-APTZ0084C");
-            sql_CheckCondition.QueryResult temp_1 = sql_CheckCondition.Is_lotManagement("BMH8201733193-5");
-            sql_CheckCondition.QueryResult temp_2 = sql_CheckCondition.Is_lotManagement("BMH8201733193-6");
+            confirm_auto(true);
+            // sql_CheckCondition.QueryResult temp = sql_CheckCondition.Is_stageManagement("AD-APTZ0084C");
+            // sql_CheckCondition.QueryResult temp_1 = sql_CheckCondition.Is_lotManagement("BMH8201733193-5");
+            // sql_CheckCondition.QueryResult temp_2 = sql_CheckCondition.Is_lotManagement("BMH8201733193-6");
+            //sql_CheckCondition.QueryResult test = sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(false);
         }
         /// <summary>
         /// confirm is true when we have to confirm message if other case is false. It will be for auto functio no need confirm message before insert 
@@ -1432,7 +1433,7 @@ namespace WindowsFormsApplication1.WMS.View
                 UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
                 string ERPDoc = ""; //string SFTDoc = "";
                 dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
-                var Update = updateData2DBForFinishedGoods.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
+                var Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
                 if (Update)
                 {
                     txt_ERPDocCreate.Text = Class.valiballecommon.GetStorage().DocNo + "-" + ERPDoc;

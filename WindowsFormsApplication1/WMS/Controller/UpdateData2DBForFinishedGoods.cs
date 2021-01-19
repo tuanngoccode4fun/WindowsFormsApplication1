@@ -178,7 +178,11 @@ namespace WindowsFormsApplication1.WMS.Controller
 			ERPDoc = null;
 			try
 			{
-
+				ERPDoc = "";
+				//Class.valiballecommon.GetStorage().DocNo
+				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
+				NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC, TB002, true);
 			}
 			catch (Exception ex)
 			{
