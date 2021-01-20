@@ -1433,8 +1433,8 @@ namespace WindowsFormsApplication1.WMS.View
                 UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
                 string ERPDoc = ""; //string SFTDoc = "";
                 dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
-                var Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
-                if (Update)
+                sql_CheckCondition.QueryResult Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
+                if (Update==sql_CheckCondition.QueryResult.OK)
                 {
                     txt_ERPDocCreate.Text = Class.valiballecommon.GetStorage().DocNo + "-" + ERPDoc;
                     //txt_SFTDoc.Text = Class.valiballecommon.GetStorage().DocNo+"-" + SFTDoc;

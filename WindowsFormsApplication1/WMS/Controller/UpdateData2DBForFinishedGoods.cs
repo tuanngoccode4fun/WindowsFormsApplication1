@@ -174,12 +174,15 @@ namespace WindowsFormsApplication1.WMS.Controller
 			}
 			return true;
 		}
-		public bool UpdateDataDBForAllDeparment(DataTable dtERPPQC, out string ERPDoc)
+		public sql_CheckCondition.QueryResult UpdateDataDBForAllDeparment(DataTable dtERPPQC, out string ERPDoc)
 		{
-			ERPDoc = null;
+			ERPDoc=null;
+			sql_CheckCondition.QueryResult ttReturn = sql_CheckCondition.QueryResult.OK;
 			try
 			{
 				ERPDoc = "";
+				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
 				for (int i = 0; i < dtERPPQC.Rows.Count; i++)
 				{
 					string productOrder = dtERPPQC.Rows[i]["ProductOrder"].ToString();
@@ -188,42 +191,41 @@ namespace WindowsFormsApplication1.WMS.Controller
 					double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
 					var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
 					var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
-					sql_CheckCondition.QueryResult statusStage= sql_CheckCondition.Is_stageManagement(product);
-					sql_CheckCondition.QueryResult statusLot  =  sql_CheckCondition.Is_lotManagement(product);
+					sql_CheckCondition.QueryResult statusStage = sql_CheckCondition.Is_stageManagement(product);
+					sql_CheckCondition.QueryResult statusLot = sql_CheckCondition.Is_lotManagement(product);
 					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK)
 					{
 						if (ischeckMOCTA == true && ischeckSFCTA == true)
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i],i, true);
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
 						}
 						else
-                        {
+						{
 							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK)
 					{
-					
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG)
-					{ 
-					
+					{
 					}
-					else if(statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
-					{ 
-					
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
+					{
 					}
 					else
 					{
-
+						ttReturn= sql_CheckCondition.QueryResult.Exception;
 					}
 				}
+				ERPDoc = TB002;
 			}
 			catch (Exception ex)
 			{
-				SystemLog.Output(SystemLog.MSG_TYPE.Err,"Exception message", "UpdateDataDBForAllDeparment :" + ex.Message);
+				SystemLog.Output(SystemLog.MSG_TYPE.Err, "Exception message", "UpdateDataDBForAllDeparment :" + ex.Message);
+				return sql_CheckCondition.QueryResult.Exception;
 			}
-			return false;
+			return ttReturn;
 		}
 		public bool UpdateDataDBForFinishedGoodsNotConfirm(DataTable dtERPPQC, string Location, out string ERPDoc, out string SFTDoc)
 		{

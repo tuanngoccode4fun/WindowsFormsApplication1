@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.NewQRcode
 {
-    class sql_CheckCondition
+  public  class sql_CheckCondition
     {
         public enum QueryResult {OK, NG, Exception };
         static SqlConnection conn = DBUtils.GetTLVN2DBConnection(); //get from user database
