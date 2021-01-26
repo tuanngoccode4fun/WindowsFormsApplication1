@@ -1428,12 +1428,25 @@ namespace WindowsFormsApplication1.WMS.View
             //  txt_SFTDoc.Text = "";
             //// update new QR
             ///
+            sql_CheckCondition.QueryResult Update = sql_CheckCondition.QueryResult.Exception;
             if (CheckLocation())
             {
                 UpdateData2DBForFinishedGoods updateData2DBForFinishedGoods = new UpdateData2DBForFinishedGoods();
                 string ERPDoc = ""; //string SFTDoc = "";
                 dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
-                sql_CheckCondition.QueryResult Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
+                ///if co cong doan
+                /// Check phat lenh khong???
+                /// check so luong du tinh san xuat -(da san xuat + phe+ chua confirm+ so can nhap)<0 thi okay khong bao loi ??
+                /// else khong co cong doan
+                /// check so luong du tinh san xuat -(da san xuat + phe+ chua confirm+ so can nhap)<0 thi okay khong bao loi ??
+                if (sql_CheckCondition.CheckConditionAllItemQRCodeInsert(dataQRInfor) == sql_CheckCondition.QueryResult.OK)
+                {
+                    Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
+                }
+                else
+                {
+                    ClassMessageBoxUI.Show("Please check your QR insert!", false);
+                }
                 if (Update==sql_CheckCondition.QueryResult.OK)
                 {
                     txt_ERPDocCreate.Text = Class.valiballecommon.GetStorage().DocNo + "-" + ERPDoc;

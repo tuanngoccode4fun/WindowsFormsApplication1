@@ -12,9 +12,9 @@ using WindowsFormsApplication1.NewQRcode;
 
 namespace WindowsFormsApplication1.WMS.Controller
 {
-  public  class UpdateData2DBForFinishedGoods
-    {
-        public bool UpdateDataDBForFinishedGoods(FinishedGoodsItems fgItems, out string ERPDoc, out string SFTDoc)
+	public class UpdateData2DBForFinishedGoods
+	{
+		public bool UpdateDataDBForFinishedGoods(FinishedGoodsItems fgItems, out string ERPDoc, out string SFTDoc)
 		{
 			try
 			{
@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);
 				SFTDataUpdate sFTDataUpdate = new SFTDataUpdate();
 				string TransNo = sFTDataUpdate.getTransnoOfSFT(Class.valiballecommon.GetStorage().DocNo);
-				
+
 				Database.ADMMFUpdate aDMMF = new ADMMFUpdate();
 				DataTable dtADMMF = aDMMF.GetDtADMFFByUser(Class.valiballecommon.GetStorage().UserName);
 				var Update2SFT = sFTDataUpdate.SFTdataUpdate(fgItems, dtLotMODETAL, TB002, TransNo);
@@ -34,17 +34,17 @@ namespace WindowsFormsApplication1.WMS.Controller
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo+"-" + TransNo + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo + "-" + TransNo + " is created !", "");
 				}
 
-				var Update2ERP = eRPDataUpdate.UploadtoERPDBForFinishedGoods(fgItems,dtADMMF, dtLotMODETAL, TB002, TransNo);
+				var Update2ERP = eRPDataUpdate.UploadtoERPDBForFinishedGoods(fgItems, dtADMMF, dtLotMODETAL, TB002, TransNo);
 				if (Update2ERP == false)
 				{
 					SystemLog.Output(SystemLog.MSG_TYPE.War, "eRPDataUpdate.UploadtoERPDBForFinishedGoods(fgItems, TB002, TransNo)", "false");
 				}
 				else
 				{
-					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo+"-" + TB002 + " is created !", "");
+					SystemLog.Output(SystemLog.MSG_TYPE.War, Class.valiballecommon.GetStorage().DocNo + "-" + TB002 + " is created !", "");
 				}
 				Database.Model.INVItems iNVItems = new Database.Model.INVItems();
 				iNVItems.Product = fgItems.product;
@@ -64,7 +64,7 @@ namespace WindowsFormsApplication1.WMS.Controller
 				iNVItems.ImportDate = fgItems.ImportDate;
 				iNVItems.MainLocation = fgItems.location;
 
-			
+
 				Database.INVMFUpdate iNVMFUpdate = new INVMFUpdate();
 				var UpdateINVMF = iNVMFUpdate.InsertINVMF(iNVItems, dtADMMF);
 				Database.INVMEUpdate iNVMEUpdate = new INVMEUpdate();
@@ -91,11 +91,11 @@ namespace WindowsFormsApplication1.WMS.Controller
 				SFTDoc = "";
 				return false;
 			}
-            return true;
-        }
+			return true;
+		}
 
 
-		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC,out string ERPDoc)
+		public bool UpdateDataDBForFinishedGoods(DataTable dtERPPQC, out string ERPDoc)
 		{
 			try
 			{
@@ -103,23 +103,23 @@ namespace WindowsFormsApplication1.WMS.Controller
 				//Class.valiballecommon.GetStorage().DocNo
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
 				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
-				//string TB002 = eRPDataUpdate.getTF002(Class.valiballecommon.GetStorage().DocNo);//fix disable 22/12/2020
+																								//string TB002 = eRPDataUpdate.getTF002(Class.valiballecommon.GetStorage().DocNo);//fix disable 22/12/2020
 
 				ConvertDataTable convertDataTable = new ConvertDataTable();
 				ConvertDataERP convertDataERP = new ConvertDataERP();
-                DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, "Y");
+				DataTable dtSFCTC = convertDataERP.GetDataTableSFCTC(dtERPPQC, TB002, "Y");
 				DataTable dtSFCTB = convertDataERP.GetDataTableSFCTB(dtSFCTC, dtERPPQC, "", "Y");// NO SFT
 				DataTable dtMOCTG = convertDataERP.GetDataTableMOCTG(dtERPPQC, TB002);
-                DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002);
-                if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
-                {
-                    Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
-                    var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
-                    if (InsertSFCTC == false)
-                    {
-                        MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
+				DataTable dtMOCTF = convertDataERP.GetDataTableMOCTF(dtMOCTG, TB002);
+				if (dtSFCTC.Rows.Count > 0 && dtMOCTG.Rows.Count > 0 && dtMOCTF.Rows.Count > 0)
+				{
+					Database.SFC.SFCTC sFCTC = new Database.SFC.SFCTC();
+					var InsertSFCTC = sFCTC.InsertData(dtSFCTC);
+					if (InsertSFCTC == false)
+					{
+						MessageBox.Show("Insert SFCTC fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return false;
+					}
 					Database.SFC.SFCTB sFCTB = new Database.SFC.SFCTB();
 					var InsertSFCTB = sFCTB.InsertData(dtSFCTB);
 					if (InsertSFCTB == false)
@@ -128,36 +128,36 @@ namespace WindowsFormsApplication1.WMS.Controller
 						return false;
 					}
 					Database.SFC.SFCTA sFCTA = new Database.SFC.SFCTA();
-                    var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
-                    if (UpdateSFCTA == false)
-                    {
-                        MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
+					var UpdateSFCTA = sFCTA.UpdateSFCTAForFinishedGoods(dtERPPQC);// UPDATE SO LUONG
+					if (UpdateSFCTA == false)
+					{
+						MessageBox.Show("Insert SFCTA fail ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return false;
+					}
 
-                    Database.MOC.MOCTG mOCTG = new Database.MOC.MOCTG();
-                    var insertMoctg = mOCTG.InsertData(dtMOCTG);
-                    if (insertMoctg == false)
-                    {
+					Database.MOC.MOCTG mOCTG = new Database.MOC.MOCTG();
+					var insertMoctg = mOCTG.InsertData(dtMOCTG);
+					if (insertMoctg == false)
+					{
 						ClassMessageBoxUI.Show("Insert MOCTG fail ", false);
-                        return false;
-                    }
+						return false;
+					}
 
-                    Database.MOC.MOCTF mOCTF = new Database.MOC.MOCTF();
-                    var insertMOCTF = mOCTF.InsertData(dtMOCTF);
-                    if (insertMOCTF == false)
-                    {
+					Database.MOC.MOCTF mOCTF = new Database.MOC.MOCTF();
+					var insertMOCTF = mOCTF.InsertData(dtMOCTF);
+					if (insertMOCTF == false)
+					{
 						ClassMessageBoxUI.Show("Insert MOCTF fail ", false);
-                        return false;
-                    }
-                    Database.MOC.MOCTA mOCTA = new Database.MOC.MOCTA();
-                    var updateMOCTA = mOCTA.UpdateMOCTAForFinishedGoods(dtERPPQC);
-                    if (updateMOCTA == false)
-                    {
-						ClassMessageBoxUI.Show("update MOCTA fail ",false);
-                        return false;
-                    }
-                    UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
+						return false;
+					}
+					Database.MOC.MOCTA mOCTA = new Database.MOC.MOCTA();
+					var updateMOCTA = mOCTA.UpdateMOCTAForFinishedGoods(dtERPPQC);
+					if (updateMOCTA == false)
+					{
+						ClassMessageBoxUI.Show("update MOCTA fail ", false);
+						return false;
+					}
+					UpdateWarehouseForFinishedGoods updateWarehouseForFinishedGoods = new UpdateWarehouseForFinishedGoods();
 					var UpdateWarehouse = updateWarehouseForFinishedGoods.UpdateWarehouse(dtERPPQC, TB002);
 					if (UpdateWarehouse == false)
 					{
@@ -174,24 +174,37 @@ namespace WindowsFormsApplication1.WMS.Controller
 			}
 			return true;
 		}
+		/// <summary>
+		/// [Tuanngoc Dev] For update all data to all department.
+		/// </summary>
+		/// <param name="dtERPPQC"></param>
+		/// <param name="ERPDoc"></param>
+		/// <returns></returns>
 		public sql_CheckCondition.QueryResult UpdateDataDBForAllDeparment(DataTable dtERPPQC, out string ERPDoc)
 		{
 			ERPDoc=null;
-			sql_CheckCondition.QueryResult ttReturn = sql_CheckCondition.QueryResult.OK;
+			sql_CheckCondition.QueryResult ttReturn = sql_CheckCondition.QueryResult.Exception;
+			var ischeckSFCTA = false;
 			try
 			{
 				ERPDoc = "";
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
-				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);//fix
+				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);// Done update query from Mr.An guidelines.
 				for (int i = 0; i < dtERPPQC.Rows.Count; i++)
 				{
 					string productOrder = dtERPPQC.Rows[i]["ProductOrder"].ToString();
 					string product = dtERPPQC.Rows[i]["Product"].ToString().Trim();
 					double Quantity = double.Parse(dtERPPQC.Rows[i]["Quantity"].ToString());
 					double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
-					var ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
-					var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);
+					///
 					sql_CheckCondition.QueryResult statusStage = sql_CheckCondition.Is_stageManagement(product);
+					///
+					if (statusStage == sql_CheckCondition.QueryResult.OK)// phai quan ly cong doan moi kiem tra
+					{
+						ischeckSFCTA = Database.SFC.SFCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);// chi cho quan ly cong doan
+					}
+					var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);//
+					
 					sql_CheckCondition.QueryResult statusLot = sql_CheckCondition.Is_lotManagement(product);
 					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK)
 					{
@@ -206,12 +219,36 @@ namespace WindowsFormsApplication1.WMS.Controller
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK)
 					{
+						if (ischeckMOCTA == true)
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+						}
+						else
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG)
 					{
+						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+						}
+						else
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
 					{
+						if (ischeckMOCTA == true)
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+						}
+						else
+						{
+							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+						}
 					}
 					else
 					{

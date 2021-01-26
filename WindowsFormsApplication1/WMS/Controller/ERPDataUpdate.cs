@@ -17,7 +17,16 @@ namespace WindowsFormsApplication1.WMS.Controller
 			///TB025 Tháng khai báo
 			///TB001 Loại phiếu chuyển
 			///TB002 Mã phiếu chuyển
-			string sqlQuerry = " select max(TB002)+1 from SFCTB where TB001 = '"+TB001+ "' and TB025 ='"+ DateTime.Now.ToString("yyyyMM")+"' " ;
+			///
+			string temp= @"IF(NOT EXISTS(SELECT TOP 1 TF002 as MADON FROM MOCTF WHERE TF001 = @TF001 and SUBSTRING(TF003, 0, 7) = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6)) UNION
+			SELECT TOP 1 TB002 as MADON FROM SFCTB WHERE TB001 = @TF001 and TB025 = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))))
+			SET @TF002 = (select convert(char(4), getdate(), 12)) +'0001'
+			ELSE
+			SET @TF002 = (SELECT MAX(MaxValue) FROM
+			(SELECT ISNULL((MAX(TF002) + 1), 0) as MaxValue FROM MOCTF WHERE TF001 = @TF001 and SUBSTRING(TF003, 0, 7) = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))
+			UNION SELECT ISNULL(MAX(TB002) + 1, 0) as MaxValue FROM SFCTB WHERE TB001 = @TF001 and TB025 = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))) as T1)";
+			string sqlQuerry = temp.Replace("@TF001", "'" + TB001.Trim() + "'");
+		    //" select max(TB002)+1 from SFCTB where TB001 = '"+TB001+ "' and TB025 ='"+ DateTime.Now.ToString("yyyyMM")+"' " ;
 			SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
 			TB002 = sqlTLVN2.sqlExecuteScalarString(sqlQuerry);
 			if (TB002 == "" || TB002 == string.Empty)

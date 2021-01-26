@@ -95,6 +95,37 @@ namespace WindowsFormsApplication1.NewQRcode
                 conn.Close();
             }
         }
-      
+        /// <summary>
+        /// [Tuanngoc Dev] For check condition for all item before proceed Update data to all department.
+        /// </summary>
+        /// <param name="dtERPPQC"></param>
+        /// <returns></returns>
+        public static QueryResult CheckConditionAllItemQRCodeInsert(DataTable dtERPPQC)
+        {
+            QueryResult ttReturn = QueryResult.Exception;
+            List<string> isListDistict = new List<string>();
+
+            try
+            {
+                for (int i = 0; i < dtERPPQC.Rows.Count; i++)
+                {
+                    string PO = dtERPPQC.Rows[i]["ProductOrder"].ToString().Trim();
+                    if (!isListDistict.Contains(PO))
+                    {
+                        int temp = Convert.ToInt32( dtERPPQC.Rows[i]["Quantity"]);
+                        string sumText = dtERPPQC.AsEnumerable().Where(row => row.Field<string>("ProductOrder") == PO).Sum(row => row.Field<UInt32>("Quantity")).ToString();
+                        UInt32 sum32Int = Convert.ToUInt32(sumText);// convert success 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "Exception message", "CheckConditionAllItemQRCodeInsert :" + ex.Message);
+                return QueryResult.Exception;
+            }
+            return ttReturn;
+        }
+       
+
     }
 }
