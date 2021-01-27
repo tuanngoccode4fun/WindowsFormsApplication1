@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.NewQRcode
 {
-  public  class sql_CheckCondition
+    public class sql_CheckCondition
     {
-        public enum QueryResult {OK, NG, Exception };
+        public enum QueryResult { OK, NG, Exception };
         static SqlConnection conn = DBUtils.GetTLVN2DBConnection(); //get from user database
         static List<string> ListSpec = new List<string>() { "AD-", "AT-", "ED-", "ET-", "CD-", "CT-" };
         /// <summary>
@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1.NewQRcode
                     return QueryResult.NG;
                 }
                 conn.Open();
-                string m_query_INVMB = @"select distinct MB010 from INVMB where MB001 = '" + MB001_product.Trim()+"'"; // 
+                string m_query_INVMB = @"select distinct MB010 from INVMB where MB001 = '" + MB001_product.Trim() + "'"; // 
                 using (SqlCommand command = new SqlCommand(m_query_INVMB, conn))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -104,17 +104,52 @@ namespace WindowsFormsApplication1.NewQRcode
         {
             QueryResult ttReturn = QueryResult.Exception;
             List<string> isListDistict = new List<string>();
-
+            double notConfirmQuantity = 0;
+            double demandQuantity = 0;
             try
             {
                 for (int i = 0; i < dtERPPQC.Rows.Count; i++)
                 {
                     string PO = dtERPPQC.Rows[i]["ProductOrder"].ToString().Trim();
+                    string product = dtERPPQC.Rows[i]["Product"].ToString().Trim();
                     if (!isListDistict.Contains(PO))
                     {
-                        int temp = Convert.ToInt32( dtERPPQC.Rows[i]["Quantity"]);
+                        isListDistict.Add(PO);
+                        int temp = Convert.ToInt32(dtERPPQC.Rows[i]["Quantity"]);
                         string sumText = dtERPPQC.AsEnumerable().Where(row => row.Field<string>("ProductOrder") == PO).Sum(row => row.Field<UInt32>("Quantity")).ToString();
                         UInt32 sum32Int = Convert.ToUInt32(sumText);// convert success 
+                        sql_CheckCondition.QueryResult statusStage = sql_CheckCondition.Is_stageManagement(product);/// check condition have stage management.
+                        demandQuantity = GetQuantityDemandPlan(PO);
+                        if (statusStage == QueryResult.OK)
+                        {
+                            notConfirmQuantity = GetQuantityNotConfirmHaveStageManagment(PO);
+                            if (notConfirmQuantity != -1 && demandQuantity != -1)
+                            {
+                                if (demandQuantity - (notConfirmQuantity + sum32Int) >= 0)
+                                {
+                                    ttReturn = QueryResult.OK;
+                                }
+                                else
+                                {
+                                    ttReturn = QueryResult.NG;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            notConfirmQuantity = GetQuantityNotConfirmNoStageManagment(PO);
+                            if (notConfirmQuantity != -1 && demandQuantity != -1)
+                            {
+                                if (demandQuantity - (notConfirmQuantity + sum32Int) >= 0)
+                                {
+                                    ttReturn = QueryResult.OK;
+                                }
+                                else
+                                {
+                                    ttReturn = QueryResult.NG;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -125,7 +160,119 @@ namespace WindowsFormsApplication1.NewQRcode
             }
             return ttReturn;
         }
-       
+        public static double GetQuantityNotConfirmHaveStageManagment(string PO)
+        {
+            double returnValue = -1;
+            try
+            {
+                conn.Open();
+                string P = PO.Split('-')[0].Trim();
+                string O = PO.Split('-')[1].Trim();
+                string m_query_temp = @"Select ISNULL(sum(TC014),0)as TongCXN from SFCTC 
+                                         Inner join SFCTB on TC001 = TB001 and TC002 = TB002
+                                         where TC004 =  @P and TC005 = @O 
+                                         and TB013 = 'N'"; // 
+                string m_query_SFCTB = m_query_temp.Replace("@P", "'" + P + "'").Replace("@O","'"+O+"'");
+                using (DataTable myTable = new DataTable())
+                using (SqlCommand command = new SqlCommand(m_query_SFCTB, conn))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // Kiểm tra có kết quả trả về
+                    if (reader.HasRows)
+                    {
+                        myTable.Load(reader);
+                        if (myTable.Rows[0]["TongCXN"].ToString()!="")
+                        {
+                            returnValue= Convert.ToDouble(myTable.Rows[0]["TongCXN"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQuantityNotConfirmHaveStageManagment", ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+
+            }
+            return returnValue;
+        }
+        public static double GetQuantityNotConfirmNoStageManagment(string PO)
+        {
+            double returnValue = -1;
+            try
+            {
+                conn.Open();
+                string P = PO.Split('-')[0].Trim();
+                string O = PO.Split('-')[1].Trim();
+                string m_query_temp = @"Select ISNULL(sum(TG011 + TG012),0) as TongCXN from MOCTG
+                                        Inner join MOCTF on TG001 = TF001 and TG002 = TF002
+                                        where TG014 =  @P and TG015 = @O
+                                        and TF006 = 'N'"; // 
+                string m_query_MOCTG = m_query_temp.Replace("@P", "'" + P + "'").Replace("@O", "'" + O + "'");
+                using (DataTable myTable = new DataTable())
+                using (SqlCommand command = new SqlCommand(m_query_MOCTG, conn))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // Kiểm tra có kết quả trả về
+                    if (reader.HasRows)
+                    {
+                        myTable.Load(reader);
+                        if (myTable.Rows[0]["TongCXN"].ToString() != "")
+                        {
+                            returnValue = Convert.ToDouble(myTable.Rows[0]["TongCXN"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQuantityNotConfirmNoStageManagment", ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return returnValue;
+        }
+        public static double GetQuantityDemandPlan(string PO)
+        {
+            double returnValue = -1;
+            try
+            {
+                conn.Open();
+                string P = PO.Split('-')[0].Trim();
+                string O = PO.Split('-')[1].Trim();
+                string m_query_temp = @"select TA015 as SLDT, TA017 as SLDSX, TA018 AS SLBP, (TA015-TA017-TA018)
+                                        as SLCoTHeNhapKHo from MOCTA  where TA001 = @P and TA002 = @O"; // 
+                string m_query_MOCTA = m_query_temp.Replace("@P", "'" + P + "'").Replace("@O", "'" + O + "'");
+                using (DataTable myTable = new DataTable())
+                using (SqlCommand command = new SqlCommand(m_query_MOCTA, conn))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // Kiểm tra có kết quả trả về
+                    if (reader.HasRows)
+                    {
+                        myTable.Load(reader);
+                        if (myTable.Rows[0]["SLCoTHeNhapKHo"].ToString().Trim() != "")
+                        {
+                            returnValue= Convert.ToDouble(myTable.Rows[0]["SLCoTHeNhapKHo"].ToString().Trim());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQuantityDemandPlan", ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return returnValue;
+        }
 
     }
 }
