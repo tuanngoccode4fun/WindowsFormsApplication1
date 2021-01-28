@@ -1275,7 +1275,16 @@
     </Compile>
     <Content Include="MySql.Data.dll" />
     <None Include="Resources\20160719024359.jpg" />
-    <Content Include="NewQRcode\FileQuerySQL\Insert import warehouse full confirm or not confirm.sql">
+    <Content Include="NewQRcode\FileQuerySQL\not_stageManagement_LotManagement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NewQRcode\FileQuerySQL\not_stageManagement_NoLotManagement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NewQRcode\FileQuerySQL\StageManagement_LotManagement.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NewQRcode\FileQuerySQL\StageManagement_NotLotManagement.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AttendanceDaily.xlsx">

@@ -210,44 +210,44 @@ namespace WindowsFormsApplication1.WMS.Controller
 					{
 						if (ischeckMOCTA == true && ischeckSFCTA == true)
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK)
 					{
 						if (ischeckMOCTA == true)
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG)
 					{
 						if (ischeckMOCTA == true && ischeckSFCTA == true)
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
 					{
 						if (ischeckMOCTA == true)
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, true);
+							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							//NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, false);
+							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else

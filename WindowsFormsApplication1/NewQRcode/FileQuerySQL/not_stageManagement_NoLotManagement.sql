@@ -17,6 +17,7 @@ DECLARE @COMMIT BIT = 0
 DECLARE @DATE VARCHAR(10)
 DECLARE @HOUR VARCHAR(10)
 DECLARE @Confirm VARCHAR(1) 
+DECLARE @LotManage BIT =0
 ----------------
 SET @PO = '@PO_VALUE'--replace @POVALUE
 SET @LOT ='@LOT_VALUE' --replace @LOTVALUE
@@ -25,11 +26,12 @@ SET @WAREHOUSE = '@WAREHOUSE_VALUE' --replace @WAREHOUSEVALUE
 SET @LOCATION ='@LOCATION_VALUE'--replace @LOCATIONVALUE
 SET @QUANTITY = @QUANTITY_VALUE --replace @QUANTITYVALUE
 SET @TF001 = '@TF001_VALUE' --replace @TF001
+SET @TF002 ='@TF002_VALUE' ---replace @TF002
 SET @STT = '@STT_VALUE'--replace @STT
 SET @Confirm = '@Confirm_VALUE'-- replace @confirmVAlue
 SET @DATE = ( Select convert(varchar(8),GETDATE(),112))
 SET @HOUR = (Select convert(varchar(8),GETDATE(),108))
-
+SET @LotManage = 0
 /*SET @PO = 'B51220100228'--replace @POVALUE
 SET @LOT ='LOT_AN' --replace @LOTVALUE
 SET @USER = 'ERP'--replace @USERVALUE
@@ -42,186 +44,13 @@ SET @Confirm = 'Y'-- replace @confirmVAlue
 SET @DATE = ( Select convert(varchar(8),GETDATE(),112))
 SET @HOUR = (Select convert(varchar(8),GETDATE(),108))*/
 
-IF NOT EXISTS (SELECT TOP 1 * FROM MOCTF WHERE TF001 = @TF001 and SUBSTRING(TF003,0,7) = (SELECT LEFT(CONVERT(varchar, GetDate(),112),6)))
-SET @TF002 = (select convert(char(4), getdate(), 12)) +'0001'
-ELSE 
-SET @TF002 = (SELECT MAX(TF002)+1 FROM MOCTF WHERE TF001 = @TF001);
---PRINT @TF002
---SET @TF002 = '21010007'
 SET @TA001 = SUBSTRING(@PO,0,5)
 SET @TA002 = SUBSTRING(@PO,5,LEN(@PO)-1)
 SET @SP = (SELECT TA006 FROM MOCTA WHERE TA001 = @TA001 AND TA002=  @TA002)
 SET @WEIGHT = @QUANTITY * (select MB014 from INVMB WHERE MB001 = @SP)
+PRINT @SP
 
 BEGIN TRAN
-IF (NOT EXISTS(SELECT TOP 1 * FROM SFCTC WHERE TC001 =@TF001 and TC002 = @TF002 and TC003 =@STT))
-BEGIN
-INSERT INTO [dbo].[SFCTC]
-           ([COMPANY]
-           ,[CREATOR]
-           ,[USR_GROUP]
-           ,[CREATE_DATE]
-           ,[MODIFIER]
-           ,[MODI_DATE]
-           ,[FLAG]
-           ,[CREATE_TIME]
-           ,[CREATE_AP]
-           ,[CREATE_PRID]
-           ,[MODI_TIME]
-           ,[MODI_AP]
-           ,[MODI_PRID]
-           ,[TC001]
-           ,[TC002]
-           ,[TC003]
-           ,[TC004]
-           ,[TC005]
-           ,[TC006]
-           ,[TC007]
-           ,[TC008]
-           ,[TC009]
-           ,[TC010]
-           ,[TC011]
-           ,[TC012]
-           ,[TC013]
-           ,[TC014]
-           ,[TC015]
-           ,[TC016]
-           ,[TC017]
-           ,[TC018]
-           ,[TC019]
-           ,[TC020]
-           ,[TC021]
-           ,[TC022]
-           ,[TC023]
-           ,[TC024]
-           ,[TC025]
-           ,[TC026]
-           ,[TC027]
-           ,[TC028]
-           ,[TC029]
-           ,[TC030]
-           ,[TC031]
-           ,[TC032]
-           ,[TC033]
-           ,[TC034]
-           ,[TC035]
-           ,[TC036]
-           ,[TC037]
-           ,[TC038]
-           ,[TC039]
-           ,[TC040]
-           ,[TC041]
-           ,[TC042]
-           ,[TC043]
-           ,[TC044]
-           ,[TC045]
-           ,[TC046]
-           ,[TC047]
-           ,[TC048]
-           ,[TC049]
-           ,[TC050]
-           ,[TC051]
-           ,[TC052]
-        
-           )
- SELECT ADMMF.COMPANY,ADMMF.MF001, ADMMF.MF004, @DATE,NULL, NULL,'1', @HOUR, 'TLAN', 'sftb03', NULL, NULL, NULL,
- @TF001,@TF002, @STT, @TA001, @TA002,'0020',SFCTA.TA004,'','',SFCTA.TA020,NULL,NULL,'1',@QUANTITY,0,0,0,0,0,0,0,@Confirm,SFCTA.TA006, 
- NULL,0,'N','N',
- NULL, NULL, NULL, NULL,@LOT
- ,(Select convert(varchar(8),DATEADD(day,INVMB.MB023,GETDATE()),112)),
- (Select convert(varchar(8),DATEADD(day,INVMB.MB024,GETDATE()),112))
- ,'N', @QUANTITY,
-'0',@DATE,0,NULL,@WAREHOUSE,@WEIGHT,@WEIGHT,0,0,0,@SP, INVMB.MB002,INVMB.MB003,
-INVMB.MB016,0,@LOCATION
-from  INVMB 
-inner join ADMMF on ADMMF.MF001 = @USER
-inner join SFCTA on SFCTA.TA001 = @TA001 and SFCTA.TA002 = @TA002 and TA003 = '0020' 
-where INVMB.MB001 = @SP
---Inset or update SFCTB
-IF(NOT EXISTS( SELECT TOP 1 * FROM SFCTB WHERE TB001 = @TF001 and TB002 = @TF002))
-BEGIN
-INSERT INTO [dbo].[SFCTB]
-           ([COMPANY]
-           ,[CREATOR]
-           ,[USR_GROUP]
-           ,[CREATE_DATE]
-           ,[MODIFIER]
-           ,[MODI_DATE]
-           ,[FLAG]
-           ,[CREATE_TIME]
-           ,[CREATE_AP]
-           ,[CREATE_PRID]
-           ,[MODI_TIME]
-           ,[MODI_AP]
-           ,[MODI_PRID]
-           ,[TB001]
-           ,[TB002]
-           ,[TB003]
-           ,[TB004]
-           ,[TB005]
-           ,[TB006]
-           ,[TB007]
-           ,[TB008]
-           ,[TB009]
-           ,[TB010]
-           ,[TB011]
-           ,[TB012]
-           ,[TB013]
-           ,[TB014]
-           ,[TB015]
-           ,[TB016]
-           ,[TB017]
-           ,[TB018]
-           ,[TB019]
-           ,[TB020]
-           ,[TB021]
-           ,[TB022]
-           ,[TB023]
-           ,[TB024]
-           ,[TB025]
-           ,[TB026]
-           ,[TB027]
-           ,[TB028]
-           ,[TB029]
-           ,[TB030]
-           ,[TB031]
-           ,[TB036]
-           ,[TB037]
-           ,[TB038]
-           ,[TB039]
-           ,[TB200]
-           ,[TB201]
-		   )
-	SELECT TOP 1 ADMMF.COMPANY,ADMMF.MF001, ADMMF.MF004,@DATE,NULL,NULL,
-	1,@HOUR,'TLAN','TLAN',NULL,NULL, NULL,@TF001,@TF002,@DATE,'1',SFCTA.TA006,SFCTA.TA007,'3',
-	@WAREHOUSE,CMSMC.MC002,'TL',0,'N',@Confirm,NULL, @DATE, @USER,'N','','1',NULL,NULL,'1','1',
-	'',(SELECT LEFT(CONVERT(varchar, GetDate(),112),6)),0.2,0,NULL,0,0,0,SFCTA.TA018,0,'D301','',@QUANTITY,@WEIGHT
-	FROM SFCTB
-	inner join ADMMF on ADMMF.MF001 = @USER
-	inner join SFCTA on TA001 = @TA001 and TA002 = @TA002 and TA003 ='0020'
-	inner join CMSMC on MC001= @WAREHOUSE
-	inner join SFCTC on TC001 = @TF001 and TC002 = @TF002
-
-END
-ELSE
-BEGIN 
-UPDATE SFCTB SET  TB200 = TB200 + @QUANTITY , TB201 = TB201+@WEIGHT
---SELECT TB200, TB201
-FROM SFCTB
-WHERE TB001 = @TF001 and TB002 = @TF002
-PRINT 'Updated'
-END
-
-UPDATE SFCTA SET MODIFIER = @USER, MODI_DATE =@DATE,FLAG = FLAG+1
-,MODI_TIME = @HOUR, MODI_AP ='TLAN', MODI_PRID ='TLAN',
-TA011 = TA011+@QUANTITY, TA039 = TA039 + @WEIGHT
-WHERE TA001 = @TA001 and TA002 = @TA002 and TA003 = '0020'
-IF (@Confirm ='Y')
-BEGIN
-UPDATE MOCTA SET MODIFIER = @USER, MODI_DATE =@DATE,FLAG = FLAG+1
-,MODI_TIME = @HOUR, MODI_AP ='TLAN', MODI_PRID ='TLAN',
-TA014 = @DATE, TA017 = TA017+@QUANTITY, TA046 = TA046+@WEIGHT
-WHERE TA001 = @TA001 AND TA002 = @TA002
 IF(NOT EXISTS (SELECT TOP 1 * FROM MOCTG WHERE TG001 =@TF001 AND TG002 = @TF002 AND TG003 = @STT))
 BEGIN 
 INSERT INTO [dbo].[MOCTG]
@@ -322,10 +151,10 @@ INSERT INTO [dbo].[MOCTF]
 
 SELECT TOP 1 ADMMF.COMPANY,ADMMF.MF001, ADMMF.MF004,@DATE,NULL,NULL,
 	1,@HOUR,'TLAN','TLAN',NULL,NULL, NULL,@TF001, @TF002, @DATE,'TL',
-	'','Y','N',0,'N','N',SFCTA.TA006,@DATE,@USER,'N','0',@QUANTITY,@WEIGHT,0
+	'',@Confirm,'N',0,'N','N',MOCTA.TA021,@DATE,@USER,'N','0',@QUANTITY,@WEIGHT,0
 FROM MOCTA
 INNER JOIN ADMMF ON ADMMF.MF001 = @USER
-INNER JOIN SFCTA ON SFCTA.TA001 = @TA001 AND SFCTA.TA002 = @TA002 AND SFCTA.TA003 = '0020'
+WHERE TA001 = @TA001 and TA002 = @TA002
 END
 ELSE
 BEGIN
@@ -333,6 +162,18 @@ UPDATE MOCTF SET TF200 = TF200 + @QUANTITY, TF201 = TF201 + @WEIGHT
 WHERE TF001 =@TF001 AND TF002 = @TF002
 END
 --INVMF, INVME, INVLA, INVLF,INVMC, INVMB, INVMM
+
+SELECT * FROM MOCTG WHERE TG001 = @TF001 AND TG002 =@TF002
+SELECT * FROM MOCTF WHERE TF001 = @TF001 AND TF002 =@TF002
+IF (@Confirm ='Y')
+BEGIN
+UPDATE MOCTA SET MODIFIER = @USER, MODI_DATE =@DATE,FLAG = FLAG+1
+,MODI_TIME = @HOUR, MODI_AP ='TLAN', MODI_PRID ='TLAN',
+TA014 = @DATE, TA017 = TA017+@QUANTITY, TA046 = TA046+@WEIGHT
+WHERE TA001 = @TA001 AND TA002 = @TA002
+
+IF (@LotManage = 1)
+BEGIN
 IF(NOT EXISTS (SELECT TOP 1 * FROM INVMF WHERE MF001 = @SP AND MF002 = @LOT AND MF004 = @TF001 AND MF005 = @TF002 AND MF006 = @STT))
 BEGIN 
 INSERT INTO [dbo].[INVMF]
@@ -372,7 +213,6 @@ FROM MOCTG
 INNER JOIN ADMMF ON ADMMF.MF001 = @USER
 WHERE TG001 = @TF001 AND TG002 = @TF002 AND TG003 = @STT
 END
-
 IF(NOT EXISTS ( SELECT TOP 1 * FROM INVME WHERE ME001 = @SP AND ME002 = @LOT))
 BEGIN 
 INSERT INTO [dbo].[INVME]
@@ -421,7 +261,7 @@ SET MODIFIER = @USER , MODI_DATE = @DATE, FLAG = FLAG+1, MODI_TIME = @HOUR
 , MODI_AP = 'TLAN', MODI_PRID = 'TLAN'
 WHERE ME001 = @SP AND ME002 = @LOT
 END
-
+END
 INSERT INTO [dbo].[INVLA]
            ([COMPANY]
            ,[CREATOR]
@@ -595,13 +435,6 @@ UPDATE INVMB SET MODIFIER = @USER,MODI_DATE= @DATE,FLAG = FLAG+1,
 MODI_TIME = @HOUR, MODI_AP = 'TLAN', MODI_PRID = 'TLAN',
 MB064 =MB064 +@QUANTITY,MB089 = MB089+@WEIGHT
 WHERE MB001 = @SP
-
-END
-
-select * from SFCTC where TC001 = @TF001 and TC002 = @TF002
-select * from SFCTB where TB001 = @TF001 and TB002 = @TF002
-select * from SFCTA WHERE TA001 = @TA001 and TA002 = @TA002 and TA003 = '0020'
------
 SELECT * FROM MOCTA WHERE TA001 = @TA001 AND TA002 = @TA002
 SELECT * FROM MOCTG WHERE TG001 = @TF001 AND TG002 =@TF002
 SELECT * FROM MOCTF WHERE TF001 = @TF001 AND TF002 =@TF002
@@ -617,7 +450,7 @@ SELECT * FROM INVMB WHERE MB001 = @SP
 END
 ELSE 
 BEGIN 
-Print 'Duplicate when Insert SFCTC (TC001, TC002,TC003)'
+Print 'Duplicate when Insert MOCTG (TG001, TG002,TG003)'
 END
 
 IF @COMMIT =0
