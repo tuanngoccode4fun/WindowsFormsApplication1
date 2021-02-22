@@ -100,6 +100,44 @@ namespace WindowsFormsApplication1.NewQRcode
         /// </summary>
         /// <param name="dtERPPQC"></param>
         /// <returns></returns>
+        /// 
+        ///////
+        public static QueryResult Is_LocationManagement(string Warehouse)
+        {
+            try
+            {
+                conn.Open();
+                string m_query_INVMB = @"select MC009 as QLVTLK from CMSMC where MB001 = '" + Warehouse.Trim() + "'"; // 
+                using (DataTable myTable = new DataTable())
+                using (SqlCommand command = new SqlCommand(m_query_INVMB, conn))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // Kiểm tra có kết quả trả về
+                    if (reader.HasRows)
+                    {
+                        myTable.Load(reader);
+                        if (myTable.Rows[0]["QLVTLK"].ToString() == "Y")
+                        {
+                            return QueryResult.OK;
+                        }
+                        return QueryResult.NG;
+                    }
+                    else
+                    {
+                        return QueryResult.NG;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "Is_LocationManagement", ex.Message);
+                return QueryResult.Exception;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public static QueryResult CheckConditionAllItemQRCodeInsert(DataTable dtERPPQC)
         {
             QueryResult ttReturn = QueryResult.Exception;
