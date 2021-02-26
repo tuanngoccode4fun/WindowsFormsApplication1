@@ -107,7 +107,7 @@ namespace WindowsFormsApplication1.NewQRcode
             try
             {
                 conn.Open();
-                string m_query_INVMB = @"select MC009 as QLVTLK from CMSMC where MB001 = '" + Warehouse.Trim() + "'"; // 
+                string m_query_INVMB = @"select MC009 as QLVTLK from CMSMC where MC001 = '" + Warehouse.Trim() + "'"; // 
                 using (DataTable myTable = new DataTable())
                 using (SqlCommand command = new SqlCommand(m_query_INVMB, conn))
                 using (SqlDataReader reader = command.ExecuteReader())

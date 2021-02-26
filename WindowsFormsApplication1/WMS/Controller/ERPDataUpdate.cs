@@ -11,6 +11,37 @@ namespace WindowsFormsApplication1.WMS.Controller
 {
    public class ERPDataUpdate
     {
+		string GetFormat(string TF001)
+		{
+			string formatReturn = "";
+			string formatReturn_Temp = "";
+			///TB025 Tháng khai báo
+			///TB001 Loại phiếu chuyển
+			///TB002 Mã phiếu chuyển
+			///
+			string temp = @"select MQ006 from CMSMQ where MQ001 =@TF001";
+			string sqlQuerry = temp.Replace("@TF001", "'" + TF001.Trim() + "'");
+			SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
+			formatReturn_Temp = sqlTLVN2.sqlExecuteScalarString(sqlQuerry).Trim();
+			if (formatReturn_Temp == "4")
+			{
+				formatReturn = "0001";
+			}
+			else if (formatReturn_Temp == "3")
+			{
+				formatReturn = "001";
+			}
+			else if (formatReturn_Temp == "5")
+			{
+				formatReturn = "00001";
+			}
+			else if (formatReturn_Temp == "6")
+			{
+				formatReturn = "000001";
+			}
+			return formatReturn;
+
+		}
 		public string getTB002(string TB001)
 		{
 			string TB002= "";
@@ -18,14 +49,15 @@ namespace WindowsFormsApplication1.WMS.Controller
 			///TB001 Loại phiếu chuyển
 			///TB002 Mã phiếu chuyển
 			///
+			string format = GetFormat(TB001);
 			string temp= @"IF(NOT EXISTS(SELECT TOP 1 TF002 as MADON FROM MOCTF WHERE TF001 = @TF001 and SUBSTRING(TF003, 0, 7) = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6)) UNION
 			SELECT TOP 1 TB002 as MADON FROM SFCTB WHERE TB001 = @TF001 and TB025 = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))))
-			SET @TF002 = (select convert(char(4), getdate(), 12)) +'0001'
+			SET @TF002 = (select convert(char(4), getdate(), 12)) + @Format_TT_Count
 			ELSE
 			SET @TF002 = (SELECT MAX(MaxValue) FROM
 			(SELECT ISNULL((MAX(TF002) + 1), 0) as MaxValue FROM MOCTF WHERE TF001 = @TF001 and SUBSTRING(TF003, 0, 7) = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))
 			UNION SELECT ISNULL(MAX(TB002) + 1, 0) as MaxValue FROM SFCTB WHERE TB001 = @TF001 and TB025 = (SELECT LEFT(CONVERT(varchar, GetDate(), 112), 6))) as T1)";
-			string sqlQuerry = temp.Replace("@TF001", "'" + TB001.Trim() + "'");
+			string sqlQuerry = temp.Replace("@TF001", "'" + TB001.Trim() + "'").Replace("@Format_TT_Count", "'" + format.Trim() + "'");
 		    //" select max(TB002)+1 from SFCTB where TB001 = '"+TB001+ "' and TB025 ='"+ DateTime.Now.ToString("yyyyMM")+"' " ;
 			SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
 			TB002 = sqlTLVN2.sqlExecuteScalarString(sqlQuerry);

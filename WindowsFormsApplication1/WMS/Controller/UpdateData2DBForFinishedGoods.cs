@@ -196,8 +196,10 @@ namespace WindowsFormsApplication1.WMS.Controller
 					string product = dtERPPQC.Rows[i]["Product"].ToString().Trim();
 					double Quantity = double.Parse(dtERPPQC.Rows[i]["Quantity"].ToString());
 					double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
+					string WareHouse = dtERPPQC.Rows[i]["Warehouse"].ToString();
 					///
 					sql_CheckCondition.QueryResult statusStage = sql_CheckCondition.Is_stageManagement(product);
+					sql_CheckCondition.QueryResult statusLocationManagement = sql_CheckCondition.Is_LocationManagement(WareHouse);
 					///
 					if (statusStage == sql_CheckCondition.QueryResult.OK)// phai quan ly cong doan moi kiem tra
 					{
@@ -206,53 +208,103 @@ namespace WindowsFormsApplication1.WMS.Controller
 					var ischeckMOCTA = Database.MOC.MOCTA.IscheckQantityAndWeight(productOrder, Quantity, SLDongGoi);//
 					
 					sql_CheckCondition.QueryResult statusLot = sql_CheckCondition.Is_lotManagement(product);
-					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK)
+					/// stage OK
+					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_07_111
 					{
 						if (ischeckMOCTA == true && ischeckSFCTA == true)
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, true);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, false);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
-					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK)
-					{
-						if (ischeckMOCTA == true)
-						{
-							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, true);
-						}
-						else
-						{
-							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndLotManagement(dtERPPQC.Rows[i], i, TB002, false);
-						}
-					}
-					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG)
+					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.NG)///_06_110
 					{
 						if (ischeckMOCTA == true && ischeckSFCTA == true)
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, true);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertHaveStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, false);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
-					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG)
+					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.OK)/// _05_101
+					{
+						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, true);
+						}
+						else
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, false);
+						}
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_04_100
+					{
+						if (ischeckMOCTA == true&& ischeckSFCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, true);
+						}
+						else
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, false);
+						}
+					}
+					/////////stage NG
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_03_011
 					{
 						if (ischeckMOCTA == true)
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, true);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.InsertNoStageManagementAndNoLotManagement(dtERPPQC.Rows[i], i, TB002, false);
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, false);
 						}
+
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_02_010
+					{
+						if (ischeckMOCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, true);
+						}
+						else
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, false);
+						}
+
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_01_001
+					{
+						if (ischeckMOCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, true);
+						}
+						else
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, false);
+						}
+
+					}
+					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_00_000
+					{
+						if (ischeckMOCTA == true)
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, true);
+						}
+						else
+						{
+							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, false);
+						}
+
 					}
 					else
 					{
-						ttReturn= sql_CheckCondition.QueryResult.Exception;
+						ttReturn = sql_CheckCondition.QueryResult.Exception;
 					}
 				}
 				ERPDoc = TB002;
