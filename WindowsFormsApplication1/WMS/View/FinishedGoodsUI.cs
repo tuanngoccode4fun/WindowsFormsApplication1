@@ -263,6 +263,7 @@ namespace WindowsFormsApplication1.WMS.View
             cmboxDocNo.SelectedIndex = -1;
             var doc = (Class.valiballecommon.GetStorage().DocNo == null) ? "" : Class.valiballecommon.GetStorage().DocNo.Trim();
             cmboxDocNo.SelectedIndex = listDocNo.ToList().FindIndex(x => x.Trim() == doc.Trim());
+            lb_indicate.Text = GetListDocNo.GetDescribeDocNo(doc.Trim());
 
         }
 
@@ -1652,6 +1653,7 @@ namespace WindowsFormsApplication1.WMS.View
             Class.valiballecommon.GetStorage().DocNo = cmboxDocNo.SelectedItem.ToString() ;
             // Properties.Settings.Default.Save();
             SaveObject.Save_data(LoginFr.PathSaveConfig, Class.valiballecommon.GetStorage());
+            lb_indicate.Text = GetListDocNo.GetDescribeDocNo(Class.valiballecommon.GetStorage().DocNo.Trim());
         }
 
         private void label11_Click(object sender, EventArgs e)

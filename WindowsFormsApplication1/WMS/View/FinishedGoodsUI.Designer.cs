@@ -115,6 +115,7 @@
             this.lbl_Header = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
+            this.lb_indicate = new System.Windows.Forms.Label();
             this.tabPage_FinishedGood.SuspendLayout();
             this.tabPage1_Import.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -211,6 +212,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lb_indicate);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cmboxDocNo);
             this.groupBox1.Controls.Add(this.pictureBox2);
@@ -1326,6 +1328,18 @@
             this.label11.Text = "Version: 1001.1";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
+            // lb_indicate
+            // 
+            this.lb_indicate.AutoSize = true;
+            this.lb_indicate.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_indicate.ForeColor = System.Drawing.Color.Blue;
+            this.lb_indicate.Location = new System.Drawing.Point(903, 104);
+            this.lb_indicate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_indicate.Name = "lb_indicate";
+            this.lb_indicate.Size = new System.Drawing.Size(21, 19);
+            this.lb_indicate.TabIndex = 32;
+            this.lb_indicate.Text = "...";
+            // 
             // FinishedGoodsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -1468,5 +1482,6 @@
         private System.Windows.Forms.ComboBox cmboxDocNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lb_indicate;
     }
 }
