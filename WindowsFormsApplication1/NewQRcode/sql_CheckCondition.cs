@@ -140,7 +140,7 @@ namespace WindowsFormsApplication1.NewQRcode
         }
         public static QueryResult CheckConditionAllItemQRCodeInsert(DataTable dtERPPQC)
         {
-            QueryResult ttReturn = QueryResult.Exception;
+            QueryResult ttReturn = QueryResult.OK;
             List<string> isListDistict = new List<string>();
             double notConfirmQuantity = 0;
             double demandQuantity = 0;
@@ -156,20 +156,25 @@ namespace WindowsFormsApplication1.NewQRcode
                         int temp = Convert.ToInt32(dtERPPQC.Rows[i]["Quantity"]);
                         string sumText = dtERPPQC.AsEnumerable().Where(row => row.Field<string>("ProductOrder") == PO).Sum(row => row.Field<UInt32>("Quantity")).ToString();
                         UInt32 sum32Int = Convert.ToUInt32(sumText);// convert success 
+                        double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, sum32Int);
                         sql_CheckCondition.QueryResult statusStage = sql_CheckCondition.Is_stageManagement(product);/// check condition have stage management.
                         demandQuantity = GetQuantityDemandPlan(PO);
+                        bool statusWeight= GetWeightDemandPlan(PO, SLDongGoi);
+                        if (!statusWeight)
+                        {
+                            ttReturn = QueryResult.NG;
+                            UI_mesage.ClassMessageBoxUI.Show("Please check weight validation failed.", false);
+
+                        }
                         if (statusStage == QueryResult.OK)
                         {
                             notConfirmQuantity = GetQuantityNotConfirmHaveStageManagment(PO);
                             if (notConfirmQuantity != -1 && demandQuantity != -1)
                             {
-                                if (demandQuantity - (notConfirmQuantity + sum32Int) >= 0)
-                                {
-                                    ttReturn = QueryResult.OK;
-                                }
-                                else
+                                if (demandQuantity - (notConfirmQuantity + sum32Int) < 0)
                                 {
                                     ttReturn = QueryResult.NG;
+                                    UI_mesage.ClassMessageBoxUI.Show("Please check quality over demandQuality at stage manage11ment", false);
                                 }
                             }
                         }
@@ -178,13 +183,10 @@ namespace WindowsFormsApplication1.NewQRcode
                             notConfirmQuantity = GetQuantityNotConfirmNoStageManagment(PO);
                             if (notConfirmQuantity != -1 && demandQuantity != -1)
                             {
-                                if (demandQuantity - (notConfirmQuantity + sum32Int) >= 0)
-                                {
-                                    ttReturn = QueryResult.OK;
-                                }
-                                else
+                                if (demandQuantity - (notConfirmQuantity + sum32Int) < 0)
                                 {
                                     ttReturn = QueryResult.NG;
+                                    UI_mesage.ClassMessageBoxUI.Show("Please check  quality over demandQuality at No stage Management", false);
                                 }
                             }
                         }
@@ -310,6 +312,43 @@ namespace WindowsFormsApplication1.NewQRcode
                 conn.Close();
             }
             return returnValue;
+        }
+        public static bool GetWeightDemandPlan(string PO, Double SLDongGoi)
+        {
+            try
+            {
+                conn.Open();
+                string P = PO.Split('-')[0].Trim();
+                string O = PO.Split('-')[1].Trim();
+                string m_query_temp = @"select ISNULL(TA010,0) as TA010,ISNULL(TA011,0) as TA011,ISNULL(TA012,0) as TA012,ISNULL(TA038,0) as TA038,
+                                        ISNULL(TA039,0) as TA039,ISNULL(TA040,0) as TA040,* from SFCTA where 1=1 and TA003 = '0020'
+                                        and  TA001 = @P and TA002 = @O"; // 
+                string m_query_MOCTA = m_query_temp.Replace("@P", "'" + P + "'").Replace("@O", "'" + O + "'");
+                DataTable dt = new DataTable();
+                SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
+                sqlTLVN2.sqlDataAdapterFillDatatable(m_query_MOCTA.ToString(), ref dt);
+                if (dt.Rows.Count == 1)
+                {
+
+                    double TA038 = double.Parse(dt.Rows[0]["TA038"].ToString());
+                    double TA039 = double.Parse(dt.Rows[0]["TA039"].ToString());
+                    double TA040 = double.Parse(dt.Rows[0]["TA040"].ToString());
+
+                    if ( TA039 + TA040 + SLDongGoi>TA038)
+                        return false;
+                    else return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQuantityDemandPlan", ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
         }
 
     }

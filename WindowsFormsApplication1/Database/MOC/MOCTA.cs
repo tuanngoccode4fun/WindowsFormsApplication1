@@ -69,7 +69,8 @@ where  (MB031 = '' or CAST(MB031 as datetime) >= GETDATE()) ");
             {
                 DataTable dt = new DataTable();
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append("select * from MOCTA where 1=1 ");
+                stringBuilder.Append(@"select ISNULL(TA015,0) as TA015,ISNULL(TA017,0) as TA017,ISNULL(TA018,0) as TA018,ISNULL(TA045,0) as TA045,ISNULL(TA046,0) as TA046,ISNULL(TA047,0) as TA047
+from MOCTA where 1 =1 ");
                 stringBuilder.Append(" and TA001 ='" + productCode.Split('-')[0] + "' ");
                 stringBuilder.Append(" and TA002 ='" + productCode.Split('-')[1] + "' ");
                 SqlTLVN2 sqlTLVN2 = new SqlTLVN2();

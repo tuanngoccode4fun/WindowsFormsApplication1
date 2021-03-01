@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1.NewQRcode
         {
             try
             {
-                conn.Open();
+                //conn.Open();
                 string fullText = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\NewQRcode\FileQuerySQL\"+ nameFile.Trim());
                 string script = null;
                 script = fullText.Replace("@PO_VALUE", ERPPQC["ProductOrder"].ToString().Trim().Replace("-", ""))
@@ -35,11 +35,16 @@ namespace WindowsFormsApplication1.NewQRcode
                                             .Replace("@TF002_VALUE", TF002)
                                             .Replace("@STT_VALUE", (i + 1).ToString("0000"))
                                             .Replace("@Confirm_VALUE", ReturnYN(IsCheckQuantity_Weight));
-                using (var command = new SqlCommand(script, conn))
+                SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
+                bool status = sqlTLVN2.sqlExecuteNonQuery(script.ToString(),false);
+                if (status)
                 {
-                    command.ExecuteNonQuery();
+                    return sql_CheckCondition.QueryResult.OK;
                 }
-                return sql_CheckCondition.QueryResult.OK;
+                else
+                {
+                    return sql_CheckCondition.QueryResult.Exception;
+                }
             }
             catch (Exception ex)
             {
@@ -63,35 +68,35 @@ namespace WindowsFormsApplication1.NewQRcode
         /// 
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_07(DataRow ERPPQC,int i,string TF002, bool IsCheckQuantity_Weight)
         {
-          return  InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "07_manage stage_manage lot_ manage location");//111
+          return  InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "07_manage stage_manage lot_ manage location.sql");//111
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_06(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "06_manage stage_manage lot_no location");//110
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "06_manage stage_manage lot_no location.sql");//110
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_05(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "05_manage stage_no lot_manage location");//101
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "05_manage stage_no lot_manage location.sql");//101
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_04(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "04_manage stage_no lot_no location");//100
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "04_manage stage_no lot_no location.sql");//100
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_03(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "03_no stage_manage lot_manage location");
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "03_no stage_manage lot_manage location.sql");
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_02(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "02_no stage_manage lot_no location");
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "02_no stage_manage lot_no location.sql");
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_01(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "01_no stage_no lot_manage location");
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "01_no stage_no lot_manage location.sql");
         }
         public static sql_CheckCondition.QueryResult managestage_managelot_managelocation_00(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         {
-            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "00_no stage_no lot_no location");
+            return InsertFunction(ERPPQC, i, TF002, IsCheckQuantity_Weight, "00_no stage_no lot_no location.sql");
         }
         //public static sql_CheckCondition.QueryResult InsertNoStageManagementAndLotManagement(DataRow ERPPQC, int i, string TF002, bool IsCheckQuantity_Weight)
         //{

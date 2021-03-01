@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1.NewQRcode
                   Temp.ProductOrder = ReturnProductOrder(arraydata[1]);//"B511-20100019";//"B511-20100154";
                   Temp.Product = arraydata[2];
                   Temp.Quantity =Convert.ToUInt32( arraydata[4]);
-                  Temp.LotNo = arraydata[7];// 
+                  Temp.LotNo = arraydata[7].Replace(Temp.Product,"");// 
                   Temp.Warehouse = warehouseName;
                   Temp.dateImport = DateTime.Now;
                   return Temp;

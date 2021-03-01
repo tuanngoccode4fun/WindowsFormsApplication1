@@ -192,13 +192,27 @@ namespace WindowsFormsApplication1.Database.SFC
             }
             return false;
         }
+        public static bool IsExistSFCTA(string productCode)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("select * from SFCTA where 1=1 and TA003 = '0020' ");
+            stringBuilder.Append(" and TA001 ='" + productCode.Split('-')[0] + "' ");
+            stringBuilder.Append(" and TA002 ='" + productCode.Split('-')[1] + "' ");
+            SqlTLVN2 sqlTLVN2 = new SqlTLVN2();
+            string status= sqlTLVN2.sqlExecuteScalarString(stringBuilder.ToString());
+            if (status.Trim() == "")
+            {
+                return false;
+            }
+            return true;
+        }
         public static    bool IscheckQantityAndWeight(string productCode, double Quantity, double Weight)
         {
             try
             {
                 DataTable dt = new DataTable();
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append("select * from SFCTA where 1=1 and TA003 = '0020' ");
+                stringBuilder.Append("select ISNULL(TA010,0) as TA010,ISNULL(TA011,0) as TA011,ISNULL(TA012,0) as TA012,ISNULL(TA038,0) as TA038,ISNULL(TA039,0) as TA039,ISNULL(TA040,0) as TA040 from SFCTA where 1=1 and TA003 = '0020' ");
                 stringBuilder.Append(" and TA001 ='" + productCode.Split('-')[0] + "' ");
                 stringBuilder.Append(" and TA002 ='" + productCode.Split('-')[1] + "' ");
                 SqlTLVN2 sqlTLVN2 = new SqlTLVN2();

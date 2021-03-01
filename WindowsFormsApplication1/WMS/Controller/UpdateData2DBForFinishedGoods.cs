@@ -190,9 +190,16 @@ namespace WindowsFormsApplication1.WMS.Controller
 				ERPDoc = "";
 				ERPDataUpdate eRPDataUpdate = new ERPDataUpdate();
 				string TB002 = eRPDataUpdate.getTB002(Class.valiballecommon.GetStorage().DocNo);// Done update query from Mr.An guidelines.
-				for (int i = 0; i < dtERPPQC.Rows.Count; i++)
+				sql_CheckCondition.QueryResult CheckNoConfirmTotal = sql_CheckCondition.CheckConditionAllItemQRCodeInsert(dtERPPQC);
+				
+					for (int i = 0; i < dtERPPQC.Rows.Count; i++)
 				{
 					string productOrder = dtERPPQC.Rows[i]["ProductOrder"].ToString();
+					if (!Database.SFC.SFCTA.IsExistSFCTA(productOrder))
+					{
+						MessageBox.Show("Please check not exist this product in SFCTA: "+ productOrder, "Warning", MessageBoxButtons.OK);/// Consider 
+						break;
+					}
 					string product = dtERPPQC.Rows[i]["Product"].ToString().Trim();
 					double Quantity = double.Parse(dtERPPQC.Rows[i]["Quantity"].ToString());
 					double SLDongGoi = Database.INV.INVMD.ConvertToWeightKg(product, Quantity);// convert quality to Kg
@@ -211,100 +218,101 @@ namespace WindowsFormsApplication1.WMS.Controller
 					/// stage OK
 					if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_07_111
 					{
-						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						if (ischeckMOCTA == true && ischeckSFCTA == true&& CheckNoConfirmTotal==sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_07(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.NG)///_06_110
 					{
-						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						if (ischeckMOCTA == true && ischeckSFCTA == true&& CheckNoConfirmTotal==sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_06(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.OK)/// _05_101
 					{
-						if (ischeckMOCTA == true && ischeckSFCTA == true)
+						if (ischeckMOCTA == true && ischeckSFCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_05(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.OK && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_04_100
 					{
-						if (ischeckMOCTA == true&& ischeckSFCTA == true)
+						if (ischeckMOCTA == true&& ischeckSFCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_04(dtERPPQC.Rows[i], i, TB002, false);
 						}
 					}
 					/////////stage NG
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_03_011
 					{
-						if (ischeckMOCTA == true)
+						if (ischeckMOCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_03(dtERPPQC.Rows[i], i, TB002, false);
 						}
 
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.OK && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_02_010
 					{
-						if (ischeckMOCTA == true)
+						if (ischeckMOCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_02(dtERPPQC.Rows[i], i, TB002, false);
 						}
 
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.OK)//_01_001
 					{
-						if (ischeckMOCTA == true)
+						if (ischeckMOCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_01(dtERPPQC.Rows[i], i, TB002, false);
 						}
 
 					}
 					else if (statusStage == sql_CheckCondition.QueryResult.NG && statusLot == sql_CheckCondition.QueryResult.NG && statusLocationManagement == sql_CheckCondition.QueryResult.NG)//_00_000
 					{
-						if (ischeckMOCTA == true)
+						if (ischeckMOCTA == true && CheckNoConfirmTotal == sql_CheckCondition.QueryResult.OK)
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, true);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, true);
 						}
 						else
 						{
-							NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, false);
+							ttReturn = NewQRcode.sql_QueryFromFileSQL.managestage_managelot_managelocation_00(dtERPPQC.Rows[i], i, TB002, false);
 						}
 
 					}
 					else
 					{
 						ttReturn = sql_CheckCondition.QueryResult.Exception;
+
 					}
 				}
 				ERPDoc = TB002;

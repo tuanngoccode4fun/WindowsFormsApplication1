@@ -69,6 +69,7 @@ namespace WindowsFormsApplication1
            
             cb_Database.Items.Add("TECHLINK");
             cb_Database.Items.Add("TLVN2");
+            cb_Database.Items.Add("TLTEST");
             Class.valiballecommon SettingGet = new Class.valiballecommon();
             if (File.Exists(PathSaveConfig))
             {
@@ -163,6 +164,11 @@ namespace WindowsFormsApplication1
                 {
                     va.DBERP = "TLVN2";
                     va.DBSFT = "SFT_TLVN2";
+                }
+                else if (cb_Database.SelectedItem.ToString() == "TLTEST")
+                {
+                    va.DBERP = "TLTEST";
+                    va.DBSFT = "SFT_TLTEST";
                 }
             }
             MainLayout mainLayout = new MainLayout();

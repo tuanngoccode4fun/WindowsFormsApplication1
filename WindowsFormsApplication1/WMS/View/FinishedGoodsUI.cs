@@ -1439,13 +1439,9 @@ namespace WindowsFormsApplication1.WMS.View
                 /// check so luong du tinh san xuat -(da san xuat + phe+ chua confirm+ so can nhap)<0 thi okay khong bao loi ??
                 /// else khong co cong doan
                 /// check so luong du tinh san xuat -(da san xuat + phe+ chua confirm+ so can nhap)<0 thi okay khong bao loi ??
-                if (sql_CheckCondition.CheckConditionAllItemQRCodeInsert(dataQRInfor) == sql_CheckCondition.QueryResult.OK)
+              //  if (sql_CheckCondition.CheckConditionAllItemQRCodeInsert(dataQRInfor) == sql_CheckCondition.QueryResult.OK)
                 {
                     Update = updateData2DBForFinishedGoods.UpdateDataDBForAllDeparment(dataQRInfor, out ERPDoc);//.UpdateDataDBForFinishedGoods(dataQRInfor, out ERPDoc);
-                }
-                else
-                {
-                    ClassMessageBoxUI.Show("Please check your QR insert!", false);
                 }
                 if (Update==sql_CheckCondition.QueryResult.OK)
                 {
