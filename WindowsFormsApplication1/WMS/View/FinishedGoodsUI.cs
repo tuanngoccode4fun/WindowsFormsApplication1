@@ -324,17 +324,20 @@ namespace WindowsFormsApplication1.WMS.View
                     {
                         dataQRInfor = ListToDatatable.ConvertListToDataTable((List<Import_FinishGood_WareHouse>)dtgv_import.DataSource);
                         FunctionImportWarehouse();
+                        txt_QRImport.Focus();
                     }
                     else
                     {
                         if (Class.valiballecommon.GetStorage().DocNo == null)
                         {
                             ClassMessageBoxUI.Show("Plese choose DocNo ?", false);
+                            txt_QRImport.Focus();
                             return;
                         }
                         if (dtgv_import.Rows.Count == 0)
                         {
                             ClassMessageBoxUI.Show("Please add new item barcode ?", false);
+                            txt_QRImport.Focus();
                             return;
                         }
 
@@ -1462,6 +1465,7 @@ namespace WindowsFormsApplication1.WMS.View
                     dtgv_import.DataSource = null;
                     ListImportFG = new List<Import_FinishGood_WareHouse>();
                     ClassMessageBoxUI.Show("Import all complete!", true);
+                    txt_QRImport.Focus(); 
                 }
             }
 
