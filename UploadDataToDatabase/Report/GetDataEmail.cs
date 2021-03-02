@@ -5,22 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using UploadDataToDatabase.Class;
-using UploadDataToDatabase;
+using UploadDataToDatabase.Log;
 
 namespace UploadDataToDatabase.Report
 {
  public   class GetDataEmail
     {
 
-        public List<ScheduleReportItems> GetScheduleReportCommon(string ReportName,string ReportType)
+        public List<ScheduleReportItems> GetScheduleReportCommon(string ReportName)
         {
 
             List<ScheduleReportItems> list = new List<ScheduleReportItems>();
             DataTable dt = new DataTable();
             StringBuilder sql = new StringBuilder();
-            sql.Append("select reportname, reporttype, Minutes,hours, day, date, month,isBodyHTML,subject, attach, comments from t_report_schedule where 1=1 ");
-              sql.Append(" and reportname = '" + ReportName  + "' " );
-            sql.Append(" and reporttype = '" + ReportType + "' ");
+            sql.Append("select reportname, reporttype, Minutes,hours, day, date, month,isBodyHTML,subject, attach, comments from t_report_schedule where 1=1  and reportname = '" + ReportName  + "' " );
             sqlCON tf = new sqlCON();
             tf.sqlDataAdapterFillDatatable(sql.ToString(), ref dt);
             for (int i = 0; i < dt.Rows.Count; i++)

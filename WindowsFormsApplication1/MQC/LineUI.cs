@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.ChartDrawing;
 using System.IO;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -97,7 +97,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "UpdateUI(MQCItem1 mQC)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateUI(MQCItem1 mQC)", ex.Message);
             }
         }
 

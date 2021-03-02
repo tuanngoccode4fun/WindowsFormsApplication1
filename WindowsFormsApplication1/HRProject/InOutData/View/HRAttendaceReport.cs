@@ -14,7 +14,7 @@ using WindowsFormsApplication1.HRProject.InOutData.Controller;
 using WindowsFormsApplication1.HRProject.InOutData.Controller.TimeWorking;
 using WindowsFormsApplication1.HRProject.InOutData.Model;
 using WindowsFormsApplication1.HRProject.InOutData.View;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.HRProject.InOutData.View
 {
@@ -169,7 +169,7 @@ namespace WindowsFormsApplication1.HRProject.InOutData.View
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "LoadDataERPMQCToShow()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "LoadDataERPMQCToShow()", ex.Message);
             }
 
 

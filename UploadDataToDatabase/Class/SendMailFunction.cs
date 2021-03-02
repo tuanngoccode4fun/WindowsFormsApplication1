@@ -84,10 +84,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -95,7 +95,7 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
             return false;
@@ -155,17 +155,17 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", "Test Mail");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", "Test Mail");
 
                     return true;
 
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
             return false;
@@ -180,11 +180,11 @@ namespace UploadDataToDatabase.Class
 
                 if (backlog.ExportExcelToReport(ref dgv_export, PathFoler, version))
                 {
-                    Logfile.Output(StatusLog.Normal, "Export excel sucessfull");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export excel sucessfull");
                 }
                 else
                 {
-                    Logfile.Output(StatusLog.Normal, "Export excel Fail ");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export excel Fail ");
                     return false;
                 }
              
@@ -192,7 +192,7 @@ namespace UploadDataToDatabase.Class
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Export excel fail!", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Export excel fail!", ex.Message);
             }
             try
             {
@@ -270,10 +270,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -281,7 +281,7 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
 
@@ -341,26 +341,17 @@ namespace UploadDataToDatabase.Class
                                 attachment = new System.Net.Mail.Attachment(file.FullName);
                                 mail.Attachments.Add(attachment);
                                 listfileattached.Add(file.FullName);
-
                             }
+                            else return false;
 
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
                         }
                     }
+                    SmtpServer.Port = 25;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
+                 //   SmtpServer.EnableSsl = true;
+                    SmtpServer.Send(mail);
+                    mail.Dispose();
+                    SmtpServer.Dispose();
                     try
                     {
                         foreach (var item in listfileattached)
@@ -375,10 +366,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -386,7 +377,7 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
             return false;
@@ -401,19 +392,16 @@ namespace UploadDataToDatabase.Class
 
                 if (backlog.ExportExcelToReport(ref dgv_export, PathFoler, version))
                 {
-                    Logfile.Output(StatusLog.Normal, "Export excel sucessfull");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export excel sucessfull");
                 }
                 else
-                {
-                    Logfile.Output(StatusLog.Normal, "Export excel fail");
                     return false;
-                }
 
             }
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Export excel fail!", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Export excel fail!", ex.Message);
             }
             try
             {
@@ -425,7 +413,7 @@ namespace UploadDataToDatabase.Class
                     else mail.IsBodyHtml = false;
                     SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
                     mail.From = new MailAddress("tlms@techlink.vn");
-                    //   mail.To.Add("ducan.tran@techlink.vn");
+                    //  mail.To.Add("tranducan.bkhcm11@gmail.com");
                     foreach (var email in emailNeedSends)
                     {
                         mail.To.Add(email.EmailReceive);
@@ -465,29 +453,19 @@ namespace UploadDataToDatabase.Class
                                 attachment = new System.Net.Mail.Attachment(file.FullName);
                                 mail.Attachments.Add(attachment);
                                 listfileattached.Add(file.FullName);
-                              
+                                SmtpServer.Port = 25;
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
+                                //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
+                                SmtpServer.Send(mail);
                             }
-                          
-                        }
-                        if(mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
+                            else
+                                return false;
                         }
                     }
 
                
-               
+                    mail.Dispose();
+                    SmtpServer.Dispose();
                     try
                     {
                         foreach (var item in listfileattached)
@@ -502,10 +480,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -513,28 +491,26 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
 
-            return false;
+            return true;
         }
 
-       
-
-        public bool SendMailwithExportExceMQCbyCompanyMail(DateTime from, DateTime to, ScheduleReportItems items, List<EmailNeedSend> emailNeedSends)
+        public bool SendMailwithExportExceMQCbyCompanyMail(PeriodProduction period,ScheduleReportItems items, List<EmailNeedSend> emailNeedSends)
         {
             try
             {
-                MQC.Report.MQCReport mQCReport = new MQC.Report.MQCReport();
+               MQC.MQCReport mQCReport  = new MQC.MQCReport();
 
-                if (mQCReport.ExportReportProductionFromTo(from, to))
+                if (mQCReport.ExportReportProductionDaiLy(period))
                 {
-                    Logfile.Output(StatusLog.Normal, "Export MQC report to excel sucessfull");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export MQC report to excel sucessfull");
                 }
                 else // return false de khoi gui mail
                 {
-                    Logfile.Output(StatusLog.Normal, "Export MQC report to excel fail");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export MQC report to excel fail");
                     return false;
                 }
 
@@ -542,7 +518,7 @@ namespace UploadDataToDatabase.Class
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Export MQC report to excel fail!", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Export MQC report to excel fail!", ex.Message);
             }
             try
             {
@@ -554,7 +530,7 @@ namespace UploadDataToDatabase.Class
                     else mail.IsBodyHtml = false;
                     SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
                     mail.From = new MailAddress("tlms@techlink.vn");
-                    //  mail.To.Add("ducan.tran@techlink.vn");
+                    //  mail.To.Add("tranducan.bkhcm11@gmail.com");
                     foreach (var email in emailNeedSends)
                     {
                         mail.To.Add(email.EmailReceive);
@@ -595,27 +571,17 @@ namespace UploadDataToDatabase.Class
                                 mail.Attachments.Add(attachment);
                                 listfileattached.Add(file.FullName);
 
+                                SmtpServer.Port = 25;
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
+                                //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
+                                SmtpServer.Send(mail);
                             }
-
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
+                            else return false;
                         }
                     }
 
-
+                    mail.Dispose();
+                    SmtpServer.Dispose();
                     try
                     {
                         foreach (var item in listfileattached)
@@ -630,10 +596,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -641,11 +607,11 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
 
-            return false;
+            return true;
         }
         public bool SendMailwithExportExceReliabilitybyCompanyMail( ScheduleReportItems items, List<EmailNeedSend> emailNeedSends)
         {
@@ -655,11 +621,11 @@ namespace UploadDataToDatabase.Class
 
                 if (realabilityReport.SendMailReliabilityReportWeekly())
                 {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export Reliability report to excel sucessfull");
                 }
                 else // return false de khoi gui mail
                 {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability  report to excel fail");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export Reliability  report to excel fail");
                     return false;
                 }
 
@@ -667,7 +633,7 @@ namespace UploadDataToDatabase.Class
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
             }
             try
             {
@@ -679,7 +645,7 @@ namespace UploadDataToDatabase.Class
                     else mail.IsBodyHtml = false;
                     SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
                     mail.From = new MailAddress("tlms@techlink.vn");
-                     //  mail.To.Add("ducan.tran@techlink.vn");
+                   // mail.To.Add("tranducan.bkhcm11@gmail.com");
                     foreach (var email in emailNeedSends)
                     {
                         mail.To.Add(email.EmailReceive);
@@ -720,28 +686,18 @@ namespace UploadDataToDatabase.Class
                                 attachment = new System.Net.Mail.Attachment(file.FullName);
                                 mail.Attachments.Add(attachment);
                                 listfileattached.Add(file.FullName);
-
+                                SmtpServer.Port = 25;
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
+                                //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
+                                SmtpServer.Send(mail);
                             }
-
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
+                            else return false;
                         }
                     }
 
-
+                
+                    mail.Dispose();
+                    SmtpServer.Dispose();
                     try
                     {
                         foreach (var item in listfileattached)
@@ -756,10 +712,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
                         return false;
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -767,153 +723,27 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
                 return false;
             }
 
 
-            return false;
+            return true;
         }
-        public bool SendMailwithExportExceReliabilityAdding7daysbyCompanyMail(ScheduleReportItems items, List<EmailNeedSend> emailNeedSends)
-        {
-            try
-            {
-                BackLogReport.RealabilityReport realabilityReport = new BackLogReport.RealabilityReport();
 
-                if (realabilityReport.SendMailReliabilityReportAdding7Days())
-                {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
-                }
-                else // return false de khoi gui mail
-                {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability  report to excel fail");
-                    return false;
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                Logfile.Output(StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
-            }
-            try
-            {
-                if (emailNeedSends.Count > 0)
-                {
-                    MailMessage mail = new MailMessage();
-                    if (items.IsBodyHTML)
-                        mail.IsBodyHtml = true;
-                    else mail.IsBodyHtml = false;
-                    SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
-                    mail.From = new MailAddress("tlms@techlink.vn");
-                    //   mail.To.Add("ducan.tran@techlink.vn");
-                    foreach (var email in emailNeedSends)
-                    {
-                        mail.To.Add(email.EmailReceive);
-
-
-                    }
-                    mail.Subject = items.Subject + " On " + DateTime.Now.ToString("MMM-dd-yyyy");
-
-                    if (items.IsBodyHTML)
-                    {
-                        string pathTemplate = Environment.CurrentDirectory + @"\Resources\EmailTemplate.html";
-                        if (File.Exists(pathTemplate))
-                        {
-                            string html = File.ReadAllText(pathTemplate);
-                            string htmlReplaced = "";
-                            htmlReplaced = html.Replace("@Replace1", items.Subject);
-                            htmlReplaced = htmlReplaced.Replace("@Replace2", DateTime.Now.ToString("MMM-dd-yyyy"));
-                            mail.Body = htmlReplaced;
-                        }
-                    }
-                    else
-                    {
-                        mail.Body = items.Contents;
-                    }
-
-                    List<string> listfileattached = new List<string>();
-                    if (items.AttachedFolder != "" && items.AttachedFolder != null)
-                    {
-                        DirectoryInfo d = new DirectoryInfo(items.AttachedFolder);//Assuming Test is your Folder
-                        FileInfo[] Files = d.GetFiles(); //Getting excel files
-
-                        foreach (FileInfo file in Files)
-                        {
-                            System.Net.Mail.Attachment attachment;
-
-                            if (file.Name.Contains(items.ReportName))
-                            {
-                                attachment = new System.Net.Mail.Attachment(file.FullName);
-                                mail.Attachments.Add(attachment);
-                                listfileattached.Add(file.FullName);
-
-                            }
-
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
-                        }
-                    }
-
-
-                    try
-                    {
-                        foreach (var item in listfileattached)
-                        {
-                            if (File.Exists(item))
-                            {
-                                File.Delete(item);//Xoa file after send file
-
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
-                        return false;
-                    }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
-
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
-                return false;
-            }
-
-
-            return false;
-        }
         public bool SendMailwithExportExceReliabilitybyCompanyMailForMonthly(ScheduleReportItems items, List<EmailNeedSend> emailNeedSends)
         {
             try
             {
                 BackLogReport.RealabilityReport realabilityReport = new BackLogReport.RealabilityReport();
 
-                if (realabilityReport.SendMailReliabilityReporAdding7DaystMonthly())
+                if (realabilityReport.SendMailReliabilityReportMonthly())
                 {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export Reliability report to excel sucessfull");
                 }
                 else // return false de khoi gui mail
                 {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability  report to excel fail");
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Export Reliability  report to excel fail");
                     return false;
                 }
 
@@ -921,7 +751,7 @@ namespace UploadDataToDatabase.Class
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
             }
             try
             {
@@ -933,7 +763,7 @@ namespace UploadDataToDatabase.Class
                     else mail.IsBodyHtml = false;
                     SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
                     mail.From = new MailAddress("tlms@techlink.vn");
-                    //  mail.To.Add("ducan.tran@techlink.vn");
+                    //    mail.To.Add("tranducan.bkhcm11@gmail.com");
                     foreach (var email in emailNeedSends)
                     {
                         mail.To.Add(email.EmailReceive);
@@ -974,26 +804,18 @@ namespace UploadDataToDatabase.Class
                                 attachment = new System.Net.Mail.Attachment(file.FullName);
                                 mail.Attachments.Add(attachment);
                                 listfileattached.Add(file.FullName);
-
+                                SmtpServer.Port = 25;
+                                SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
+                                //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
+                                SmtpServer.Send(mail);
                             }
-
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
+                            else return false;
                         }
                     }
+
+               
+                    mail.Dispose();
+                    SmtpServer.Dispose();
                     try
                     {
                         foreach (var item in listfileattached)
@@ -1008,10 +830,10 @@ namespace UploadDataToDatabase.Class
                     }
                     catch (Exception ex)
                     {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
+                        Log.Logfile.Output(Log.StatusLog.Error, "Delete file attached fail :", ex.Message);
 
                     }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
+                    Log.Logfile.Output(Log.StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
 
                     return true;
                 }
@@ -1019,172 +841,11 @@ namespace UploadDataToDatabase.Class
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
+                Log.Logfile.Output(Log.StatusLog.Error, "Send mail fail :", ex.Message);
             }
 
 
-            return false;
-        }
-
-
-        public bool SendMailReportObnormal()
-        {
-
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                mail.From = new MailAddress("only4testproject@gmail.com");
-                mail.To.Add("tuanngoccode4fun@gmail.com");
-                mail.Subject = "Mail for Test";
-                mail.Body = "Hello Tuanngoc";
-                SmtpServer.Port = 587;
-                SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("only4testproject@gmail.com", "tuanngoc123$");
-                SmtpServer.EnableSsl = true;
-                SmtpServer.Send(mail);
-                mail.Dispose();
-                SmtpServer.Dispose();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
-            }
-            return false;
-        }
-
-
-        public bool SendAttendanceReport(ScheduleReportItems items, List<EmailNeedSend> emailNeedSends, DateTime dateReport)
-        {
-            try
-            {
-
-                AttendancReport.Controller.GetAttendanceHR getAttendance = new AttendancReport.Controller.GetAttendanceHR();
-                List<AttendancReport.Model.AttendanceDept> attendanceDepts = getAttendance.GetAttendanceDeptsNew(dateReport);
-                AttendancReport.Controller.HRReport hRReport = new AttendancReport.Controller.HRReport();
-                string pathsave = @"C:\ERP_Temp\AttendanceReport" + "_" + dateReport.ToString("ddMMMyyyy") + ".xlsx";
-      
-
-                if (hRReport.ExportAttendanceDaily(attendanceDepts, pathsave, dateReport))
-                {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
-                }
-                else // return false de khoi gui mail
-                {
-                    Logfile.Output(StatusLog.Normal, "Export Reliability  report to excel fail");
-                    return false;
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                Logfile.Output(StatusLog.Error, "Export Reliability  report to excel fail!", ex.Message);
-            }
-            try
-            {
-                if (emailNeedSends.Count > 0)
-                {
-                    MailMessage mail = new MailMessage();
-                    if (items.IsBodyHTML)
-                        mail.IsBodyHtml = true;
-                    else mail.IsBodyHtml = false;
-                    SmtpClient SmtpServer = new SmtpClient("103.18.179.112", 25);
-                    mail.From = new MailAddress("tlms@techlink.vn");
-                    //  mail.To.Add("ducan.tran@techlink.vn");
-                    foreach (var email in emailNeedSends)
-                    {
-                        mail.To.Add(email.EmailReceive);
-
-
-                    }
-                    mail.Subject = items.Subject + " On " + DateTime.Now.ToString("MMM-dd-yyyy");
-
-                    if (items.IsBodyHTML)
-                    {
-                        string pathTemplate = Environment.CurrentDirectory + @"\Resources\EmailTemplate.html";
-                        if (File.Exists(pathTemplate))
-                        {
-                            string html = File.ReadAllText(pathTemplate);
-                            string htmlReplaced = "";
-                            htmlReplaced = html.Replace("@Replace1", items.Subject);
-                            htmlReplaced = htmlReplaced.Replace("@Replace2", DateTime.Now.ToString("MMM-dd-yyyy"));
-                            mail.Body = htmlReplaced;
-                        }
-                    }
-                    else
-                    {
-                        mail.Body = items.Contents;
-                    }
-
-                    List<string> listfileattached = new List<string>();
-                    if (items.AttachedFolder != "" && items.AttachedFolder != null)
-                    {
-                        DirectoryInfo d = new DirectoryInfo(items.AttachedFolder);//Assuming Test is your Folder
-                        FileInfo[] Files = d.GetFiles(); //Getting excel files
-
-                        foreach (FileInfo file in Files)
-                        {
-                            System.Net.Mail.Attachment attachment;
-
-                            if (file.Name.Contains(items.ReportName))
-                            {
-                                attachment = new System.Net.Mail.Attachment(file.FullName);
-                                mail.Attachments.Add(attachment);
-                                listfileattached.Add(file.FullName);
-
-                            }
-
-                        }
-                        if (mail.Attachments.Count > 0)
-                        {
-                            SmtpServer.Port = 25;
-                            SmtpServer.Credentials = new System.Net.NetworkCredential("tlms@techlink.vn", "techlink@123");
-                            //  SmtpServer.EnableSsl = true;  // dung email cong ty thi bo dong nay
-                            SmtpServer.Send(mail);
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                        }
-                        else
-                        {
-                            mail.Dispose();
-                            SmtpServer.Dispose();
-                            return false;
-                        }
-                    }
-                    try
-                    {
-                        foreach (var item in listfileattached)
-                        {
-                            if (File.Exists(item))
-                            {
-                                File.Delete(item);//Xoa file after send file
-
-                            }
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Logfile.Output(StatusLog.Error, "Delete file attached fail :", ex.Message);
-
-                    }
-                    Logfile.Output(StatusLog.Normal, "Send mail suscess :", items.ReportName + "|" + items.ReportType + "|" + items.Subject);
-
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Logfile.Output(StatusLog.Error, "Send mail fail :", ex.Message);
-            }
-
-
-            
-            return false;
-             
+            return true;
         }
     }
     

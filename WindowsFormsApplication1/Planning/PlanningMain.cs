@@ -9,9 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Log;
-using Application = Microsoft.Office.Interop.Excel.Application;
-
 namespace WindowsFormsApplication1.Planning
 {
     public partial class PlanningMain : CommonFormMetro

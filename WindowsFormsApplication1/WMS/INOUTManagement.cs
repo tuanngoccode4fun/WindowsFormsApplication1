@@ -14,7 +14,7 @@ using WindowsFormsApplication1.WMS.Model;
 using WindowsFormsApplication1.WMS.View;
 using System.Windows.Documents;
 using WindowsFormsApplication1.WMS.Controller;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.WMS
 {
@@ -767,7 +767,7 @@ namespace WindowsFormsApplication1.WMS
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "Add new row datagridview stock in", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "Add new row datagridview stock in", ex.Message);
             }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1
 {
@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "sqlExecuteScalarString(string sql)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "sqlExecuteScalarString(string sql)", ex.Message);
                 conn.Close();
                 return String.Empty;
             }
@@ -65,7 +65,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "getComboBoxData(string sql, ref ComboBox cmb)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "getComboBoxData(string sql, ref ComboBox cmb)", ex.Message);
 
             }
             conn.Close();
@@ -96,7 +96,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, " getComboBoxData(string sql, ref ComboBox cmb, ref ComboBox cmb2)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, " getComboBoxData(string sql, ref ComboBox cmb, ref ComboBox cmb2)", ex.Message);
 
             }
             conn.Close();
@@ -116,7 +116,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, " sqlDataAdapterFillDatatable(string sql, ref DataTable dt)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, " sqlDataAdapterFillDatatable(string sql, ref DataTable dt)", ex.Message);
             }
         }
         public bool sqlExecuteNonQuery(string sql, bool result_message_show)
@@ -142,7 +142,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, " sqlExecuteNonQuery(string sql, bool result_message_show)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, " sqlExecuteNonQuery(string sql, bool result_message_show)", ex.Message);
                 conn.Close();
                 return false;
             }
@@ -175,7 +175,7 @@ namespace WindowsFormsApplication1
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, " sqlDatatablePermision(string buttonText, Button btn_common)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, " sqlDatatablePermision(string buttonText, Button btn_common)", ex.Message);
 
             }
         }

@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -122,7 +122,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "LoadDataERPMQCToShow()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "LoadDataERPMQCToShow()", ex.Message);
             }
           
 

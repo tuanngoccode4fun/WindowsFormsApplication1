@@ -40,6 +40,8 @@ namespace WindowsFormsApplication1.WMS.View
         bool status_IsInput = false;
         Timer timerGetQR_Total;
         Timer timerGetQR_Min;
+        int m_maxLine = 200;
+        EventBroker.EventObserver m_observerLog = null;
         public FinishedGoodsUI()
         {
             InitializeComponent();
@@ -179,6 +181,7 @@ namespace WindowsFormsApplication1.WMS.View
                         ///////
                         valueGet.Id = (uint)ListImportFG.Count() + 1;
                         ListImportFG.Add(valueGet);
+                        SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[ReceiveQR Success] " , valueGet.TransactionID);
                         txt_QRImport.Text = null;
                     }
                     else
@@ -195,7 +198,8 @@ namespace WindowsFormsApplication1.WMS.View
             }
             catch (Exception ex)
             {
-                ClassMessageBoxUI.Show(ex.Message, false);
+               ClassMessageBoxUI.Show(ex.Message, false);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "[ReceiveQR] :" , ex.Message);
             }
 
         }
@@ -264,7 +268,10 @@ namespace WindowsFormsApplication1.WMS.View
             var doc = (Class.valiballecommon.GetStorage().DocNo == null) ? "" : Class.valiballecommon.GetStorage().DocNo.Trim();
             cmboxDocNo.SelectedIndex = listDocNo.ToList().FindIndex(x => x.Trim() == doc.Trim());
             lb_indicate.Text = GetListDocNo.GetDescribeDocNo(doc.Trim());
+            m_observerLog = new EventBroker.EventObserver(OnReceiveLog);
+            EventBroker.AddObserver(EventBroker.EventID.etLog, m_observerLog);
 
+            SystemLog.Output(SystemLog.MSG_TYPE.Nor, "------------Start-----------  ", Text);
         }
 
         private void btn_search4_Click(object sender, EventArgs e)
@@ -856,9 +863,9 @@ namespace WindowsFormsApplication1.WMS.View
                     }
                 }
             }
-            catch
-            { 
-            
+            catch (Exception ex )
+            {
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "[Delete_Click] :",ex.Message);
             }
             //  throw new NotImplementedException();
         }
@@ -1654,6 +1661,42 @@ namespace WindowsFormsApplication1.WMS.View
             // Properties.Settings.Default.Save();
             SaveObject.Save_data(LoginFr.PathSaveConfig, Class.valiballecommon.GetStorage());
             lb_indicate.Text = GetListDocNo.GetDescribeDocNo(Class.valiballecommon.GetStorage().DocNo.Trim());
+        }
+        private void OnReceiveLog(EventBroker.EventID id, EventBroker.EventParam param)
+        {
+            if (param == null)
+                return;
+            SystemLog.MSG_TYPE type = (SystemLog.MSG_TYPE)param.ParamInt;
+            if (type == SystemLog.MSG_TYPE.Err)
+                Output(param.ParamString, Color.Red);
+            else if (type == SystemLog.MSG_TYPE.War)
+                Output(param.ParamString, Color.Yellow);
+            else
+                Output(param.ParamString, Color.White);
+        }
+        private void Output(string msg, Color brush, bool isBold = false)
+        {
+            UpdateText(msg, brush);
+        }
+        private void UpdateText(String text, Color brush)
+        {
+            if (!IsDisposed && !Disposing && InvokeRequired)
+            {
+                Invoke((Action<String, Color>)UpdateText, text, brush);
+            }
+            else
+            {
+                if (richTextLog.Lines.Count() > m_maxLine) //200 lines will remove top line
+                {
+                    richTextLog.SelectionStart = 0;
+                    richTextLog.SelectionLength = richTextLog.Text.IndexOf("\n", 0) + 1;
+                    richTextLog.SelectedText = "";
+                }
+                richTextLog.SelectionColor = brush;
+                richTextLog.AppendText("\r\n[" + DateTime.Now.ToString("yyyyMMdd") + " " + DateTime.Now.ToString("HH:mm:ss") + "] " + text);
+
+            }
+
         }
 
         private void label11_Click(object sender, EventArgs e)

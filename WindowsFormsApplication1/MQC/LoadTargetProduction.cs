@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -44,7 +44,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception EX)
             {
 
-               Logfile.Output(StatusLog.Error, "GetTargetMQC (string model, string date)", EX.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetTargetMQC (string model, string date)", EX.Message);
             }
             return target;
         }

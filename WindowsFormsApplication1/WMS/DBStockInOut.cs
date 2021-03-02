@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.WMS
 {
@@ -42,7 +42,7 @@ namespace WindowsFormsApplication1.WMS
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "Insert2StockIn(gridviewInStock inStock)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "Insert2StockIn(gridviewInStock inStock)", ex.Message);
                 return false;
             }
            

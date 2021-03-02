@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.Device.Printer;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.WMS
 {
@@ -58,7 +58,7 @@ namespace WindowsFormsApplication1.WMS
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "Btn_Generate_Click(object sender, EventArgs e)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "Btn_Generate_Click(object sender, EventArgs e)", ex.Message);
             }
           
         }
@@ -75,7 +75,7 @@ namespace WindowsFormsApplication1.WMS
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "Btn_Generate_Click(object sender, EventArgs e)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "Btn_Generate_Click(object sender, EventArgs e)", ex.Message);
             }
         }
 

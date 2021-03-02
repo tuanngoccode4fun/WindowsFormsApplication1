@@ -480,7 +480,6 @@
     </Compile>
     <Compile Include="Logfile\DateTimeFunctions.cs" />
     <Compile Include="Logfile\EventBroker.cs" />
-    <Compile Include="Logfile\Logfile.cs" />
     <Compile Include="Logfile\SystemLog.cs" />
     <Compile Include="LoginFr.cs">
       <SubType>Form</SubType>
@@ -1323,6 +1322,7 @@
     <Content Include="Resources\BackLogOverview.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\computer-bug.png" />
     <Content Include="Resources\CustomsBOM.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1347,6 +1347,7 @@
     <None Include="Resources\finishedGoods_64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\file.png" />
     <Content Include="Resources\Form5Common.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1433,6 +1434,7 @@
     <None Include="Resources\Manpower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\logs.png" />
     <Content Include="Resources\Month.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

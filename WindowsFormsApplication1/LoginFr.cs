@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             AcceptButton = btn_login;
             Class.valiballecommon.GetStorage().PCName = System.Environment.MachineName;
-            SystemLog.Output(SystemLog.MSG_TYPE.Nor, "dasdsad", "dasdadasddsda");
+           // SystemLog.Output(SystemLog.MSG_TYPE.Nor, "dasdsad", "dasdadasddsda");
         }
         /// <summary>
         //Data Source=LONG;Initial Catalog=TEST;Integrated Security=True

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -195,7 +195,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "LoadUIFromMQCITEM()", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "LoadUIFromMQCITEM()", ex.Message);
 
 
             }

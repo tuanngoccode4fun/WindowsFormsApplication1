@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Globalization;
 using WindowsFormsApplication1.Class;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -86,7 +86,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }
@@ -152,7 +152,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return itemSummary;
         }
@@ -235,7 +235,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }
@@ -318,7 +318,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }
@@ -402,7 +402,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }
@@ -469,7 +469,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return itemSummary;
         }
@@ -544,7 +544,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }
@@ -625,7 +625,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetMQCItemSummaries(DateTime from, DateTime to, string site, string process)", ex.Message);
             }
             return qCItemSummaries;
         }

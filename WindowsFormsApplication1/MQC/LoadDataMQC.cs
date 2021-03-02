@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -119,7 +119,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetQCCItemOK", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQCCItemOK", ex.Message);
             }
             // sql.Append()
             return mQCItem;
@@ -231,7 +231,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetQCCItemOK", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQCCItemOK", ex.Message);
             }
             // sql.Append()
             return mQCItem;
@@ -341,7 +341,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetQCCItemOK", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetQCCItemOK", ex.Message);
             }
             // sql.Append()
             return mQCItem;
@@ -428,7 +428,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCItemsOfDept()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCItemsOfDept()", ex.Message);
             }
             return listMQCReturn;
 
@@ -515,7 +515,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCItemsOfDept()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCItemsOfDept()", ex.Message);
             }
             return listMQCReturn;
 
@@ -567,7 +567,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItems()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItems()", ex.Message);
             }
             return listMQCDataItems;
         }
@@ -617,7 +617,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItems()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItems()", ex.Message);
             }
             return listMQCDataItems;
         }
@@ -668,7 +668,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItems()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItems()", ex.Message);
             }
             return listMQCDataItems;
         }
@@ -715,7 +715,7 @@ namespace WindowsFormsApplication1.MQC
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItemsbySite()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItemsbySite()", ex.Message);
             }
 
             return listMQCDataItems;
@@ -798,7 +798,7 @@ where 1=1 and data != '0'   and site = 'B01' and process = 'MQC'
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItemsbySite()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItemsbySite()", ex.Message);
             }
 
             return listMQCDataItems;
@@ -851,7 +851,7 @@ where 1=1 and data != '0'   and site = 'B01' and process = 'MQC'
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItemsbySite()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItemsbySite()", ex.Message);
             }
 
             return listMQCDataItems;
@@ -904,7 +904,7 @@ where 1=1 and data != '0'   and site = 'B01' and process = 'MQC'
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCData_ErrorItems()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCData_ErrorItems()", ex.Message);
             }
 
             return listMQCDataItems;
@@ -955,7 +955,7 @@ where 1=1 and data != '0'   and site = 'B01' and process = 'MQC'
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItemsbySite()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItemsbySite()", ex.Message);
             }
 
             return listMQCDataItems;
@@ -978,7 +978,7 @@ sqlQuerry += " cast(inspectdate as datetime) + CAST(inspecttime as datetime) >= 
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, " GetMQCDataFromLine(string line)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, " GetMQCDataFromLine(string line)", ex.Message);
                 return null;
             }
 
@@ -1034,7 +1034,7 @@ sqlQuerry += " cast(inspectdate as datetime) + CAST(inspecttime as datetime) >= 
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "listMQCDataItemsbySite()", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "listMQCDataItemsbySite()", ex.Message);
             }
 
             return listMQCDataItems;

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.ChartDrawing;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -308,7 +308,7 @@ namespace WindowsFormsApplication1.MQC
                    tpk_to.Value.Hour, tpk_to.Value.Minute, tpk_to.Value.Second);
                 if (mQCReport.ExportReportProductionFromToNewForm(from,To, pathsave))
                 {
-                   Logfile.Output(StatusLog.Normal, "Export MQC report to excel sucessfull");
+                   SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[Btn_ExportExcel_Click]", "Export MQC report to excel sucessfull");
                     var resultMessage = MessageBox.Show("MQC Report exported to excel sucessful ! \n\r Do you want to open this file ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (resultMessage == DialogResult.Yes)
                     {

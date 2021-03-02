@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1.Report.Reliability
             catch (Exception ex)
             {
 
-              //  Logfile.Output(StatusLog.Error, "SendMailReliabilityReportWeekly()", ex.Message);
+              //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "SendMailReliabilityReportWeekly()", ex.Message);
                 return false;
             }
             return true;
@@ -67,7 +67,7 @@ namespace WindowsFormsApplication1.Report.Reliability
             catch (Exception ex)
             {
 
-               // Logfile.Output(StatusLog.Error, "SendMailReliabilityReportWeekly()", ex.Message);
+               // SystemLog.Output(SystemLog.MSG_TYPE.Err, "SendMailReliabilityReportWeekly()", ex.Message);
                 return false;
             }
             return true;
@@ -95,7 +95,7 @@ namespace WindowsFormsApplication1.Report.Reliability
             catch (Exception ex)
             {
 
-              //  Logfile.Output(StatusLog.Error, "SendMailReliabilityReportWeekly()", ex.Message);
+              //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "SendMailReliabilityReportWeekly()", ex.Message);
                 return false;
             }
             return true;
@@ -125,7 +125,7 @@ namespace WindowsFormsApplication1.Report.Reliability
             catch (Exception ex)
             {
 
-                //  Logfile.Output(StatusLog.Error, "SendMailReliabilityReportWeekly()", ex.Message);
+                //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "SendMailReliabilityReportWeekly()", ex.Message);
                 return false;
             }
             return true;
@@ -155,7 +155,7 @@ namespace WindowsFormsApplication1.Report.Reliability
             catch (Exception ex)
             {
 
-                //  Logfile.Output(StatusLog.Error, "SendMailReliabilityReportWeekly()", ex.Message);
+                //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "SendMailReliabilityReportWeekly()", ex.Message);
                 return false;
             }
             return true;

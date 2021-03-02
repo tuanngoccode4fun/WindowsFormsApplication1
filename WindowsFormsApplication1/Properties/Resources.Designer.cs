@@ -243,6 +243,16 @@ namespace WindowsFormsApplication1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap computer_bug {
+            get {
+                object obj = ResourceManager.GetObject("computer-bug", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap confirm {
             get {
                 object obj = ResourceManager.GetObject("confirm", resourceCulture);
@@ -357,6 +367,16 @@ namespace WindowsFormsApplication1.Properties {
             get {
                 object obj = ResourceManager.GetObject("ExportFGsForm1", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap file {
+            get {
+                object obj = ResourceManager.GetObject("file", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -556,6 +576,16 @@ namespace WindowsFormsApplication1.Properties {
         internal static System.Drawing.Bitmap logo3 {
             get {
                 object obj = ResourceManager.GetObject("logo3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logs {
+            get {
+                object obj = ResourceManager.GetObject("logs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

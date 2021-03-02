@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,14 @@ namespace WindowsFormsApplication1
         };
         private SystemLog()
         {
-            m_startUpPath = AppDomain.CurrentDomain.BaseDirectory + "Log_";
+            try
+            {
+                m_startUpPath = Directory.GetCurrentDirectory();
+                m_startUpPath += "\\Log\\";
+                if (!Directory.Exists(m_startUpPath))
+                    Directory.CreateDirectory(m_startUpPath);
+            }
+            catch (Exception /*ex*/) { }
         }
 
         public static void Output(MSG_TYPE msgType, string name, string str)
@@ -35,7 +43,7 @@ namespace WindowsFormsApplication1
         }
         private void logout(MSG_TYPE msgType, string name, string str)
         {
-            string filePath = m_startUpPath + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            string filePath = m_startUpPath+"Log_" + DateTime.Now.ToString("yyyy_MM_dd") + ".txt";
             string output = name + " : " + str;
             try
             {

@@ -12,25 +12,19 @@ namespace UploadDataToDatabase
 
         public static SqlConnection GetDBConnection()
         {
-            
+            //Data Source=LONG;Initial Catalog=TEST;Integrated Security=True
+            //string datasource = "Long";
+            //string database = "TEST";
+            //string username = "SQLUSER";
+            //string password = "12345";
+
+            //string datasource = @"MSI\SQLEXPRESS";
+            //string database = "TLSOFT";
+            //string username = "SQLUSER";
+            //string password = "12345";
 
             string datasource = "172.16.0.12";
             string database = "ERPSOFT";
-            string username = "ERPUSER";
-            string password = "12345";
-
-
-
-            //  return DBSQLServerUtils.GetDBConnection(datasource, database, username, password);
-            string connecString = string.Format("Data Source=ADMIN;Initial Catalog={0};Integrated Security=True", database);
-            return new SqlConnection(connecString);
-        }
-        public static SqlConnection GetDBHRConnection()
-        {
-
-
-            string datasource = "172.16.0.12";
-            string database = "HR_TECHLINK";
             string username = "ERPUSER";
             string password = "12345";
 
@@ -74,21 +68,11 @@ namespace UploadDataToDatabase
             //Data Source = LONG; Initial Catalog = TEST; Integrated Security = True
             string datasource = "172.16.0.11";
             string database = "SOT";
-            string username = "soft";
-            string password = "techlink@!@#";
-
+            string username = "sa";
+            string password = "dsc@123";
 
 
             return DBSQLServerUtils.GetSFTDBConnection(datasource, database, username, password);
-        }
-        public static SqlConnection GetHRDATAConnection()
-        {
-            //Data Source = LONG; Initial Catalog = TEST; Integrated Security = True
-            string datasource = "172.16.0.9\\tx";
-            string database = "txcard";
-            string username = "sa";
-            string password = "ppnn13";
-            return DBSQLServerUtils.GetHRDataConnection(datasource, database, username, password);
         }
     }
 }

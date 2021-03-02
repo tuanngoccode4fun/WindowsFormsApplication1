@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.Report.Reliability
 {
@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1.Report.Reliability
                         ReliabilityClass reliabilityClass = new ReliabilityClass();
                         if (reliabilityClass.SendMailReliabilityReporAdding7DaystMonthly(pathsave))
                         {
-                           Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                           SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[Btn_ExportExcel_Click]", "Export Reliability report to excel sucessfull");
                         }
 
                     }
@@ -58,7 +58,7 @@ namespace WindowsFormsApplication1.Report.Reliability
                         ReliabilityClass reliabilityClass = new ReliabilityClass();
                         if (reliabilityClass.SendMailReliabilityReportAdding7Days(pathsave))
                         {
-                           Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                           SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[Btn_ExportExcel_Click]", "Export Reliability report to excel sucessfull");
                         }
                     }
                     else if (radio_Year.Checked)
@@ -67,7 +67,7 @@ namespace WindowsFormsApplication1.Report.Reliability
                         ReliabilityClass reliabilityClass = new ReliabilityClass();
                         if (reliabilityClass.SendMailReliabilityReporAdding7DaysYear(pathsave))
                         {
-                           Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                           SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[Btn_ExportExcel_Click]", "Export Reliability report to excel sucessfull");
                         }
                     }
                     else if (radio_periodtime.Checked)
@@ -75,7 +75,7 @@ namespace WindowsFormsApplication1.Report.Reliability
                         ReliabilityClass reliabilityClass = new ReliabilityClass();
                         if (reliabilityClass.SendMailReliabilityReporAdding7DayPeriodTime(pathsave,dtpk_From.Value, dtpk_To.Value))
                         {
-                           Logfile.Output(StatusLog.Normal, "Export Reliability report to excel sucessfull");
+                           SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[Btn_ExportExcel_Click]", "Export Reliability report to excel sucessfull");
                         }
                     }
                     var resultMessage = MessageBox.Show("Production Plan export to excel sucessful ! \n\r Do you want to open this file ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);

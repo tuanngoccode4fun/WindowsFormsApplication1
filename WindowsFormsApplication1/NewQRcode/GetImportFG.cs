@@ -48,7 +48,7 @@ namespace WindowsFormsApplication1.NewQRcode
             }
             catch (Exception ex)
             {
-                Log.Logfile.Output(Log.StatusLog.Error,"ReturnProductOrder: " + ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err,"ReturnProductOrder: " , ex.Message);
             }
             return null;
         }

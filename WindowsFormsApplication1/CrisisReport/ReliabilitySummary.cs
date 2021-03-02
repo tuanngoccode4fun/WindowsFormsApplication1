@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.CrisisReport
 {
@@ -68,7 +68,7 @@ and  coptcs.TC027 = 'Y'
                 catch (Exception ex)
                 {
 
-                   Logfile.Output(StatusLog.Error, "GetDataProductionOrder() : " + ex.Message);
+                   SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataProductionOrder() : " , ex.Message);
                 }
             }
 

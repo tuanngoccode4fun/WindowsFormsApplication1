@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.Report.Backlog
 {
@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1.Report.Backlog
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, " It's function : GetDataBackLogToExport() : Fail", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, " It's function : GetDataBackLogToExport() : Fail", ex.Message);
                 return false;
             }
 
@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1.Report.Backlog
                 }
                 catch (Exception ex)
                 {
-                    Logfile.Output(StatusLog.Error, "Export excel error !", ex.Message);
+                    SystemLog.Output(SystemLog.MSG_TYPE.Err, "Export excel error !", ex.Message);
                     return false;
                 }
             }
@@ -105,7 +105,7 @@ and  coptcs.TC027 = 'Y'
             catch (Exception ex)
             {
 
-               Logfile.Output(StatusLog.Error, "GetDataProductionOrder() : " + ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataProductionOrder() : " , ex.Message);
             }
         }
         public DataTable GetDataProductionOrder2(DateTime todate)
@@ -154,7 +154,7 @@ and  coptcs.TC027 = 'Y' and coptds.TD016  ='N' and coptds.TD009 < coptds.TD008
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataProductionOrder() : " + ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataProductionOrder() : " , ex.Message);
             }
             return dtShipping;
         }
@@ -347,7 +347,7 @@ TH016
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, " GetDataToExport ", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, " GetDataToExport ", ex.Message);
 
 
             }
@@ -453,7 +453,7 @@ TH016
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "bOMItems (string NameProduct)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "bOMItems (string NameProduct)", ex.Message);
             }
 
             return bOMItems;
@@ -483,7 +483,7 @@ TH016
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "stockOfSemis(string SemiProduct, double rate)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "stockOfSemis(string SemiProduct, double rate)", ex.Message);
             }
             return Semis;
         }
@@ -523,7 +523,7 @@ TH016
             catch (Exception ex)
             {
 
-             //   Logfile.Output(StatusLog.Error, "GetSemibyNameProduct", ex.Message);
+             //   SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetSemibyNameProduct", ex.Message);
             }
             return semiFinishedgoods;
         }

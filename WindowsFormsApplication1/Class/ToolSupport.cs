@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.HRProject.InOutData.Model;
-using WindowsFormsApplication1.Log;
+
 using WindowsFormsApplication1.MQC;
 using WindowsFormsApplication1.Planning;
 using WindowsFormsApplication1.Report.Backlog;
@@ -432,7 +432,7 @@ namespace WindowsFormsApplication1.Class
             }
             catch (Exception ex)
             {
-              //  Logfile.Output(StatusLog.Error, "ExportToTemplateMQCDefectDaily : An error happened in the process.", ex.Message);
+              //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToTemplateMQCDefectDaily : An error happened in the process.", ex.Message);
 
             }
         }
@@ -1238,7 +1238,7 @@ namespace WindowsFormsApplication1.Class
             }
             catch (Exception ex)
             {
-               // Logfile.Output(StatusLog.Error, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
+               // SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
 
             }
         }
@@ -1604,7 +1604,7 @@ namespace WindowsFormsApplication1.Class
             }
             catch (Exception ex)
             {
-              //  Logfile.Output(StatusLog.Error, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
+              //  SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
 
             }
         }
@@ -2045,7 +2045,7 @@ namespace WindowsFormsApplication1.Class
             }
             catch (Exception ex)
             {
-               // Logfile.Output(StatusLog.Error, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
+               // SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToReliabilityReport : An error happened in the process.", ex.Message);
 
             }
         }
@@ -2081,7 +2081,7 @@ namespace WindowsFormsApplication1.Class
                     }
                 }
                 string filename = @"C:\ERP_Temp\BackLogReport" + "" + "-" + DateTime.Now.ToString("yyyyMMdd hhmmss") + ".xlsx";
-                Logfile.Output(StatusLog.Normal, filename);
+                SystemLog.Output(SystemLog.MSG_TYPE.Nor, "ExportToTemplate]", filename);
                 #endregion
 
                 xlWorkBook.SaveAs(filename, Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue,
@@ -2089,12 +2089,12 @@ namespace WindowsFormsApplication1.Class
                 xlWorkBook.Close();
 
 
-                Logfile.Output(StatusLog.Normal, "Xuat file OK");
+                SystemLog.Output(SystemLog.MSG_TYPE.Nor, "ExportToTemplate]", "Xuat file OK");
                 return true;
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "ExportToTemplate error", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToTemplate error", ex.Message);
                 return false;
 
             }
@@ -2145,7 +2145,7 @@ namespace WindowsFormsApplication1.Class
 
                 }
                 //string filename = @"C:\ERP_Temp\BackLogReport" + "" + "-" + DateTime.Now.ToString("yyyyMMdd hhmmss") + ".xlsx";
-                //Logfile.Output(StatusLog.Normal, filename);
+                //SystemLog.Output(SystemLog.MSG_TYPE.Nor, filename);
                 #endregion
 
                 xlWorkBook.SaveAs(pathSave, Excel.XlFileFormat.xlWorkbookDefault, misValue, misValue, misValue,
@@ -2155,12 +2155,12 @@ namespace WindowsFormsApplication1.Class
                 reOject(xlWorkSheet);
                 reOject(xlApp);
 
-                Logfile.Output(StatusLog.Normal, "Xuat file OK");
+                SystemLog.Output(SystemLog.MSG_TYPE.Nor, "[ExportToTemplate]", "Xuat file OK");
                 return true;
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "ExportToTemplate error", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "ExportToTemplate error", ex.Message);
                 return false;
 
             }

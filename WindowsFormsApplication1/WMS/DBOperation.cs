@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WindowsFormsApplication1.Log;
+
 using System.Windows.Forms;
 using WindowsFormsApplication1.WMS.Model;
 
@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1.WMS
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
             }
             return invertoryItems;
         }
@@ -79,7 +79,7 @@ namespace WindowsFormsApplication1.WMS
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
             }
             return invertoryItems;
         }
@@ -117,7 +117,7 @@ LA009 as Kho,LA022 as Position,LA004 AS NGAY from INVLA WHERE  1=1  ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<InvertoryItem> GetInvertoryItems(DateTime InventoryDate)", ex.Message);
             }
             return invertoryItems;
         }
@@ -199,7 +199,7 @@ LA009 as Kho,LA022 as Position,LA004 AS NGAY from INVLA WHERE  1=1  ");
                 catch (Exception ex)
                 {
 
-                    Logfile.Output(StatusLog.Error, "List < PURTD > GetPURTDsfromQRCode(string QRcode)", ex.Message);
+                    SystemLog.Output(SystemLog.MSG_TYPE.Err, "List < PURTD > GetPURTDsfromQRCode(string QRcode)", ex.Message);
                 }
             }
             return pURTDs;
@@ -242,7 +242,7 @@ LA009 as Kho,LA022 as Position,LA004 AS NGAY from INVLA WHERE  1=1  ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "List<InforWH> GetInforWHs()", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<InforWH> GetInforWHs()", ex.Message);
             }
             return inforWHs;
         }
@@ -1187,7 +1187,7 @@ where 1=1 and TA006 = 'N'
                 catch (Exception ex)
                 {
 
-                    Logfile.Output(StatusLog.Error, "List<WMS.Model.INVTATB> GetINVTATBs(string QRCode)", ex.Message);
+                    SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<WMS.Model.INVTATB> GetINVTATBs(string QRCode)", ex.Message);
                 }
             }
             return iNVTATBs;
@@ -1285,7 +1285,7 @@ where 1=1 ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "List<Model.LotINVMEMF> GetLotINVMEMFs (string sp, string kho)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "List<Model.LotINVMEMF> GetLotINVMEMFs (string sp, string kho)", ex.Message);
             }
             lots = lotINVMEMFs;
             return lotINVMEMFsReturn;
@@ -1318,7 +1318,7 @@ where 1=1 ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetLocationofLot (string sp, string kho, string lot)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetLocationofLot (string sp, string kho, string lot)", ex.Message);
             }
             return iNVLF_Locates;
 
@@ -1396,7 +1396,7 @@ where 1=1 ");
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "ERPFormUpdateLot(string QRCode, string STT, Model.LotINVMEMF iNVMEMF)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "ERPFormUpdateLot(string QRCode, string STT, Model.LotINVMEMF iNVMEMF)", ex.Message);
                 return false;
             }
             
@@ -1421,7 +1421,7 @@ where 1 =1 ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataTableINVTATB (string code, string No, string STT)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataTableINVTATB (string code, string No, string STT)", ex.Message);
                 return null;
             }
             return dt;
@@ -1444,7 +1444,7 @@ where 1 =1 ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataTableINVTATB (string code, string No, string STT)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataTableINVTATB (string code, string No, string STT)", ex.Message);
                 return null;
             }
             return dt;
@@ -1487,7 +1487,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "DeleteINVTBbyRow (string code, string No, string STT)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "DeleteINVTBbyRow (string code, string No, string STT)", ex.Message);
                 return false;
             }
       
@@ -1625,7 +1625,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "InsertInToINVTB( string STT, Model.LotINVMEMF lot, DataTable dtINVTB)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "InsertInToINVTB( string STT, Model.LotINVMEMF lot, DataTable dtINVTB)", ex.Message);
                 return false;
             }
          
@@ -1658,7 +1658,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "UpdateINVTA(string code, string No)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateINVTA(string code, string No)", ex.Message);
                 return false;
             }
             
@@ -1736,7 +1736,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "UpdateINVTA(string code, string No)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateINVTA(string code, string No)", ex.Message);
                 return false;
             }
             return true;
@@ -1825,7 +1825,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "dtgvOutToINVMF(List<INVTATB> iNVTATBs)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "dtgvOutToINVMF(List<INVTATB> iNVTATBs)", ex.Message);
             }
             return false;
 
@@ -1837,13 +1837,13 @@ where 1 =1");
                 foreach (var item in iNVTATBsNoChose)
                 {
                     if (DeleteINVTBbyRow(item.TA001_ma, item.TA002_code, item.TB003_STT) == false)
-                        Logfile.Output(StatusLog.Error, "Delete row INVTB fail", item.TA001_ma + "-" + item.TA002_code + "-" + item.TB003_STT);
+                        SystemLog.Output(SystemLog.MSG_TYPE.Err, "Delete row INVTB fail", item.TA001_ma + "-" + item.TA002_code + "-" + item.TB003_STT);
                 }
             }
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Delete row INVTB fail", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "Delete row INVTB fail", ex.Message);
                 return false;
             }
            
@@ -2134,7 +2134,7 @@ where 1 =1");
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
                 return false;
             }
         }
@@ -2308,7 +2308,7 @@ where 1 =1");
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
                 return false;
             }
         }
@@ -2326,7 +2326,7 @@ where 1 =1");
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "GetdataINVMF (string lot, string sp)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetdataINVMF (string lot, string sp)", ex.Message);
                 
             }
             return dt;
@@ -2364,7 +2364,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVLA(string product)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVLA(string product)", ex.Message);
                 return data;
             }
         }
@@ -2384,7 +2384,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVLF(string product)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVLF(string product)", ex.Message);
                 return data;
             }
         }
@@ -2759,7 +2759,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "UpdateorInsertINVMC (INVTATB nVTATB)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateorInsertINVMC (INVTATB nVTATB)", ex.Message);
                 return false;
             }
             return true;
@@ -3145,7 +3145,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "UpdateorInsertINVMM (INVTATB nVTATB)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "UpdateorInsertINVMM (INVTATB nVTATB)", ex.Message);
             }
             return true;
         }
@@ -3165,7 +3165,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVMC(string MC001_sp, string MC002_kho )", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVMC(string MC001_sp, string MC002_kho )", ex.Message);
             }
             return dt;
         }
@@ -3184,7 +3184,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVMCTop1", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVMCTop1", ex.Message);
             }
             return dt;
         }
@@ -3207,7 +3207,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVMM(string MM001_sp, string MM002_kho,string MM003_pos, string MM004_lot)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVMM(string MM001_sp, string MM002_kho,string MM003_pos, string MM004_lot)", ex.Message);
             }
             return dt;
         }
@@ -3224,7 +3224,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetDataINVMMTop1", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDataINVMMTop1", ex.Message);
             }
             return dt;
         }
@@ -3243,7 +3243,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetNameOfProductCode (string maSp)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetNameOfProductCode (string maSp)", ex.Message);
             }
            
             
@@ -3263,7 +3263,7 @@ where 1 =1");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "GetNameOfProductCode (string maSp)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetNameOfProductCode (string maSp)", ex.Message);
             }
 
 
@@ -3291,7 +3291,7 @@ GROUP BY TA001, TA002 ");
             catch (Exception ex)
             {
 
-                Logfile.Output(StatusLog.Error, "Dictionary<string, int> NumberDigitsofCodeINVTA()", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "Dictionary<string, int> NumberDigitsofCodeINVTA()", ex.Message);
             }
             return keyValues;
         }
@@ -4049,7 +4049,7 @@ where 1 = 1 ");
             }
             catch (Exception ex)
             {
-                Logfile.Output(StatusLog.Error, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
+                SystemLog.Output(SystemLog.MSG_TYPE.Err, "InsertINVLA(INVTATB iNVTATB, DataTable dtINVLA, int intInOut)", ex.Message);
                 return false;
             }
         }

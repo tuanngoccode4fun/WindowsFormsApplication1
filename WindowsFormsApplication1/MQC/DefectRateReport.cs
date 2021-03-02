@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WindowsFormsApplication1.Log;
+
 
 namespace WindowsFormsApplication1.MQC
 {
@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
 
             }
@@ -126,7 +126,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
 
             }
@@ -202,7 +202,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
 
             }
@@ -274,7 +274,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
 
             }
@@ -336,7 +336,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
             }
             return defectRates;
@@ -394,7 +394,7 @@ namespace WindowsFormsApplication1.MQC
             }
             catch (Exception ex)
             {
-               Logfile.Output(StatusLog.Error, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
+               SystemLog.Output(SystemLog.MSG_TYPE.Err, "GetDefectRateReport(DateTime from, DateTime to, string Dept, string codeProcess)", ex.Message);
 
             }
             return defectRates;
